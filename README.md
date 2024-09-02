@@ -6,7 +6,7 @@ By KARS Stack
 
 ### Backend
 
-- User Authentication: Clerk
+- User Authentication: [Clerk](https://dashboard.clerk.com/)
 
 ### Frontend
 
