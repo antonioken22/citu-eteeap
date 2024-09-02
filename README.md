@@ -1,4 +1,4 @@
-# CIT-U ETEEAP
+# <img src="/public/citu-eteeap-logo.svg" alt="Logo Dark Mode" width="32" height="32"> CIT-U ETEEAP
 
 By KARS Stack
 
@@ -34,7 +34,7 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 npm install
 ```
 
-3. Fill in all the necessary variables in the `.env.local` outlined above. You can obtain these keys by watching the video from the playlist linked in the References below.
+3. Fill in all the necessary variables in the `.env.local` outlined above. 
 
 4. Build and run your web app at `http://localhost:3000` by running the code below in the terminal.
 
