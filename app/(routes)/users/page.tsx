@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import PlaceholderContent from "@/app/_components/(sidebar)/demo/placeholder-content";
-import { ContentLayout } from "@/app/_components/(sidebar)/admin-panel/content-layout";
+import PlaceholderContent from "@/app/_components/demo/placeholder-content";
+import { ContentLayout } from "@/app/_components/(sidebar)/content-layout";
 import {
   Breadcrumb,
   BreadcrumbItem,
