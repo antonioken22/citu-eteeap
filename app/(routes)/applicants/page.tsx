@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ContentLayout } from "@/app/_components/(sidebar)/admin-panel/content-layout";
+import { ContentLayout } from "@/app/_components/(sidebar)/content-layout";
 import {
   Breadcrumb,
   BreadcrumbItem,

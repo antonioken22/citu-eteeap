@@ -73,11 +73,10 @@ export function Footer() {
         <div className="border-t border-muted-foreground pt-4 text-center">
           <p className="text-xs md:text-sm text-muted-foreground">
             Expanded Tertiary Education Equivalency Accreditation (ETEEAP)
-            Program
+            Program, Cebu Institute of Technology - University
           </p>
           <p className="text-xs md:text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Cebu Institute of Technology -
-            University. All rights reserved.
+            © {new Date().getFullYear()} KARS Stack. All rights reserved.
           </p>
         </div>
       </div>
