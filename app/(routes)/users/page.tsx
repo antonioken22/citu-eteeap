@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import PlaceholderContent from "@/app/_components/demo/placeholder-content";
+import PlaceholderContent from "@/app/_components/placeholder-content/placeholder-content";
 import { ContentLayout } from "@/app/_components/(sidebar)/content-layout";
 import {
   Breadcrumb,
