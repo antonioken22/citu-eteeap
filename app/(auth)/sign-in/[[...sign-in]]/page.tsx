@@ -1,5 +1,6 @@
 import { Loader2 } from "lucide-react";
 import { SignIn, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function SignInPage() {
   return (
@@ -19,6 +20,15 @@ export default function SignInPage() {
             <Loader2 className="animate-spin text-muted-foreground" />
           </ClerkLoading>
         </div>
+      </div>
+      <div className="h-full justify-center hidden lg:flex">
+        <Image
+          src="/marketing-side-panel.jpg"
+          alt="CITU ETEEAP Poster"
+          height={1280 * 0.5}
+          width={981 * 0.5}
+          className="m-8"
+        />
       </div>
     </div>
   );
