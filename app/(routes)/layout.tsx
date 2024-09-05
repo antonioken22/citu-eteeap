@@ -1,9 +1,9 @@
-import AdminPanelLayout from "../_components/(sidebar)/admin-panel/admin-panel-layout";
+import SidebarPanelLayout from "../_components/(sidebar-panel-layout)/sidebar-panel-layout";
 
-export default function DemoLayout({
+export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <AdminPanelLayout>{children}</AdminPanelLayout>;
+  return <SidebarPanelLayout>{children}</SidebarPanelLayout>;
 }

@@ -40,28 +40,23 @@ export function getMenuList(pathname: string): Group[] {
       ]
     },
     {
-      groupLabel: "Admin Tools",
+      groupLabel: "Admin",
       menus: [
         {
-          href: "/applicants",
-          label: "Applicants",
-          active: pathname.includes("/applicants"),
+          href: "/admin/manage-applicants",
+          label: "Manage Applicants",
+          active: pathname.includes("/manage-applicants"),
           icon: BookUser,
           submenus: []
-        }
-      ]
-    },
-    {
-      groupLabel: "Admin Controls",
-      menus: [
+        },
         {
-          href: "/users",
-          label: "Users",
-          active: pathname.includes("/users"),
+          href: "/admin/monitor-users",
+          label: "Monitor Users",
+          active: pathname.includes("/monitor-users"),
           icon: Users,
           submenus: []
         },
       ]
-    }
+    },
   ];
 }
