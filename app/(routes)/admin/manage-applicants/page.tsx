@@ -13,7 +13,7 @@ import { DataTablePage } from "./_components/data-table-page";
 
 export default function ApplicantsPage() {
   return (
-    <ContentLayout title="Applicants">
+    <ContentLayout title="Manage Applicants">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -29,7 +29,11 @@ export default function ApplicantsPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Applicants</BreadcrumbPage>
+            <BreadcrumbPage>Admin</BreadcrumbPage>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Manage Applicants</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
