@@ -1,6 +1,6 @@
 export type ApplicantData = {
-    activeEmail: string;
-    lastName: string;
+  activeEmail: string;
+  lastName: string;
   firstName: string;
   age: number;
   gender: string;
@@ -52,7 +52,7 @@ export type ApplicantData = {
   evalSheet: string | null; // file url
   jobDescription: string | null; // file url
   tor: string | null; // file url
-  hsForm: string | null; //
+  hsForm: string | null; // file url
   transferCred: string | null; // file url
   marriageCert: string | null; // file url
   employmentCert: string | null; // file url

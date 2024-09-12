@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -17,6 +17,8 @@ interface FilterAndColumnControlsProps {
 export function FilterAndColumnControls({
   table,
 }: FilterAndColumnControlsProps) {
+  const [globalFilter, setGlobalFilter] = useState(""); // State for global filter
+
   // Set default hidden columns
   useMemo(() => {
     const hiddenColumns = [
@@ -72,20 +74,22 @@ export function FilterAndColumnControls({
     });
   }, [table]);
 
-  // TODO: Create a global filter that will filter some cell values
+  // Global filter handler
+  const handleGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGlobalFilter(e.target.value);
+    table.setGlobalFilter(e.target.value);
+  };
 
   return (
     <div className="flex items-center py-4">
+      {/* Global Filter Input */}
       <Input
-        placeholder="Filter emails..."
-        value={
-          (table.getColumn("activeEmail")?.getFilterValue() as string) ?? ""
-        }
-        onChange={(event) =>
-          table.getColumn("activeEmail")?.setFilterValue(event.target.value)
-        }
+        placeholder="Filter all data..."
+        value={globalFilter}
+        onChange={handleGlobalFilterChange}
         className="max-w-sm"
       />
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="ml-auto">

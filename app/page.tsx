@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 import { firestore } from "@/firebase/config";
 import { Spinner } from "@/components/spinner";
@@ -33,15 +34,18 @@ const RedirectToDashboard = () => {
               pushNotificationStatus: false,
             });
             // console.log("User data saved to Firestore.");
+            setIsLoading(false);
+            router.push("/dashboard");
           } else {
             // console.log("User already exists in Firestore.");
+            setIsLoading(false);
+            router.push("/dashboard");
           }
         } catch (error) {
           // console.error("Error saving user data to Firestore: ", error);
-        } finally {
           setIsLoading(false);
-          // After the Firestore operation is complete, redirect to the dashboard
           router.push("/dashboard");
+          toast.error("Error loading the web application.");
         }
       }
     };
