@@ -23,7 +23,7 @@ export function UserNav() {
 
       if (userDoc.exists()) {
         // If user already exists in Firestore, show a message or perform any necessary logic
-        toast.info("Welcome back, " + user.firstName + "!");
+        // toast.info("Welcome back, " + user.firstName + "!");
       } else {
         // If user doesn't exist in Firestore, create the document
         await setDoc(userDocRef, {
