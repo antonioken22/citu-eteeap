@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
+
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -8,6 +9,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { ApplicantData } from "@/types/ApplicantData";
 
 interface RowActionsProps {
@@ -17,6 +19,83 @@ interface RowActionsProps {
 }
 
 const RowActions: React.FC<RowActionsProps> = ({ row }) => {
+  // Function to copy the full row as CSV (Excel compatible format)
+  const copyRowAsCSV = () => {
+    const csvRow = [
+      row.original.firstName,
+      row.original.lastName,
+      row.original.activeEmail,
+      row.original.age,
+      row.original.gender,
+      row.original.nationality,
+      row.original.religion,
+      row.original.birthdate,
+      row.original.birthplace,
+      row.original.civilStatus,
+      row.original.birthRank,
+      row.original.numBrothers,
+      row.original.numSisters,
+      row.original.numCITBrothersSisters,
+      row.original.homeAddress,
+      row.original.cityAddress,
+      row.original.facebookURL,
+      row.original.mobileNumber,
+      row.original.fatherName,
+      row.original.fatherAge,
+      row.original.fatherBirthplace,
+      row.original.fatherNationality,
+      row.original.fatherReligion,
+      row.original.fatherEducation,
+      row.original.fatherOccupation,
+      row.original.motherName,
+      row.original.motherAge,
+      row.original.motherBirthplace,
+      row.original.motherNationality,
+      row.original.motherReligion,
+      row.original.motherEducation,
+      row.original.motherOccupation,
+      row.original.prevCourse,
+      row.original.lastSchool,
+      row.original.schoolYear,
+      row.original.schoolType,
+      row.original.prevSchoolAddress,
+      row.original.hsSchoolName,
+      row.original.hsSchoolAddress,
+      row.original.hsYearGraduated,
+      row.original.elemSchoolName,
+      row.original.elemSchoolAddress,
+      row.original.elemYearGraduated,
+      row.original.progChoice1,
+      row.original.progChoice2,
+      row.original.progChoice3,
+      row.original.contactName,
+      row.original.relation,
+      row.original.contactAddress,
+      row.original.contactNumber,
+      row.original.evalSheet,
+      row.original.jobDescription,
+      row.original.tor,
+      row.original.hsForm,
+      row.original.transferCred,
+      row.original.marriageCert,
+      row.original.employmentCert,
+      row.original.businessProof,
+      row.original.applicantType,
+      row.original.missingDocs,
+      row.original.photoWithID,
+      row.original.examSet,
+      row.original.firstQuestion,
+      row.original.secondQuestion,
+      row.original.thirdQuestion,
+      row.original.fourthQuestion,
+      row.original.fifthQuestion,
+    ].join("\t");
+
+    navigator.clipboard.writeText(csvRow).then(() => {
+      toast.success("Row copied as CSV!");
+    });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -27,17 +106,47 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Row Actions</DropdownMenuLabel>
+
+        {/* Copy Firstname Lastname */}
         <DropdownMenuItem
-          onClick={() =>
+          onClick={() => {
+            navigator.clipboard.writeText(
+              `${row.original.firstName} ${row.original.lastName}`
+            );
+            toast.success("Full Name (Firstname Lastname) copied!");
+          }}
+        >
+          Copy Full Name (Firstname Lastname)
+        </DropdownMenuItem>
+
+        {/* Copy Lastname, Firstname */}
+        <DropdownMenuItem
+          onClick={() => {
             navigator.clipboard.writeText(
               `${row.original.lastName}, ${row.original.firstName}`
-            )
-          }
+            );
+            toast.success("Full Name (Lastname, Firstname) copied!");
+          }}
         >
-          Copy Name
+          Copy Full Name (Lastname, Firstname)
         </DropdownMenuItem>
+
+        {/* Copy Email Address */}
+        <DropdownMenuItem
+          onClick={() => {
+            navigator.clipboard.writeText(row.original.activeEmail);
+            toast.success("Email address copied!");
+          }}
+        >
+          Copy Email Address
+        </DropdownMenuItem>
+
         <DropdownMenuSeparator />
-        <DropdownMenuItem>View Details</DropdownMenuItem>
+
+        {/* Copy Entire Row as CSV */}
+        <DropdownMenuItem onClick={copyRowAsCSV}>
+          Copy Entire Row (Excel Pasteable)
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
