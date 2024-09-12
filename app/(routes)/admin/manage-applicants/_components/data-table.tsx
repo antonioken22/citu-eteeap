@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { flexRender, Table as ReactTable } from "@tanstack/react-table";
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpAZ, ArrowUpZA } from "lucide-react";
 
 interface DataTableProps {
   table: ReactTable<any>;
@@ -22,16 +23,42 @@ export function DataTable({ table, columns }: DataTableProps) {
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+              {headerGroup.headers.map((header) => {
+                const isSorted = header.column.getIsSorted();
+                const sortDirection = isSorted
+                  ? header.column.getIsSorted()
+                  : null;
+
+                return (
+                  <TableHead key={header.id}>
+                    <div className="flex items-center">
+                      {/* Render the header content */}
+                      {!header.isPlaceholder &&
+                        flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+
+                      {/* Sorting button */}
+                      {header.column.getCanSort() && (
+                        <button
+                          onClick={header.column.getToggleSortingHandler()}
+                          className="ml-2"
+                          aria-label="Sort"
+                        >
+                          {sortDirection === "asc" && <ArrowUpAZ size={16} />}
+                          {sortDirection === "desc" && <ArrowUpZA size={16} />}
+                          {!sortDirection && (
+                            <span className="invisible">
+                              <ArrowUpAZ size={16} />
+                            </span>
+                          )}
+                        </button>
                       )}
-                </TableHead>
-              ))}
+                    </div>
+                  </TableHead>
+                );
+              })}
             </TableRow>
           ))}
         </TableHeader>
