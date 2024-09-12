@@ -53,6 +53,7 @@ const RedirectToDashboard = () => {
     return (
       <div className="flex items-center justify-center absolute inset-y-0 h-full w-full bg-background/80 z-50">
         <Spinner size="lg" />
+        <h2 className="ml-2">Initializing the website...</h2>
       </div>
     );
   }
