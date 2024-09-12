@@ -35,47 +35,42 @@ const RedirectToDashboard = () => {
           role: "user",
           pushNotificationStatus: false,
         });
+        // dtoast.success("User created in Firestore.");
       }
 
       setIsLoading(false);
       router.push("/dashboard");
     } catch (error) {
-      setIsLoading(false);
+      console.error("Error checking user in Firestore:", error);
       toast.error("Error loading the web application.");
-      router.push("/dashboard");
+      setIsLoading(false);
     }
   }, [user, router]);
 
   useEffect(() => {
-    // Check every second for user existence
-    const intervalId = setInterval(() => {
-      if (isLoaded && user) {
-        clearInterval(intervalId); // Stop interval when user is found
+    if (isLoaded) {
+      if (user) {
         setLoadingMessage("Initializing the web application...");
+        setProgress(50); // Set halfway progress
         checkFirestoreForUser();
+      } else {
+        // If user is not loaded, redirect to sign-in
+        toast.error("User not found, redirecting to sign-in.");
+        router.push("/sign-in");
       }
-    }, 1000);
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [isLoaded, user, checkFirestoreForUser]);
+    }
+  }, [isLoaded, user, checkFirestoreForUser, router]);
 
   // Progress bar effect
   useEffect(() => {
-    if (progress < 100) {
+    if (isLoading && progress < 100) {
       const intervalId = setInterval(() => {
-        setProgress((prevProgress) => prevProgress + 20);
+        setProgress((prevProgress) => Math.min(prevProgress + 20, 100));
       }, 1000);
 
       return () => clearInterval(intervalId); // Cleanup interval on component unmount
     }
-  }, [progress]);
-
-  // If still loading after progress reaches 100, redirect to sign-in
-  useEffect(() => {
-    if (!isLoaded && progress >= 100) {
-      router.push("/sign-in");
-    }
-  }, [isLoaded, progress, router]);
+  }, [isLoading, progress]);
 
   if (isLoading) {
     return (
@@ -99,15 +94,11 @@ const RedirectToDashboard = () => {
     );
   }
 
-  if (!isLoading && user) {
-    return (
-      <div className="h-screen flex flex-col items-center justify-center space-y-4">
-        <h2>All good! Redirecting to Dashboard.</h2>
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div className="h-screen flex flex-col items-center justify-center space-y-4">
+      <h2>All good! Redirecting to Dashboard.</h2>
+    </div>
+  );
 };
 
 export default RedirectToDashboard;
