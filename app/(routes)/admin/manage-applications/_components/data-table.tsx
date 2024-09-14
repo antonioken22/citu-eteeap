@@ -30,8 +30,13 @@ export function DataTable({ table, columns }: DataTableProps) {
                   : null;
 
                 return (
-                  <TableHead key={header.id}>
-                    <div className="flex items-center">
+                  <TableHead
+                    key={header.id}
+                    className="border border-muted"
+                    onClick={header.column.getToggleSortingHandler()}
+                    role="button"
+                  >
+                    <div className="flex items-center cursor-pointer">
                       {/* Render the header content */}
                       {!header.isPlaceholder &&
                         flexRender(
@@ -41,11 +46,7 @@ export function DataTable({ table, columns }: DataTableProps) {
 
                       {/* Sorting button */}
                       {header.column.getCanSort() && (
-                        <button
-                          onClick={header.column.getToggleSortingHandler()}
-                          className="ml-2"
-                          aria-label="Sort"
-                        >
+                        <span className="ml-2">
                           {sortDirection === "asc" && <ArrowUpAZ size={16} />}
                           {sortDirection === "desc" && <ArrowUpZA size={16} />}
                           {!sortDirection && (
@@ -53,7 +54,7 @@ export function DataTable({ table, columns }: DataTableProps) {
                               <ArrowUpAZ size={16} />
                             </span>
                           )}
-                        </button>
+                        </span>
                       )}
                     </div>
                   </TableHead>
@@ -70,7 +71,7 @@ export function DataTable({ table, columns }: DataTableProps) {
                 data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
+                  <TableCell key={cell.id} className="border border-muted">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

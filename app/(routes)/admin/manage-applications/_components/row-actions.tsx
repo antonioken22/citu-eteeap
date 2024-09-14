@@ -19,9 +19,9 @@ interface RowActionsProps {
 }
 
 const RowActions: React.FC<RowActionsProps> = ({ row }) => {
-  // Function to copy the full row as CSV (Excel compatible format)
-  const copyRowAsCSV = () => {
-    const csvRow = [
+  // Function to copy the full row as Spreadsheet pasteable format (Tab-delimited)
+  const copyRowAsTabDelimited = () => {
+    const tabDelimitedRow = [
       row.original.firstName,
       row.original.lastName,
       row.original.activeEmail,
@@ -91,8 +91,8 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
       row.original.fifthQuestion,
     ].join("\t");
 
-    navigator.clipboard.writeText(csvRow).then(() => {
-      toast.success("Row copied as CSV!");
+    navigator.clipboard.writeText(tabDelimitedRow).then(() => {
+      toast.success("Row copied as Tab-delimited (Excel Pasteable)");
     });
   };
 
@@ -113,7 +113,7 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
             navigator.clipboard.writeText(
               `${row.original.firstName} ${row.original.lastName}`
             );
-            toast.success("Full Name (Firstname Lastname) copied!");
+            toast.success("Full Name (Firstname Lastname) copied");
           }}
         >
           Copy Full Name (Firstname Lastname)
@@ -125,7 +125,7 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
             navigator.clipboard.writeText(
               `${row.original.lastName}, ${row.original.firstName}`
             );
-            toast.success("Full Name (Lastname, Firstname) copied!");
+            toast.success("Full Name (Lastname, Firstname) copied");
           }}
         >
           Copy Full Name (Lastname, Firstname)
@@ -135,7 +135,7 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
         <DropdownMenuItem
           onClick={() => {
             navigator.clipboard.writeText(row.original.activeEmail);
-            toast.success("Email address copied!");
+            toast.success("Email address copied");
           }}
         >
           Copy Email Address
@@ -143,9 +143,9 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
 
         <DropdownMenuSeparator />
 
-        {/* Copy Entire Row as CSV */}
-        <DropdownMenuItem onClick={copyRowAsCSV}>
-          Copy Entire Row (Excel Pasteable)
+        {/* Copy Entire Row as Tab-delimited */}
+        <DropdownMenuItem onClick={copyRowAsTabDelimited}>
+          Copy Entire Row (Excel pasteable)
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
