@@ -43,9 +43,9 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: "Admin",
       menus: [
         {
-          href: "/admin/manage-applicants",
-          label: "Manage Applicants",
-          active: pathname.includes("/manage-applicants"),
+          href: "/admin/manage-applications",
+          label: "Manage Applications",
+          active: pathname.includes("/manage-applications"),
           icon: BookUser,
           submenus: []
         },

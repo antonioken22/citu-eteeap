@@ -41,7 +41,7 @@ export function DataTablePage() {
     onRowSelectionChange: setRowSelection,
     state: { sorting, columnFilters, columnVisibility, rowSelection },
     initialState: {
-      pagination: { pageSize: 4 }, // Set to paginate n rows at a time
+      pagination: { pageSize: 5 }, // Set to paginate n rows at a time
     },
   });
 

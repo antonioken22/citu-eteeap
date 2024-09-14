@@ -1,6 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
+
 import { ApplicantData } from "@/types/ApplicantData";
 import RowActions from "./row-actions";
+import DateSubmittedCell from "./date-submitted-cell";
+import ApplicationStatusCell from "./application-status-cell";
+import IsEditedCell from "./is-edited-cell";
 
 export const columns: ColumnDef<ApplicantData>[] = [
   {
@@ -9,8 +13,25 @@ export const columns: ColumnDef<ApplicantData>[] = [
     cell: ({ row }) => <RowActions row={row} />,
   },
   {
-    accessorKey: "activeEmail",
-    header: "Active Email",
+    accessorKey: "dateSubmitted",
+    header: "Date Submitted",
+    cell: ({ cell }) => (
+      <DateSubmittedCell date={cell.getValue() as string | Date} />
+    ),
+  },
+  {
+    accessorKey: "applicationStatus",
+    header: "Application Status",
+    cell: ({ cell }) => (
+      <ApplicationStatusCell
+        status={(cell.getValue() as string) || "Unreviewed"}
+      />
+    ),
+  },
+  {
+    accessorKey: "isEdited",
+    header: "Edited Status",
+    cell: ({ cell }) => <IsEditedCell isEdited={cell.getValue() as boolean} />,
   },
   {
     accessorKey: "lastName",
