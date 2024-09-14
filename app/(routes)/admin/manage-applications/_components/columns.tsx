@@ -34,6 +34,10 @@ export const columns: ColumnDef<ApplicantData>[] = [
     cell: ({ cell }) => <IsEditedCell isEdited={cell.getValue() as boolean} />,
   },
   {
+    accessorKey: "activeEmail",
+    header: "Active Email Address",
+  },
+  {
     accessorKey: "lastName",
     header: "Last Name",
   },

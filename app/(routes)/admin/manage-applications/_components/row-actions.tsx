@@ -22,6 +22,10 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
   // Function to copy the full row as Spreadsheet pasteable format (Tab-delimited)
   const copyRowAsTabDelimited = () => {
     const tabDelimitedRow = [
+      row.original.applicationId,
+      row.original.dateSubmitted,
+      row.original.applicationStatus,
+      row.original.isEdited,
       row.original.firstName,
       row.original.lastName,
       row.original.activeEmail,
