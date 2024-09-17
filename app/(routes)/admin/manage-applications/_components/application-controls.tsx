@@ -47,7 +47,7 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
   };
 
   return (
-    <div className="mt-4 flex gap-4">
+    <div className="flex gap-2">
       {/* Button to save data to Firestore */}
       <Button
         variant="outline"
@@ -55,9 +55,8 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
         onClick={handleSaveToFirestore}
         disabled={loading}
       >
-        Save Data to Firestore
+        Create Data
       </Button>
-      {error && <p className="text-red-500 mt-2">Error: {error}</p>}
 
       {/* Button to delete the selected applications */}
       <Button
@@ -66,7 +65,7 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
         onClick={handleDeleteSelectedApplications}
         disabled={loading || selectedApplicationIds.length === 0}
       >
-        Delete Selected Applications
+        Delete
       </Button>
     </div>
   );
