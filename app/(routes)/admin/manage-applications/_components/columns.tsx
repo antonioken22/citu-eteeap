@@ -1,12 +1,31 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { Timestamp } from "firebase/firestore";
 
 import { ApplicantData } from "@/types/ApplicantData";
-import RowActions from "./row-actions";
-import DateSubmittedCell from "./date-submitted-cell";
-import ApplicationStatusCell from "./application-status-cell";
-import IsEditedCell from "./is-edited-cell";
+
+import RowActions from "./(column-header-controls)/row-actions";
+import DateSubmittedCell from "./(column-header-controls)/date-submitted-cell";
+import ApplicationStatusCell from "./(column-header-controls)/application-status-cell";
+import IsEditedCell from "./(column-header-controls)/is-edited-cell";
+import SelectRow from "./(column-header-controls)/select-row";
+import BirthdateCell from "./(column-header-controls)/birthdate-cell";
 
 export const columns: ColumnDef<ApplicantData>[] = [
+  {
+    id: "select",
+    header: "Select Row",
+    cell: ({ row }) => (
+      <SelectRow
+        row={row}
+        applicationId={row.original.applicationId as string} // Pass the applicationId from the row data
+        onSelect={(applicationId, selected) => {
+          console.log(`Applicant ${applicationId} selected: ${selected}`);
+        }}
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     id: "rowActions",
     header: "Row Actions",
@@ -16,7 +35,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "dateSubmitted",
     header: "Date Submitted",
     cell: ({ cell }) => (
-      <DateSubmittedCell date={cell.getValue() as string | Date} />
+      <DateSubmittedCell date={cell.getValue() as string | Date | Timestamp} />
     ),
   },
   {
@@ -32,6 +51,10 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "isEdited",
     header: "Edited Status",
     cell: ({ cell }) => <IsEditedCell isEdited={cell.getValue() as boolean} />,
+  },
+  {
+    accessorKey: "applicationId",
+    header: "Application ID",
   },
   {
     accessorKey: "activeEmail",
@@ -64,6 +87,9 @@ export const columns: ColumnDef<ApplicantData>[] = [
   {
     accessorKey: "birthdate",
     header: "Birthdate",
+    cell: ({ cell }) => (
+      <BirthdateCell timestamp={cell.getValue() as Timestamp} />
+    ),
   },
   {
     accessorKey: "birthplace",

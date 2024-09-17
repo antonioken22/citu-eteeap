@@ -1,5 +1,5 @@
 export type ApplicantData = {
-  applicationId: string;
+  applicationId?: string;
   dateSubmitted: Date;
   applicationStatus: string;
   isEdited: boolean;
@@ -10,7 +10,7 @@ export type ApplicantData = {
   gender: string;
   nationality: string;
   religion: string;
-  birthdate: string;
+  birthdate: Date;
   birthplace: string;
   civilStatus: string;
   birthRank: string;

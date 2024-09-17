@@ -22,6 +22,13 @@ export function FilterAndColumnControls({
   // Set default hidden columns
   useMemo(() => {
     const hiddenColumns = [
+      // "applicationId",
+      // "dateSubmitted",
+      // "applicationStatus",
+      // "isEdited",
+      // "activeEmail",
+      // "lastName",
+      // "firstName",
       "age",
       "gender",
       "nationality",
@@ -35,6 +42,8 @@ export function FilterAndColumnControls({
       "numCITBrothersSisters",
       "homeAddress",
       "cityAddress",
+      "facebookURL",
+      "mobileNumber",
       "fatherName",
       "fatherAge",
       "fatherBirthplace",
@@ -60,19 +69,23 @@ export function FilterAndColumnControls({
       "elemSchoolName",
       "elemSchoolAddress",
       "elemYearGraduated",
+      // "progChoice1",
       "progChoice2",
       "progChoice3",
       "contactName",
       "relation",
       "contactAddress",
       "contactNumber",
-      "facebookURL",
-      "mobileNumber",
+      // "evalSheet",
+      // "jobDescription",
+      // "tor",
       // "hsForm",
       // "transferCred",
       // "marriageCert",
       // "employmentCert",
       // "businessProof",
+      // "applicantType",
+      // "missingDocs",
       "photoWithID",
       "examSet",
       "firstQuestion",
@@ -97,7 +110,7 @@ export function FilterAndColumnControls({
     <div className="flex items-center py-4">
       {/* Global Filter Input */}
       <Input
-        placeholder="Filter all data..."
+        placeholder="Global filter..."
         value={globalFilter}
         onChange={handleGlobalFilterChange}
         className="max-w-sm"

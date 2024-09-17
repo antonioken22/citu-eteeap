@@ -1,9 +1,13 @@
+import React from "react";
+import { Timestamp } from "firebase/firestore";
+
 interface DateSubmittedCellProps {
-  date: string | Date; // date might be a string or Date object
+  date: string | Date | Timestamp; // date might be a string, Date object, or Firestore Timestamp
 }
 
 const DateSubmittedCell: React.FC<DateSubmittedCellProps> = ({ date }) => {
-  const dateObj = new Date(date); // Ensure date is a Date object
+  // Check if the date is a Firestore Timestamp and convert it to a Date
+  const dateObj = date instanceof Timestamp ? date.toDate() : new Date(date);
 
   // Format the date as "MMM/dd/yyyy"
   const formattedDate = dateObj.toLocaleDateString("en-US", {
