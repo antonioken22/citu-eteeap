@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import {
   collection,
   setDoc, // Use setDoc instead of addDoc to specify custom ID
-  deleteDoc,
+  updateDoc,
   getDocs,
   query,
   where,
@@ -21,13 +21,16 @@ const useApplications = () => {
   const [error, setError] = useState<string | null>(null);
   const [applications, setApplications] = useState<ApplicantData[]>([]);
 
-  // Real-time read query for fetching applications
+  // Real-time read query for fetching applications where isDeleted is false
   useEffect(() => {
     const applicationsCollection = collection(firestore, "applications");
 
+    // Modify the query to only fetch applications where isDeleted is false
+    const q = query(applicationsCollection, where("isDeleted", "==", false));
+
     // Subscribe to real-time updates
     const unsubscribe = onSnapshot(
-      applicationsCollection,
+      q,
       (snapshot: QuerySnapshot<DocumentData>) => {
         const updatedApplications: ApplicantData[] = snapshot.docs.map((doc) => ({
           ...doc.data(),
@@ -67,7 +70,7 @@ const useApplications = () => {
 
     try {
       const applicationId = await generateApplicationId(); // Generate custom ID
-      const applicationData = { ...data, applicationId }; // Add the custom ID to data
+      const applicationData = { ...data, applicationId, isDeleted: false }; // Add the custom ID and isDeleted flag
 
       // Use setDoc with custom ID (applicationId) instead of addDoc
       await setDoc(doc(firestore, "applications", applicationId), applicationData);
@@ -79,7 +82,7 @@ const useApplications = () => {
     }
   };
 
-  // Delete application by applicationId
+  // Soft delete application by updating isDeleted to true
   const deleteApplication = async (applicationId: string) => {
     setLoading(true);
     setError(null);
@@ -91,8 +94,8 @@ const useApplications = () => {
 
       if (!snapshot.empty) {
         const docId = snapshot.docs[0].id; // Get the document ID
-        await deleteDoc(doc(firestore, "applications", docId));
-        toast.info("Application deleted with ID: " + applicationId);
+        await updateDoc(doc(firestore, "applications", docId), { isDeleted: true }); // Soft delete by setting isDeleted to true
+        toast.info("Application deleted (soft) with ID: " + applicationId);
       } else {
         toast.error("Application not found with ID: " + applicationId);
       }

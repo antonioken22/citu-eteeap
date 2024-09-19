@@ -8,15 +8,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import useApplicationStatus from "@/hooks/use-application-status";
 
 interface ApplicationStatusCellProps {
-  status: string;
+  applicationId: string;
+  currentApplicationStatus: string;
 }
 
 const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
-  status,
+  applicationId,
+  currentApplicationStatus,
 }) => {
-  const [selectedStatus, setSelectedStatus] = useState(status || "Unreviewed");
+  const [selectedStatus, setSelectedStatus] = useState(
+    currentApplicationStatus || "Unreviewed"
+  );
+  const { updateApplicationStatus, loading } = useApplicationStatus();
 
   const statusOptions = [
     { value: "Transferred", bgColor: "bg-green-500" },
@@ -30,15 +36,28 @@ const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
     (option) => option.value === selectedStatus
   );
 
+  // Handle status change and call the hook to update Firestore and log the change
+  const handleStatusChange = async (newApplicationStatus: string) => {
+    setSelectedStatus(newApplicationStatus);
+    await updateApplicationStatus(
+      applicationId,
+      currentApplicationStatus,
+      newApplicationStatus
+    );
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className={`flex w-full items-center px-4 py-2 rounded text-white ${
-            currentStatus?.bgColor || "bg-gray-500"
-          } hover:bg-muted-foreground transition-colors`}
+          className={`flex w-full items-center px-4 py-2 rounded text-white transition-colors ${
+            loading
+              ? "bg-muted-foreground"
+              : currentStatus?.bgColor || "bg-gray-500"
+          }`}
+          disabled={loading}
         >
-          {selectedStatus}
+          {loading ? "Updating..." : selectedStatus}
           <ChevronDown className="ml-2 w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
@@ -49,7 +68,7 @@ const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
               className={`px-4 py-2 cursor-pointer text-sm ${
                 selectedStatus === option.value ? "font-bold" : "font-normal"
               } `}
-              onClick={() => setSelectedStatus(option.value)}
+              onClick={() => handleStatusChange(option.value)}
             >
               {option.value}
             </div>

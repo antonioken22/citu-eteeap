@@ -41,9 +41,10 @@ export const columns: ColumnDef<ApplicantData>[] = [
   {
     accessorKey: "applicationStatus",
     header: "Application Status",
-    cell: ({ cell }) => (
+    cell: ({ row, cell }) => (
       <ApplicationStatusCell
-        status={(cell.getValue() as string) || "Unreviewed"}
+        applicationId={row.original.applicationId as string}
+        currentApplicationStatus={(cell.getValue() as string) || "Unreviewed"}
       />
     ),
   },
