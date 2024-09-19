@@ -2,7 +2,9 @@ export type ApplicantData = {
   applicationId?: string;
   dateSubmitted: Date;
   applicationStatus: string;
+  isApplicationStatusEdited: boolean;
   isEdited: boolean;
+  isDeleted: boolean;
   activeEmail: string;
   lastName: string;
   firstName: string;
