@@ -44,6 +44,9 @@ export const columns: ColumnDef<ApplicantData>[] = [
     cell: ({ row, cell }) => (
       <ApplicationStatusCell
         applicationId={row.original.applicationId as string}
+        isApplicationStatusEdited={
+          row.original.isApplicationStatusEdited as boolean
+        }
         currentApplicationStatus={(cell.getValue() as string) || "Unreviewed"}
       />
     ),
