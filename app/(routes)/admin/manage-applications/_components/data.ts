@@ -5,7 +5,7 @@ import { ApplicantData } from "@/types/ApplicantData";
 export const data: ApplicantData[] = [
   {
     // applicationId: string (Firestore - auto generated)
-    dateSubmitted: new Date("2024-09-14"),
+    dateSubmitted: new Date(),
     applicationStatus: "Unreviewed",
     isApplicationStatusEdited: false,
     isEdited: false,

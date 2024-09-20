@@ -3,9 +3,11 @@
 import * as React from "react";
 import { toast } from "sonner";
 
+import { Button } from "@/components/ui/button";
+
 import { data } from "./data";
 import useApplications from "@/hooks/use-applications";
-import { Button } from "@/components/ui/button";
+import { useUsers } from "@/hooks/use-users";
 
 interface ApplicationControlsProps {
   selectedApplicationIds: string[]; // Accept selected application IDs
@@ -16,6 +18,7 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
 }) => {
   const { createApplication, deleteApplication, loading, error } =
     useApplications();
+  const userRole = useUsers();
 
   // Handler for saving data from data.ts to Firestore
   const handleSaveToFirestore = async () => {
@@ -48,25 +51,29 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
 
   return (
     <div className="flex gap-2">
-      {/* Button to save data to Firestore */}
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={handleSaveToFirestore}
-        disabled={loading}
-      >
-        Create Data
-      </Button>
+      {userRole == "admin" && (
+        <>
+          {/* Button to save data to Firestore */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleSaveToFirestore}
+            disabled={loading}
+          >
+            Create Data
+          </Button>
 
-      {/* Button to delete the selected applications */}
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={handleDeleteSelectedApplications}
-        disabled={loading || selectedApplicationIds.length === 0}
-      >
-        Delete
-      </Button>
+          {/* Button to delete the selected applications */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDeleteSelectedApplications}
+            disabled={loading || selectedApplicationIds.length === 0}
+          >
+            Delete
+          </Button>
+        </>
+      )}
     </div>
   );
 };

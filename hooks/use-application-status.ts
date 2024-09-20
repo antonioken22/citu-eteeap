@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import { doc, updateDoc, setDoc, collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
+import { doc, updateDoc, setDoc, collection, query, where, getDocs, orderBy, limit, onSnapshot  } from "firebase/firestore";
 import { useUser } from "@clerk/clerk-react";
 
 import { firestore } from "@/firebase/config";
@@ -17,33 +17,40 @@ const useApplicationStatus = () => {
   const [statusLogs, setStatusLogs] = useState<ApplicationStatusLog[]>([]);
   const { user } = useUser(); 
 
-  // Fetch status logs based on applicationId without real-time updates
-  const fetchStatusLogs = useCallback(async (applicationId: string) => {
-    setLoading(true);
-    setError(null);
-  
-    try {
-      const statusLogQuery = query(
-        collection(firestore, "applicationStatusLog"),
-        where("applicationId", "==", applicationId)
-      );
-  
-      const querySnapshot = await getDocs(statusLogQuery);
+  // READ
+  // Fetch status logs with real-time updates using onSnapshot
+const fetchStatusLogs = useCallback((applicationId: string) => {
+  setLoading(true);
+  setError(null);
+
+  const statusLogQuery = query(
+    collection(firestore, "applicationStatusLog"),
+    where("applicationId", "==", applicationId)
+  );
+
+  const unsubscribe = onSnapshot(
+    statusLogQuery,
+    (querySnapshot) => {
       const logs: ApplicationStatusLog[] = querySnapshot.docs.map((doc) => ({
         ...(doc.data() as ApplicationStatusLog),
         dateEdited: doc.data().dateEdited.toDate(), // Convert Firestore timestamp to Date object
       }));
-  
+
       setStatusLogs(logs);
-    } catch (error) {
-      console.error("Error fetching status logs: ", error);
+      setLoading(false);
+    },
+    (error) => {
+      // console.error("Error fetching status logs: ", error);
       toast.error("Failed to fetch status logs.");
       setError("Failed to fetch status logs");
-    } finally {
       setLoading(false);
     }
-  }, []);
+  );
 
+  return () => unsubscribe(); // Clean up the listener on unmount
+}, []);
+
+  // CREATE
   // Get the latest applicationStatusLogId and increment it
   const getNextApplicationStatusLogId = async (): Promise<string> => {
     const logsCollection = collection(firestore, "applicationStatusLog");
@@ -80,6 +87,7 @@ const useApplicationStatus = () => {
     return `${formattedNumber} ${formattedDate}`;
   };
 
+  // UPDATE
   // Update applicationStatus and Create the update log
   const updateApplicationStatus = async (
     applicationId: string,
@@ -131,7 +139,7 @@ const useApplicationStatus = () => {
 
       toast.success("Application status updated and logged successfully.");
     } catch (e) {
-      console.error("Error updating status: ", e);
+      // console.error("Error updating status: ", e);
       toast.error("Failed to update application status.");
       setError("Failed to update application status");
     } finally {
