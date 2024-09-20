@@ -19,7 +19,8 @@ export const columns: ColumnDef<ApplicantData>[] = [
         row={row}
         applicationId={row.original.applicationId as string} // Pass the applicationId from the row data
         onSelect={(applicationId, selected) => {
-          console.log(`Applicant ${applicationId} selected: ${selected}`);
+          // FOR DEBUGGING PURPOSES
+          // console.log(`Applicant ${applicationId} selected: ${selected}`);
         }}
       />
     ),
