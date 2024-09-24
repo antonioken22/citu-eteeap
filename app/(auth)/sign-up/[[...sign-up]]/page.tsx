@@ -4,32 +4,49 @@ import Image from "next/image";
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-      <div className="h-full lg:flex flex-col items-center justify-center px-4">
-        <div className="text-center space-y-4 pt-16">
-          <h1 className="font-bold text-3xl primary">
-            Welcome to CIT-U ETEEAP
-          </h1>
-          <p className="text-base text-muted-foreground">
+    <div
+      className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/sign-in-bg.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Full-Screen Gray Overlay */}
+      <div className="absolute inset-0 bg-gray-100 opacity-50 z-0"></div>
+
+      {/* Left Side - Sign Up */}
+      <div className="h-full flex flex-col items-center justify-center px-6 lg:px-12 relative z-10 bg-white bg-opacity-80">
+        <div className="text-center space-y-6 pt-20">
+          <h1 className="font-bold text-4xl text-primary">Welcome to CIT-U ETEEAP</h1>
+          <p className="text-lg text-muted-foreground">
             Register your account here to access CIT-U ETEEAP!
           </p>
+          <p className="text-sm text-gray-500">
+            Join us and embark on your learning journey.
+          </p>
         </div>
-        <div className="flex items-center justify-center mt-8">
-          <ClerkLoaded>
-            <SignUp path="/sign-up" />
-          </ClerkLoaded>
-          <ClerkLoading>
-            <Loader2 className="animate-spin text-muted-foreground" />
-          </ClerkLoading>
+
+        <div className="flex items-center justify-center mt-10">
+          <div className="bg-gray-100 p-6 rounded-lg shadow-lg w-full max-w-md transition-transform duration-300 transform hover:scale-105">
+            <ClerkLoaded>
+              <SignUp path="/sign-up" />
+            </ClerkLoaded>
+            <ClerkLoading>
+              <Loader2 className="animate-spin text-muted-foreground" size={32} />
+            </ClerkLoading>
+          </div>
         </div>
       </div>
-      <div className="h-full justify-center hidden lg:flex">
+
+      {/* Right Side - Image */}
+      <div className="h-full hidden lg:flex justify-center items-center z-10">
         <Image
           src="/marketing-side-panel.jpg"
-          alt="CITU ETEEAP Poster"
-          height={1280 * 0.5}
-          width={981 * 0.5}
-          className="m-8"
+          alt="CIT-U ETEEAP Poster"
+          height={640}
+          width={490.5}
+          className="m-10 rounded-xl shadow-lg transition-transform duration-300 transform hover:scale-105"
         />
       </div>
     </div>
