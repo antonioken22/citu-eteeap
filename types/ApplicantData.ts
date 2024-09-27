@@ -1,10 +1,13 @@
 export type ApplicantData = {
+  dateCreated?: Date;
+  isDeleted: boolean;
+  dateDeleted?: Date;
+
   applicationId?: string;
-  dateSubmitted: Date;
+  dateSubmitted?: Date;
   applicationStatus: string;
   isApplicationStatusEdited: boolean;
   isEdited: boolean;
-  isDeleted: boolean;
   activeEmail: string;
   lastName: string;
   firstName: string;

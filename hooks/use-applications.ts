@@ -70,11 +70,11 @@ const useApplications = () => {
 
     try {
       const applicationId = await generateApplicationId(); // Generate custom ID
-      const applicationData = { ...data, applicationId, isDeleted: false }; // Add the custom ID and isDeleted flag
+      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false }; // Add the custom ID and isDeleted flag
 
       // Use setDoc with custom ID (applicationId) instead of addDoc
       await setDoc(doc(firestore, "applications", applicationId), applicationData);
-      toast.info("Application created with ID: " + applicationId);
+      toast.success("Application successfully created.");
     } catch (e) {
       toast.error("Error adding document: " + e);
     } finally {
@@ -94,8 +94,8 @@ const useApplications = () => {
 
       if (!snapshot.empty) {
         const docId = snapshot.docs[0].id; // Get the document ID
-        await updateDoc(doc(firestore, "applications", docId), { isDeleted: true }); // Soft delete by setting isDeleted to true
-        toast.info("Application deleted (soft) with ID: " + applicationId);
+        await updateDoc(doc(firestore, "applications", docId), { isDeleted: true, dateDeleted: new Date() }); // Soft delete by setting isDeleted to true
+        toast.success("Application successfully deleted. " + applicationId);
       } else {
         toast.error("Application not found with ID: " + applicationId);
       }
