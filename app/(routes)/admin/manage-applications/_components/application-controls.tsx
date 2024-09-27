@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 
@@ -26,9 +25,8 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
       for (const applicant of data) {
         await createApplication(applicant); // Store each applicant to Firestore
       }
-      toast.success("Data saved successfully to Firestore!");
     } catch (error) {
-      toast.error("Error saving data: " + error);
+      console.error("Error saving data: " + error);
     }
   };
 
@@ -40,12 +38,9 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
         for (const applicationId of selectedApplicationIds) {
           await deleteApplication(applicationId);
         }
-        toast.success("Selected applications deleted successfully!");
       } catch (error) {
-        toast.error("Error deleting applications: " + error);
+        console.error("Error deleting applications: " + error);
       }
-    } else {
-      toast.error("No applications selected for deletion.");
     }
   };
 
