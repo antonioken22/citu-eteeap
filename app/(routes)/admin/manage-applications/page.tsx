@@ -1,4 +1,8 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { ContentLayout } from "@/app/_components/(content-layout)/content-layout";
 import {
@@ -10,8 +14,23 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { DataTablePage } from "./_components/data-table-page";
+import { useUsers } from "@/hooks/use-users";
 
-export default function ApplicantsPage() {
+export default function ManageApplicationsPage() {
+  const { loading: userLoading, userRole } = useUsers();
+  const router = useRouter();
+
+  // Push to /dashboard if not admin
+  useEffect(() => {
+    if (!userLoading && userRole !== "admin") {
+      router.push("/");
+    }
+  }, [userLoading, userRole, router]);
+
+  if (userLoading) {
+    return <></>;
+  }
+
   return (
     <ContentLayout title="Manage Applications">
       <Breadcrumb>

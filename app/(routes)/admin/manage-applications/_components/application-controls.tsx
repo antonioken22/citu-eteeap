@@ -17,7 +17,7 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
 }) => {
   const { createApplication, deleteApplication, loading, error } =
     useApplications();
-  const userRole = useUsers();
+  const { userRole } = useUsers();
 
   // Handler for saving data from data.ts to Firestore
   const handleSaveToFirestore = async () => {
