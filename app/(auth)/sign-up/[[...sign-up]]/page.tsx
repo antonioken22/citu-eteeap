@@ -18,7 +18,11 @@ export default function SignUpPage() {
         <div className="flex items-center justify-center ">
           <div className="transition-transform duration-300 transform hover:scale-105">
             <ClerkLoaded>
-              <SignUp path="/sign-up" />
+              <SignUp
+                path="/sign-up"
+                forceRedirectUrl="/registration"
+                fallbackRedirectUrl="/registration"
+              />
             </ClerkLoaded>
             <ClerkLoading>
               <Loader2

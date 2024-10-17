@@ -18,7 +18,12 @@ export default function SignInPage() {
         <div className="flex items-center justify-center ">
           <div className="transition-transform duration-300 transform hover:scale-105">
             <ClerkLoaded>
-              <SignIn path="/sign-in" />
+              <SignIn
+                path="/sign-in"
+                forceRedirectUrl="/registration"
+                fallbackRedirectUrl="/registration"
+                signUpFallbackRedirectUrl="/registration"
+              />
             </ClerkLoaded>
             <ClerkLoading>
               <Loader2

@@ -14,20 +14,20 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { DataTablePage } from "./_components/data-table-page";
-import { useUsers } from "@/hooks/use-users";
+import { useUser } from "@clerk/nextjs";
 
 export default function ManageApplicationsPage() {
-  const { loading: userLoading, userRole } = useUsers();
+  const { user, isLoaded } = useUser();
   const router = useRouter();
 
   // Push to /dashboard if not admin
   useEffect(() => {
-    if (!userLoading && userRole !== "admin") {
+    if (isLoaded && user?.publicMetadata.role !== "admin") {
       router.push("/");
     }
-  }, [userLoading, userRole, router]);
+  }, [isLoaded, user, router]);
 
-  if (userLoading) {
+  if (!isLoaded) {
     return <></>;
   }
 
