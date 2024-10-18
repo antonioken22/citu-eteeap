@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import { data } from "./data";
 import useApplications from "@/hooks/use-applications";
-import { useUsers } from "@/hooks/use-users";
+import { useUser } from "@clerk/nextjs";
 
 interface ApplicationControlsProps {
   selectedApplicationIds: string[]; // Accept selected application IDs
@@ -17,7 +17,7 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
 }) => {
   const { createApplication, deleteApplication, loading, error } =
     useApplications();
-  const { userRole } = useUsers();
+  const { user } = useUser();
 
   // Handler for saving data from data.ts to Firestore
   const handleSaveToFirestore = async () => {
@@ -46,7 +46,7 @@ export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
 
   return (
     <div className="flex gap-2">
-      {userRole == "admin" && (
+      {user?.publicMetadata.role == "admin" && (
         <>
           {/* Button to save data to Firestore */}
           <Button
