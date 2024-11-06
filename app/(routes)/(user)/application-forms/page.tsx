@@ -11,9 +11,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export default function UsersPage() {
+export default function ApplicationFormsPage() {
   return (
-    <ContentLayout title="Monitor Users">
+    <ContentLayout title="Application Forms">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -23,11 +23,7 @@ export default function UsersPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Admin</BreadcrumbPage>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Monitor Users</BreadcrumbPage>
+            <BreadcrumbPage>Application Forms</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

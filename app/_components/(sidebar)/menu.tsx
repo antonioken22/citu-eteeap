@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { Ellipsis, LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { SignOutButton } from "@clerk/nextjs";
-import { toast } from "sonner";
+import { useUser, SignOutButton } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 import { getMenuList } from "@/lib/menu-list";
@@ -34,8 +33,12 @@ interface MenuProps {
 }
 
 export function Menu({ isOpen }: MenuProps) {
+  const { user } = useUser();
   const pathname = usePathname();
-  const menuList = getMenuList(pathname);
+  const menuList = getMenuList(
+    pathname,
+    user?.publicMetadata.role as string | undefined
+  );
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
