@@ -42,12 +42,6 @@ export default function ManageApplicationsPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/dashboard">Dashboard</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
             <BreadcrumbPage>Admin</BreadcrumbPage>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

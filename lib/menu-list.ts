@@ -1,9 +1,10 @@
 import {
   Users,
-  Settings,
   LayoutGrid,
   LucideIcon,
-  BookUser
+  BookUser,
+  SquareUserRound,
+  FileUser
 } from "lucide-react";
 
 type Submenu = {
@@ -25,8 +26,9 @@ type Group = {
   menus: Menu[];
 };
 
-export function getMenuList(pathname: string): Group[] {
-  return [
+export function getMenuList(pathname: string, role?: string): Group[] {
+  // Base menu that's always shown
+  const baseMenus: Group[] = [
     {
       groupLabel: "",
       menus: [
@@ -36,10 +38,28 @@ export function getMenuList(pathname: string): Group[] {
           active: pathname.includes("/dashboard"),
           icon: LayoutGrid,
           submenus: []
+        },
+        {
+          href: "/application-forms",
+          label: "Application Forms",
+          active: pathname.includes("/application-forms"),
+          icon: FileUser,
+          submenus: []
+        },
+        {
+          href: "/user-profile",
+          label: "User Profile",
+          active: pathname.includes("/user-profile"),
+          icon: SquareUserRound,
+          submenus: []
         }
       ]
-    },
-    {
+    }
+  ];
+
+  // Only add admin menus if user is an admin
+  if (role === "admin") {
+    baseMenus.push({
       groupLabel: "Admin",
       menus: [
         {
@@ -57,6 +77,8 @@ export function getMenuList(pathname: string): Group[] {
           submenus: []
         },
       ]
-    },
-  ];
+    });
+  }
+
+  return baseMenus;
 }
