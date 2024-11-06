@@ -9,12 +9,14 @@ import { toast } from "sonner";
 import { firestore } from "@/firebase/config";
 import { Spinner } from "@/components/spinner";
 
-const RegistrationPage = () => {
+const VerificationPage = () => {
   const router = useRouter();
   const { user, isLoaded } = useUser();
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [loadingMessage, setLoadingMessage] = useState("Fetching user data...");
+  const [loadingMessage, setLoadingMessage] = useState(
+    "Verifying user data..."
+  );
 
   const checkFirestoreForUser = useCallback(async () => {
     if (!user) return;
@@ -42,7 +44,7 @@ const RegistrationPage = () => {
       router.push("/dashboard");
     } catch (error) {
       console.error("Error checking user in Firestore:", error);
-      toast.error("Error loading the web application.");
+      toast.error("Error setting up your account.");
       setIsLoading(false);
     }
   }, [user, router]);
@@ -50,7 +52,7 @@ const RegistrationPage = () => {
   useEffect(() => {
     if (isLoaded) {
       if (user) {
-        setLoadingMessage("Initializing the web application...");
+        setLoadingMessage("Verifying your account...");
         setProgress(50);
         checkFirestoreForUser();
       } else {
@@ -101,4 +103,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default VerificationPage;

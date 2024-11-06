@@ -20,8 +20,8 @@ export default function SignUpPage() {
             <ClerkLoaded>
               <SignUp
                 path="/sign-up"
-                forceRedirectUrl="/registration"
-                fallbackRedirectUrl="/registration"
+                forceRedirectUrl="/verification"
+                fallbackRedirectUrl="/verification"
               />
             </ClerkLoaded>
             <ClerkLoading>
