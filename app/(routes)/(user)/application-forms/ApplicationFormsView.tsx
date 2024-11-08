@@ -23,6 +23,9 @@ export const ApplicationFormsView = () => {
       ? JSON.parse(savedFormData)
       : {
           isQuestionReadAndUnderstood: false,
+          isPrivacyNoticeAccepted: false,
+          isWaiverAccepted: false,
+
           // TAB 1: General Information
           // Personal
           applicantId: user?.id,
@@ -101,7 +104,6 @@ export const ApplicationFormsView = () => {
           // Undertaking/Waiver
           applicantType: "",
           missingDocs: "",
-          isWaiverAccepted: false,
           photoWithID: "",
 
           // TAB 5: Emergency Contact & Essay Admission Test
@@ -177,7 +179,11 @@ export const ApplicationFormsView = () => {
           />
         </TabsContent>
         <TabsContent value="tab2">
-          {/* <Tab2 formData={formData} updateFormData={updateFormData} /> */}
+          <Tab2
+            formData={formData}
+            updateFormData={updateFormData}
+            handleTabChange={handleTabChange}
+          />
         </TabsContent>
         <TabsContent value="tab3">
           {/* <Tab3 formData={formData} updateFormData={updateFormData} /> */}

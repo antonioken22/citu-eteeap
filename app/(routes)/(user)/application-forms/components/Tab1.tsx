@@ -18,8 +18,8 @@ export const Tab1 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Image
           src={CITUBanner}
           alt="CIT University Banner"
-          width={500}
-          height={150}
+          width={2876}
+          height={715}
           placeholder="blur"
           loading="eager"
           className="w-full object-cover rounded-md"
