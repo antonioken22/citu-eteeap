@@ -5,10 +5,17 @@ import { ApplicantData } from "@/types/ApplicantData";
 export const data: ApplicantData[] = [
   {
     // applicationId: string (Firestore - auto generated)
+    isSubmitted: true,
     applicationStatus: "Unreviewed",
     isApplicationStatusEdited: false,
     isEdited: false,
     isDeleted: false,
+
+    isPrivacyNoticeAccepted: true,
+    isQuestionReadAndUnderstood: true,
+    isWaiverAccepted: true,
+
+    applicantId: "user_2lHJQ9LzS2omqKBNtIOTqsRd3FO",
     activeEmail: "johndoe@gmail.com",
     lastName: "Doe",
     firstName: "John",
@@ -19,14 +26,17 @@ export const data: ApplicantData[] = [
     birthdate: new Date("1999-01-15"),
     birthplace: "Cebu City",
     civilStatus: "Single",
+
     birthRank: "2nd",
     numBrothers: 1,
     numSisters: 2,
     numCITBrothersSisters: 0,
+
     homeAddress: "1234 Mango St., Cebu City",
     cityAddress: "4567 Banana Ave., Cebu City",
     facebookURL: "https://facebook.com/johndoe",
     mobileNumber: "09123456789",
+
     fatherName: "Doe, Michael J.",
     fatherAge: 55,
     fatherBirthplace: "Manila",
@@ -41,6 +51,7 @@ export const data: ApplicantData[] = [
     motherReligion: "Christian",
     motherEducation: "College Graduate",
     motherOccupation: "Teacher",
+
     prevCourse: "BS Computer Science",
     lastSchool: "XYZ University",
     schoolYear: "2023",
@@ -55,21 +66,26 @@ export const data: ApplicantData[] = [
     progChoice1: "BSIT",
     progChoice2: "BSCS",
     progChoice3: "BSECE",
-    contactName: "Smith, Anna B.",
-    relation: "Sister",
-    contactAddress: "7890 Orange St., Cebu City",
-    contactNumber: "09198765432",
+    
     evalSheet: null,
     jobDescription: null,
+
     tor: null,
     hsForm: null,
+    psaBirthCert: null,
     transferCred: null,
     marriageCert: null,
     employmentCert: null,
     businessProof: null,
+
     applicantType: "ETEEAP",
-    missingDocs: "TOR, COE",
+    missingDocs: ["TOR", "HS From", "PSA", "Marriage Cert", "COE", "Business Proof"],
     photoWithID: null,
+
+    contactName: "Smith, Anna B.",
+    relation: "Sister",
+    contactAddress: "7890 Orange St., Cebu City",
+    contactNumber: "09198765432",
     examSet: "Set A",
     firstQuestion: "Ambition is good as it drives us to achieve our goals.",
     secondQuestion: "Yes, honesty builds trust, which is essential for relationships.",

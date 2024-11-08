@@ -281,6 +281,10 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "HS Form",
   },
   {
+    accessorKey: "psaBirthCert",
+    header: "PSA Birth Cert.",
+  },
+  {
     accessorKey: "transferCred",
     header: "Transfer Cred.",
   },
