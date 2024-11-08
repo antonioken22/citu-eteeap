@@ -15,7 +15,7 @@ export type ApplicantData = {
   isPrivacyNoticeAccepted: boolean;
   isWaiverAccepted: boolean;
 
-// TAB 1: General Information 
+// TAB 1: Personal Information 
   // Personal
       applicantId: string;
       activeEmail: string;
@@ -40,7 +40,7 @@ export type ApplicantData = {
       facebookURL: string;
       mobileNumber: string;
 
-// TAB 2: Family Background
+// TAB 2: Parents Profile
     fatherName: string;
     fatherAge: number;
     fatherBirthplace: string;
