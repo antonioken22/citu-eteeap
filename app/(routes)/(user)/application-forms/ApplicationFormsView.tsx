@@ -26,7 +26,7 @@ export const ApplicationFormsView = () => {
           isPrivacyNoticeAccepted: false,
           isWaiverAccepted: false,
 
-          // TAB 1: General Information
+          // TAB 1: Personal Information
           // Personal
           applicantId: user?.id,
           activeEmail: user?.primaryEmailAddress?.emailAddress,
@@ -51,7 +51,7 @@ export const ApplicationFormsView = () => {
           facebookURL: "",
           mobileNumber: "",
 
-          // TAB 2: Family Background
+          // TAB 2: Parents Profile
           fatherName: "",
           fatherAge: "",
           fatherBirthplace: "",
@@ -186,7 +186,11 @@ export const ApplicationFormsView = () => {
           />
         </TabsContent>
         <TabsContent value="tab3">
-          {/* <Tab3 formData={formData} updateFormData={updateFormData} /> */}
+          <Tab3
+            formData={formData}
+            updateFormData={updateFormData}
+            handleTabChange={handleTabChange}
+          />
         </TabsContent>
         <TabsContent value="tab4">
           {/* <Tab4 formData={formData} updateFormData={updateFormData} /> */}
