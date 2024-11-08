@@ -30,12 +30,16 @@ const VerificationPage = () => {
       if (!userDoc.exists()) {
         // If user doesn't exist in Firestore, create the document
         await setDoc(userDocRef, {
+          userId: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.primaryEmailAddress?.emailAddress,
           imageUrl: user.imageUrl,
+          phoneNumber: user.primaryPhoneNumber || "",
           role: "user",
           pushNotificationStatus: false,
+          dateCreated: new Date(),
+          isDeleted: false,
         });
         toast.success("User registered successfully.");
       }
