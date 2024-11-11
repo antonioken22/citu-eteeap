@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import PlaceholderContent from "@/app/_components/(content-layout)/placeholder-content";
 import { ContentLayout } from "@/app/_components/(content-layout)/content-layout";
 import {
   Breadcrumb,
@@ -10,6 +9,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
+import { UserProfileView } from "./UserProfileView";
 
 export default function UserProfilePage() {
   return (
@@ -27,7 +28,7 @@ export default function UserProfilePage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PlaceholderContent />
+      <UserProfileView />
     </ContentLayout>
   );
 }
