@@ -1,6 +1,10 @@
+import Image from "next/image";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ApplicantData } from "@/types/ApplicantData";
+
+import ProgramsOffered from "@/public/application-forms/programs-offered.png";
 
 interface Tab5Props {
   formData: ApplicantData;
@@ -25,7 +29,9 @@ export const Tab5 = ({
       {/* Previous Education */}
       <h3 className="text-md font-semibold text-center">Previous Education</h3>
       <label className="block">
-        <span className="font-medium">Previous Course:</span>
+        <span className="font-medium">
+          Previous Course (If Transferee/College Graduate):
+        </span>
         <Input
           type="text"
           name="prevCourse"
@@ -43,7 +49,7 @@ export const Tab5 = ({
           type="text"
           name="lastSchool"
           required
-          placeholder="e.g. ABC University"
+          placeholder="e.g. Cebu Institute of Technology - University"
           value={formData.lastSchool}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -102,7 +108,7 @@ export const Tab5 = ({
           type="text"
           name="hsSchoolName"
           required
-          placeholder="e.g. XYZ High School"
+          placeholder="e.g. Cebu Institute of Technology - University"
           value={formData.hsSchoolName}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -143,7 +149,7 @@ export const Tab5 = ({
           type="text"
           name="elemSchoolName"
           required
-          placeholder="e.g. ABC Elementary School"
+          placeholder="e.g. Cebu Institute of Technology - University"
           value={formData.elemSchoolName}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -176,8 +182,20 @@ export const Tab5 = ({
         />
       </label>
 
-      {/* Program Choices */}
-      <h3 className="text-md font-semibold text-center">Program Choices</h3>
+      {/* Programs Covered Image Placeholder */}
+      <div className="bg-muted p-4 rounded-lg flex flex-col items-center space-y-2">
+        <p className="text-lg font-semibold">Programs Offered in ETEEAP</p>
+        <Image
+          src={ProgramsOffered}
+          alt="Programs Covered"
+          width={1681}
+          height={787}
+          placeholder="blur"
+          loading="eager"
+          className="w-full h-auto"
+        />
+      </div>
+
       <label className="block">
         <span className="font-medium">First Program Choice:</span>
         <Input
