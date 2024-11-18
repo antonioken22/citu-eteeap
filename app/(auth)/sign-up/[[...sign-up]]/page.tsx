@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { ClerkLoaded, ClerkLoading, SignUp } from "@clerk/nextjs";
 
-import { ModeToggle } from "@/components/ThemeSwitcher";
+import { ThemeSwitch } from "@/components/ThemeSwitcher";
 import ETEEAPMarketingPoster from "@/public/marketing-side-panel.jpg";
 import WildCatsWallpaper from "@/public/wildcats-wallpaper.png";
 
@@ -10,7 +10,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-primary">
       <div className="absolute z-50 top-0 right-0 p-2">
-        <ModeToggle />
+        <ThemeSwitch />
       </div>
 
       {/* Left Side - Sign Up */}
