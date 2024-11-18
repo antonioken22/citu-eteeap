@@ -249,19 +249,19 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "Program 3",
   },
   {
-    accessorKey: "contactName",
+    accessorKey: "emergencyContactName",
     header: "Contact Name",
   },
   {
-    accessorKey: "relation",
+    accessorKey: "emergencyContactRelationship",
     header: "Relation",
   },
   {
-    accessorKey: "contactAddress",
+    accessorKey: "emergencyContactAddress",
     header: "Contact Addr.",
   },
   {
-    accessorKey: "contactNumber",
+    accessorKey: "emergencyContactNumber",
     header: "Contact No.",
   },
   {

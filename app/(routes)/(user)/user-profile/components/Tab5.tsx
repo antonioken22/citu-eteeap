@@ -33,10 +33,16 @@ export const Tab5 = ({ handleTabChange }: any) => {
     userFourthQuestion,
     userFifthQuestion,
   } = useUserState();
-  const [contactName, setContactName] = useState(userContactName || "");
-  const [contactNumber, setContactNumber] = useState(userContactNumber || "");
-  const [relation, setRelation] = useState(userRelation || "");
-  const [contactAddress, setContactAddress] = useState(
+  const [emergencyContactName, setContactName] = useState(
+    userContactName || ""
+  );
+  const [emergencyContactNumber, setContactNumber] = useState(
+    userContactNumber || ""
+  );
+  const [emergencyContactRelationship, setRelation] = useState(
+    userRelation || ""
+  );
+  const [emergencyContactAddress, setContactAddress] = useState(
     userContactAddress || ""
   );
   const [firstQuestionAnswer, setFirstQuestion] = useState(
@@ -96,10 +102,10 @@ export const Tab5 = ({ handleTabChange }: any) => {
       try {
         const userRef = doc(firestore, "users", userId);
         await updateDoc(userRef, {
-          contactName,
-          relation,
-          contactAddress,
-          contactNumber,
+          emergencyContactName,
+          emergencyContactRelationship,
+          emergencyContactAddress,
+          emergencyContactNumber,
           firstQuestionAnswer,
           secondQuestionAnswer,
           thirdQuestionAnswer,
@@ -128,9 +134,9 @@ export const Tab5 = ({ handleTabChange }: any) => {
               </label>
               <Input
                 type="text"
-                name="contactName"
+                name="emergencyContactName"
                 placeholder="e.g. Juan Dela Cruz"
-                value={contactName}
+                value={emergencyContactName}
                 onChange={(e) => setContactName(e.target.value)}
               />
             </div>
@@ -140,9 +146,9 @@ export const Tab5 = ({ handleTabChange }: any) => {
               </label>
               <Input
                 type="text"
-                name="contactNumber"
+                name="emergencyContactNumber"
                 placeholder="e.g. 09296901573"
-                value={contactNumber}
+                value={emergencyContactNumber}
                 onChange={(e) => setContactNumber(e.target.value)}
               />
             </div>
@@ -150,9 +156,9 @@ export const Tab5 = ({ handleTabChange }: any) => {
               <label className="block text-sm font-medium mb-1">Relation</label>
               <Input
                 type="text"
-                name="relation"
+                name="emergencyContactRelationship"
                 placeholder="e.g. Father"
-                value={relation}
+                value={emergencyContactRelationship}
                 onChange={(e) => setRelation(e.target.value)}
               />
             </div>
@@ -160,9 +166,9 @@ export const Tab5 = ({ handleTabChange }: any) => {
               <label className="block text-sm font-medium mb-1">Address</label>
               <Input
                 type="text"
-                name="contactAddress"
+                name="emergencyContactAddress"
                 placeholder="e.g. 2Wilson Place, Wilson Street, Lahug"
-                value={contactAddress}
+                value={emergencyContactAddress}
                 onChange={(e) => setContactAddress(e.target.value)}
               />
             </div>

@@ -105,10 +105,10 @@ export const UserProfileView = () => {
 
           // TAB 5: Emergency Contact & Essay Admission Test
           // Emergency Contact
-          contactName: "",
-          relation: "",
-          contactAddress: "",
-          contactNumber: "",
+          emergencyContactName: "",
+          emergencyContactRelationship: "",
+          emergencyContactAddress: "",
+          emergencyContactNumber: "",
           // Essay Admission Test
           examSet: "",
           // Answers

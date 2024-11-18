@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { ApplicantData } from "@/types/ApplicantData";
@@ -15,6 +16,7 @@ import { Tab5 } from "./components/Tab5";
 import { Tab6 } from "./components/Tab6";
 import { Tab7 } from "./components/Tab7";
 import { Tab8 } from "./components/Tab8";
+import { Tab9 } from "./components/Tab9";
 
 export const ApplicationFormsView = () => {
   const { user } = useUser();
@@ -53,7 +55,8 @@ export const ApplicationFormsView = () => {
           facebookURL: "",
           mobileNumber: "",
 
-          // SECTION 2: Parents Profile
+          // SECTION 2: Parents Profile & Emergency Contact
+          // Father's Profile
           fatherName: "",
           fatherAge: "",
           fatherBirthplace: "",
@@ -61,7 +64,7 @@ export const ApplicationFormsView = () => {
           fatherReligion: "",
           fatherEducation: "",
           fatherOccupation: "",
-
+          // Mother's Profile
           motherName: "",
           motherAge: "",
           motherBirthplace: "",
@@ -69,6 +72,11 @@ export const ApplicationFormsView = () => {
           motherReligion: "",
           motherEducation: "",
           motherOccupation: "",
+          // Emergency Contact
+          emergencyContactName: "",
+          emergencyContactRelationship: "",
+          emergencyContactAddress: "",
+          emergencyContactNumber: "",
 
           // SECTION 3: Educational Background
           // Previous Education
@@ -92,6 +100,7 @@ export const ApplicationFormsView = () => {
           progChoice3: "",
 
           // SECTION 4: Requirement Documents
+          applicantType: "",
           // Pre-evaluation Requirements
           evalSheet: "",
           jobDescription: "",
@@ -104,17 +113,10 @@ export const ApplicationFormsView = () => {
           employmentCert: "",
           businessProof: "",
           // Undertaking/Waiver
-          applicantType: "",
           missingDocs: "",
           photoWithID: "",
 
-          // SECTION 5: Emergency Contact & Essay Admission Test
-          // Emergency Contact
-          contactName: "",
-          relation: "",
-          contactAddress: "",
-          contactNumber: "",
-          // Essay Admission Test
+          // SECTION 5: Essay Admission Test
           examSet: "",
           // Answers
           firstQuestionAnswer: "",
@@ -155,6 +157,22 @@ export const ApplicationFormsView = () => {
     localStorage.setItem("activeTab", activeTab);
   }, [activeTab]);
 
+  const incrementTab = () => {
+    const currentTabIndex = parseInt(activeTab.replace("tab", ""));
+    if (currentTabIndex < 9) {
+      // Assuming there are 8 tabs
+      handleTabChange(`tab${currentTabIndex + 1}`);
+    }
+  };
+
+  const decrementTab = () => {
+    const currentTabIndex = parseInt(activeTab.replace("tab", ""));
+    if (currentTabIndex > 1) {
+      // Prevents going below tab1
+      handleTabChange(`tab${currentTabIndex - 1}`);
+    }
+  };
+
   return (
     <Tabs
       defaultValue="tab1"
@@ -162,7 +180,7 @@ export const ApplicationFormsView = () => {
       onValueChange={handleTabChange}
       className="mt-6"
     >
-      <TabsList className="w-full grid grid-cols-8">
+      <TabsList className="w-full grid grid-cols-9">
         <TabsTrigger value="tab1">1</TabsTrigger>
         <TabsTrigger value="tab2">2</TabsTrigger>
         <TabsTrigger value="tab3">3</TabsTrigger>
@@ -171,52 +189,44 @@ export const ApplicationFormsView = () => {
         <TabsTrigger value="tab6">6</TabsTrigger>
         <TabsTrigger value="tab7">7</TabsTrigger>
         <TabsTrigger value="tab8">8</TabsTrigger>
+        <TabsTrigger value="tab9">9</TabsTrigger>
       </TabsList>
       <div className="mt-6">
         <TabsContent value="tab1">
-          <Tab1
-            formData={formData}
-            updateFormData={updateFormData}
-            handleTabChange={handleTabChange}
-          />
+          <Tab1 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab2">
-          <Tab2
-            formData={formData}
-            updateFormData={updateFormData}
-            handleTabChange={handleTabChange}
-          />
+          <Tab2 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab3">
-          <Tab3
-            formData={formData}
-            updateFormData={updateFormData}
-            handleTabChange={handleTabChange}
-          />
+          <Tab3 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab4">
-          <Tab4
-            formData={formData}
-            updateFormData={updateFormData}
-            handleTabChange={handleTabChange}
-          />
+          <Tab4 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab5">
-          <Tab5
-            formData={formData}
-            updateFormData={updateFormData}
-            handleTabChange={handleTabChange}
-          />
+          <Tab5 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab6">
-          {/* <Tab6 formData={formData} updateFormData={updateFormData} handleTabChange={handleTabChange}/> */}
+          <Tab6 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab7">
-          {/* <Tab7 formData={formData} updateFormData={updateFormData} handleTabChange={handleTabChange}/> */}
+          <Tab7 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
         <TabsContent value="tab8">
-          {/* <Tab8 formData={formData} updateFormData={updateFormData} handleTabChange={handleTabChange}/> */}
+          <Tab8 formData={formData} updateFormData={updateFormData} />
         </TabsContent>
+        <TabsContent value="tab9">
+          <Tab9 formData={formData} updateFormData={updateFormData} />
+        </TabsContent>
+      </div>
+      <div className="flex justify-between mt-8">
+        <Button className="px-4 py-2 " onClick={decrementTab}>
+          Previous
+        </Button>
+        <Button className="px-4 py-2 " onClick={incrementTab}>
+          Next
+        </Button>
       </div>
     </Tabs>
   );

@@ -3,10 +3,17 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { ApplicantData } from "@/types/ApplicantData";
+
 import CITUBanner from "@/public/application-forms/citu-banner.png";
 
-export const Tab1 = ({ formData, updateFormData, handleTabChange }: any) => {
-  const handleInputChange = (e: any) => {
+interface Tab1Props {
+  formData: ApplicantData;
+  updateFormData: (newData: Partial<ApplicantData>) => void;
+}
+
+export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
   };
@@ -85,16 +92,6 @@ export const Tab1 = ({ formData, updateFormData, handleTabChange }: any) => {
         />
         <span>I have read and understood.</span>
       </label>
-
-      {/* Previous and Next buttons */}
-      <div className="flex justify-end mt-8">
-        <Button
-          className="px-4 py-2 rounded "
-          onClick={() => handleTabChange("tab2")}
-        >
-          Next
-        </Button>
-      </div>
     </div>
   );
 };

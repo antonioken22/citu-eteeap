@@ -9,14 +9,9 @@ import ProgramsOffered from "@/public/application-forms/programs-offered.png";
 interface Tab5Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
-  handleTabChange: (tabValue: string) => void;
 }
 
-export const Tab5 = ({
-  formData,
-  updateFormData,
-  handleTabChange,
-}: Tab5Props) => {
+export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
@@ -77,6 +72,7 @@ export const Tab5 = ({
               <input
                 type="radio"
                 name="schoolType"
+                required
                 value={option}
                 checked={formData.schoolType === option}
                 onChange={handleInputChange}
@@ -234,16 +230,6 @@ export const Tab5 = ({
           className="w-full mt-1"
         />
       </label>
-
-      {/* Previous and Next buttons */}
-      <div className="flex justify-between mt-8">
-        <Button className="px-4 py-2" onClick={() => handleTabChange("tab4")}>
-          Previous
-        </Button>
-        <Button className="px-4 py-2" onClick={() => handleTabChange("tab6")}>
-          Next
-        </Button>
-      </div>
     </div>
   );
 };

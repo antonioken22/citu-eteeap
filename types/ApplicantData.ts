@@ -40,7 +40,8 @@ export type ApplicantData = {
       facebookURL: string;
       mobileNumber: string;
 
-// SECTION 2: Parents Profile
+// SECTION 2: Parents Profile & Emergency Contact
+    // Father's Profile
     fatherName: string;
     fatherAge: number;
     fatherBirthplace: string;
@@ -48,7 +49,7 @@ export type ApplicantData = {
     fatherReligion: string;
     fatherEducation: string;
     fatherOccupation: string;
-    
+    // Mother's Profile
     motherName: string;
     motherAge: number;
     motherBirthplace: string;
@@ -56,6 +57,11 @@ export type ApplicantData = {
     motherReligion: string;
     motherEducation: string;
     motherOccupation: string;
+    // Emergency Contact   
+    emergencyContactName: string;
+    emergencyContactRelationship: string;
+    emergencyContactAddress: string;
+    emergencyContactNumber: string;
 
 // SECTION 3: Educational Background
   // Previous Education
@@ -79,6 +85,7 @@ export type ApplicantData = {
       progChoice3: string;
 
 // SECTION 4: Requirement Documents
+      applicantType: string;
   // Pre-evaluation Requirements
       evalSheet: string | null; // file url
       jobDescription: string | null; // file url
@@ -91,17 +98,10 @@ export type ApplicantData = {
       employmentCert: string | null; // file url
       businessProof: string | null; // file url
   // Undertaking/Waiver
-      applicantType: string;
       missingDocs: string[];
       photoWithID: string | null; // file url
 
-// SECTION 5: Emergency Contact & Essay Admission Test
-  // Emergency Contact   
-      contactName: string;
-      relation: string;
-      contactAddress: string;
-      contactNumber: string;
-  // Essay Admission Test
+// SECTION 5: Essay Admission Test
       examSet: string;
     // Answers
         firstQuestionAnswer: string;

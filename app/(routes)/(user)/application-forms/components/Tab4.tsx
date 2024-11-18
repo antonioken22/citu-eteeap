@@ -1,18 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
 import { ApplicantData } from "@/types/ApplicantData";
 
 interface Tab4Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
-  handleTabChange: (tabValue: string) => void;
 }
 
-export const Tab4 = ({
-  formData,
-  updateFormData,
-  handleTabChange,
-}: Tab4Props) => {
+export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
@@ -347,16 +343,6 @@ export const Tab4 = ({
           className="w-full mt-1"
         />
       </label>
-
-      {/* Previous and Next buttons */}
-      <div className="flex justify-between mt-8">
-        <Button className="px-4 py-2" onClick={() => handleTabChange("tab3")}>
-          Previous
-        </Button>
-        <Button className="px-4 py-2" onClick={() => handleTabChange("tab5")}>
-          Next
-        </Button>
-      </div>
     </div>
   );
 };

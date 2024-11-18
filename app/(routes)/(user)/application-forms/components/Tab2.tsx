@@ -3,9 +3,16 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { ApplicantData } from "@/types/ApplicantData";
+
 import ProgramsOffered from "@/public/application-forms/programs-offered.png";
 
-export const Tab2 = ({ formData, updateFormData, handleTabChange }: any) => {
+interface Tab2Props {
+  formData: ApplicantData;
+  updateFormData: (newData: Partial<ApplicantData>) => void;
+}
+
+export const Tab2 = ({ formData, updateFormData }: Tab2Props) => {
   return (
     <div className="p-6 space-y-6 rounded-lg shadow-md">
       {/* Welcome Message */}
@@ -109,16 +116,6 @@ export const Tab2 = ({ formData, updateFormData, handleTabChange }: any) => {
         />
         <span>I ACCEPT</span>
       </label>
-
-      {/* Previous and Next buttons */}
-      <div className="flex justify-between mt-8">
-        <Button className="px-4 py-2 " onClick={() => handleTabChange("tab1")}>
-          Previous
-        </Button>
-        <Button className="px-4 py-2 " onClick={() => handleTabChange("tab3")}>
-          Next
-        </Button>
-      </div>
     </div>
   );
 };

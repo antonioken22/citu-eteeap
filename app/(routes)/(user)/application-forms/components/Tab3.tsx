@@ -6,14 +6,9 @@ import { ApplicantData } from "@/types/ApplicantData";
 interface Tab3Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
-  handleTabChange: (tabValue: string) => void;
 }
 
-export const Tab3 = ({
-  formData,
-  updateFormData,
-  handleTabChange,
-}: Tab3Props) => {
+export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({
@@ -76,6 +71,7 @@ export const Tab3 = ({
               <input
                 type="radio"
                 name="gender"
+                required
                 value={option}
                 checked={formData.gender === option}
                 onChange={handleInputChange}
@@ -177,6 +173,7 @@ export const Tab3 = ({
                 <input
                   type="radio"
                   name="civilStatus"
+                  required
                   value={option}
                   checked={formData.civilStatus === option}
                   onChange={handleInputChange}
@@ -300,16 +297,6 @@ export const Tab3 = ({
         Mobile Number. We will be communicating with you through the contact
         information you have provided.
       </p>
-
-      {/* Previous and Next buttons */}
-      <div className="flex justify-between mt-8">
-        <Button className="px-4 py-2 " onClick={() => handleTabChange("tab2")}>
-          Previous
-        </Button>
-        <Button className="px-4 py-2 " onClick={() => handleTabChange("tab4")}>
-          Next
-        </Button>
-      </div>
     </div>
   );
 };

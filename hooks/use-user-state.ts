@@ -175,10 +175,10 @@ const useUserState = () => {
             setProgChoice3(applicantData.progChoice3 || null);
 
             //Emergency Contact & Essay Admission Test
-            setContactName(applicantData.contactName || null);
-            setRelation(applicantData.relation || null);
-            setContactAddress(applicantData.contactAddress || null);
-            setContactNumber(applicantData.contactNumber || null);
+            setContactName(applicantData.emergencyContactName || null);
+            setRelation(applicantData.emergencyContactRelationship || null);
+            setContactAddress(applicantData.emergencyContactAddress || null);
+            setContactNumber(applicantData.emergencyContactNumber || null);
             setFirstQuestion(applicantData.firstQuestionAnswer || null);
             setSecondQuestion(applicantData.secondQuestionAnswer || null);
             setThirdQuestion(applicantData.thirdQuestionAnswer || null);
