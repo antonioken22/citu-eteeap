@@ -111,12 +111,12 @@ export const UserProfileView = () => {
           contactNumber: "",
           // Essay Admission Test
           examSet: "",
-          // Questions
-          firstQuestion: "",
-          secondQuestion: "",
-          thirdQuestion: "",
-          fourthQuestion: "",
-          fifthQuestion: "",
+          // Answers
+          firstQuestionAnswer: "",
+          secondQuestionAnswer: "",
+          thirdQuestionAnswer: "",
+          fourthQuestionAnswer: "",
+          fifthQuestionAnswer: "",
         };
   });
 

@@ -29,6 +29,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="prevCourse"
+          required
           placeholder="e.g. BS Computer Science"
           value={formData.prevCourse}
           onChange={handleInputChange}
@@ -41,6 +42,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="lastSchool"
+          required
           placeholder="e.g. ABC University"
           value={formData.lastSchool}
           onChange={handleInputChange}
@@ -53,6 +55,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="schoolYear"
+          required
           placeholder="e.g. 2018-2022"
           value={formData.schoolYear}
           onChange={handleInputChange}
@@ -61,15 +64,21 @@ export const Tab5 = ({
       </label>
 
       <label className="block">
-        <span className="font-medium">School Type (Public/Private):</span>
-        <Input
-          type="text"
-          name="schoolType"
-          placeholder="e.g. Public"
-          value={formData.schoolType}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <span className="font-medium">School Type:</span>
+        <div className="flex flex-col mt-1">
+          {["Public", "Private"].map((option) => (
+            <label key={option}>
+              <input
+                type="radio"
+                name="schoolType"
+                value={option}
+                checked={formData.schoolType === option}
+                onChange={handleInputChange}
+              />
+              <span className="ml-2">{option}</span>
+            </label>
+          ))}
+        </div>
       </label>
 
       <label className="block">
@@ -77,6 +86,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="prevSchoolAddress"
+          required
           placeholder="Barangay, City, Province"
           value={formData.prevSchoolAddress}
           onChange={handleInputChange}
@@ -91,6 +101,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="hsSchoolName"
+          required
           placeholder="e.g. XYZ High School"
           value={formData.hsSchoolName}
           onChange={handleInputChange}
@@ -103,6 +114,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="hsSchoolAddress"
+          required
           placeholder="Barangay, City, Province"
           value={formData.hsSchoolAddress}
           onChange={handleInputChange}
@@ -115,6 +127,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="hsYearGraduated"
+          required
           placeholder="e.g. 2016"
           value={formData.hsYearGraduated}
           onChange={handleInputChange}
@@ -129,6 +142,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="elemSchoolName"
+          required
           placeholder="e.g. ABC Elementary School"
           value={formData.elemSchoolName}
           onChange={handleInputChange}
@@ -141,6 +155,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="elemSchoolAddress"
+          required
           placeholder="Barangay, City, Province"
           value={formData.elemSchoolAddress}
           onChange={handleInputChange}
@@ -153,6 +168,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="elemYearGraduated"
+          required
           placeholder="e.g. 2012"
           value={formData.elemYearGraduated}
           onChange={handleInputChange}
@@ -167,6 +183,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="progChoice1"
+          required
           placeholder="e.g. BS Computer Engineering"
           value={formData.progChoice1}
           onChange={handleInputChange}
@@ -179,6 +196,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="progChoice2"
+          required
           placeholder="e.g. BS Information Technology"
           value={formData.progChoice2}
           onChange={handleInputChange}
@@ -191,6 +209,7 @@ export const Tab5 = ({
         <Input
           type="text"
           name="progChoice3"
+          required
           placeholder="e.g. BS Computer Science"
           value={formData.progChoice3}
           onChange={handleInputChange}

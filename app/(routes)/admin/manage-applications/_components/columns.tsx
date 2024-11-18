@@ -317,23 +317,23 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "Exam Set",
   },
   {
-    accessorKey: "firstQuestion",
+    accessorKey: "firstQuestionAnswer",
     header: "First Question",
   },
   {
-    accessorKey: "secondQuestion",
+    accessorKey: "secondQuestionAnswer",
     header: "Second Question",
   },
   {
-    accessorKey: "thirdQuestion",
+    accessorKey: "thirdQuestionAnswer",
     header: "Third Question",
   },
   {
-    accessorKey: "fourthQuestion",
+    accessorKey: "fourthQuestionAnswer",
     header: "Fourth Question",
   },
   {
-    accessorKey: "fifthQuestion",
+    accessorKey: "fifthQuestionAnswer",
     header: "FifthQuestion",
   },
 ];

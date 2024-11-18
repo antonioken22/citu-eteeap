@@ -39,15 +39,21 @@ export const Tab5 = ({ handleTabChange }: any) => {
   const [contactAddress, setContactAddress] = useState(
     userContactAddress || ""
   );
-  const [firstQuestion, setFirstQuestion] = useState(userFirstQuestion || "");
-  const [secondQuestion, setSecondQuestion] = useState(
+  const [firstQuestionAnswer, setFirstQuestion] = useState(
+    userFirstQuestion || ""
+  );
+  const [secondQuestionAnswer, setSecondQuestion] = useState(
     userSecondQuestion || ""
   );
-  const [thirdQuestion, setThirdQuestion] = useState(userThirdQuestion || "");
-  const [fourthQuestion, setFourthQuestion] = useState(
+  const [thirdQuestionAnswer, setThirdQuestion] = useState(
+    userThirdQuestion || ""
+  );
+  const [fourthQuestionAnswer, setFourthQuestion] = useState(
     userFourthQuestion || ""
   );
-  const [fifthQuestion, setFifthQuestion] = useState(userFifthQuestion || "");
+  const [fifthQuestionAnswer, setFifthQuestion] = useState(
+    userFifthQuestion || ""
+  );
 
   useEffect(() => {
     if (userId) {
@@ -94,11 +100,11 @@ export const Tab5 = ({ handleTabChange }: any) => {
           relation,
           contactAddress,
           contactNumber,
-          firstQuestion,
-          secondQuestion,
-          thirdQuestion,
-          fourthQuestion,
-          fifthQuestion,
+          firstQuestionAnswer,
+          secondQuestionAnswer,
+          thirdQuestionAnswer,
+          fourthQuestionAnswer,
+          fifthQuestionAnswer,
         });
         toast.success("Profile updated successfully!");
       } catch (error) {
@@ -173,23 +179,29 @@ export const Tab5 = ({ handleTabChange }: any) => {
         <CardContent className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Question 1</label>
-            <Textarea name="firstQuestion" value={firstQuestion} />
+            <Textarea name="firstQuestionAnswer" value={firstQuestionAnswer} />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Question 2</label>
-            <Textarea name="secondQuestion" value={secondQuestion} />
+            <Textarea
+              name="secondQuestionAnswer"
+              value={secondQuestionAnswer}
+            />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Question 3</label>
-            <Textarea name="thirdQuestion" value={thirdQuestion} />
+            <Textarea name="thirdQuestionAnswer" value={thirdQuestionAnswer} />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Question 4</label>
-            <Textarea name="fourthQuestion" value={fourthQuestion} />
+            <Textarea
+              name="fourthQuestionAnswer"
+              value={fourthQuestionAnswer}
+            />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Question 5</label>
-            <Textarea name="fifthQuestion" value={fifthQuestion} />
+            <Textarea name="fifthQuestionAnswer" value={fifthQuestionAnswer} />
           </div>
         </CardContent>
       </Card>

@@ -88,11 +88,11 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
       row.original.missingDocs,
       row.original.photoWithID,
       row.original.examSet,
-      row.original.firstQuestion,
-      row.original.secondQuestion,
-      row.original.thirdQuestion,
-      row.original.fourthQuestion,
-      row.original.fifthQuestion,
+      row.original.firstQuestionAnswer,
+      row.original.secondQuestionAnswer,
+      row.original.thirdQuestionAnswer,
+      row.original.fourthQuestionAnswer,
+      row.original.fifthQuestionAnswer,
     ].join("\t");
 
     navigator.clipboard.writeText(tabDelimitedRow).then(() => {

@@ -179,11 +179,11 @@ const useUserState = () => {
             setRelation(applicantData.relation || null);
             setContactAddress(applicantData.contactAddress || null);
             setContactNumber(applicantData.contactNumber || null);
-            setFirstQuestion(applicantData.firstQuestion || null);
-            setSecondQuestion(applicantData.secondQuestion || null);
-            setThirdQuestion(applicantData.thirdQuestion || null);
-            setFourthQuestion(applicantData.fourthQuestion || null);
-            setFifthQuestion(applicantData.fifthQuestion || null);
+            setFirstQuestion(applicantData.firstQuestionAnswer || null);
+            setSecondQuestion(applicantData.secondQuestionAnswer || null);
+            setThirdQuestion(applicantData.thirdQuestionAnswer || null);
+            setFourthQuestion(applicantData.fourthQuestionAnswer || null);
+            setFifthQuestion(applicantData.fifthQuestionAnswer || null);
           }
         } catch (error) {
           console.error("Error fetching user data:", error);

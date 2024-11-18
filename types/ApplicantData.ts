@@ -103,10 +103,10 @@ export type ApplicantData = {
       contactNumber: string;
   // Essay Admission Test
       examSet: string;
-    // Questions
-        firstQuestion: string;
-        secondQuestion: string;
-        thirdQuestion: string;
-        fourthQuestion: string;
-        fifthQuestion: string;
+    // Answers
+        firstQuestionAnswer: string;
+        secondQuestionAnswer: string;
+        thirdQuestionAnswer: string;
+        fourthQuestionAnswer: string;
+        fifthQuestionAnswer: string;
 };

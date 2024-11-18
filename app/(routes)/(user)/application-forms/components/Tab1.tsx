@@ -76,6 +76,7 @@ export const Tab1 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="checkbox"
           name="isQuestionReadAndUnderstood"
+          required
           checked={formData.isQuestionReadAndUnderstood}
           onChange={(e) =>
             updateFormData({ isQuestionReadAndUnderstood: e.target.checked })

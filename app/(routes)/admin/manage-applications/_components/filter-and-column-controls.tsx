@@ -88,11 +88,11 @@ export function FilterAndColumnControls({
       // "missingDocs",
       "photoWithID",
       "examSet",
-      "firstQuestion",
-      "secondQuestion",
-      "thirdQuestion",
-      "fourthQuestion",
-      "fifthQuestion",
+      "firstQuestionAnswer",
+      "secondQuestionAnswer",
+      "thirdQuestionAnswer",
+      "fourthQuestionAnswer",
+      "fifthQuestionAnswer",
     ];
 
     hiddenColumns.forEach((col) => {

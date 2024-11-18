@@ -31,6 +31,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="lastName"
+          required
           placeholder="e.g. Dela Cruz"
           value={formData.lastName}
           onChange={handleInputChange}
@@ -44,6 +45,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="firstName"
+          required
           placeholder="e.g. Juan"
           value={formData.firstName}
           onChange={handleInputChange}
@@ -57,6 +59,7 @@ export const Tab3 = ({
         <Input
           type="number"
           name="age"
+          required
           placeholder="e.g. 29"
           value={formData.age}
           onChange={handleInputChange}
@@ -126,6 +129,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="religion"
+          required
           placeholder="e.g. Roman Catholic"
           value={formData.religion}
           onChange={handleInputChange}
@@ -155,6 +159,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="birthplace"
+          required
           placeholder="Barangay, City, Province"
           value={formData.birthplace}
           onChange={handleInputChange}
@@ -189,6 +194,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="birthRank"
+          required
           placeholder="e.g. 1st"
           value={formData.birthRank}
           onChange={handleInputChange}
@@ -201,6 +207,7 @@ export const Tab3 = ({
         <Input
           type="number"
           name="numBrothers"
+          required
           placeholder="e.g. 2"
           value={formData.numBrothers}
           onChange={handleInputChange}
@@ -213,6 +220,7 @@ export const Tab3 = ({
         <Input
           type="number"
           name="numSisters"
+          required
           placeholder="e.g. 3"
           value={formData.numSisters}
           onChange={handleInputChange}
@@ -225,6 +233,7 @@ export const Tab3 = ({
         <Input
           type="number"
           name="numCITBrothersSisters"
+          required
           placeholder="e.g. 1"
           value={formData.numCITBrothersSisters}
           onChange={handleInputChange}
@@ -238,6 +247,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="homeAddress"
+          required
           placeholder="Barangay, City, Province"
           value={formData.homeAddress}
           onChange={handleInputChange}
@@ -250,6 +260,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="cityAddress"
+          required
           placeholder="Barangay, City, Province"
           value={formData.cityAddress}
           onChange={handleInputChange}
@@ -263,6 +274,7 @@ export const Tab3 = ({
         <Input
           type="url"
           name="facebookURL"
+          required
           placeholder="https://facebook.com/username"
           value={formData.facebookURL}
           onChange={handleInputChange}
@@ -275,6 +287,7 @@ export const Tab3 = ({
         <Input
           type="text"
           name="mobileNumber"
+          required
           placeholder="e.g. 09296901573"
           value={formData.mobileNumber}
           onChange={handleInputChange}

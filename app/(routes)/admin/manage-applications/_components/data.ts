@@ -87,11 +87,11 @@ export const data: ApplicantData[] = [
     contactAddress: "7890 Orange St., Cebu City",
     contactNumber: "09198765432",
     examSet: "Set A",
-    firstQuestion: "Ambition is good as it drives us to achieve our goals.",
-    secondQuestion: "Yes, honesty builds trust, which is essential for relationships.",
-    thirdQuestion: "Life is what we make it, so we should strive to live it well.",
-    fourthQuestion: "Reading enhances knowledge and opens doors to opportunities.",
-    fifthQuestion: "Experience teaches valuable lessons that theory alone cannot provide.",
+    firstQuestionAnswer: "Ambition is good as it drives us to achieve our goals.",
+    secondQuestionAnswer: "Yes, honesty builds trust, which is essential for relationships.",
+    thirdQuestionAnswer: "Life is what we make it, so we should strive to live it well.",
+    fourthQuestionAnswer: "Reading enhances knowledge and opens doors to opportunities.",
+    fifthQuestionAnswer: "Experience teaches valuable lessons that theory alone cannot provide.",
   },
    
   // Additional entries...

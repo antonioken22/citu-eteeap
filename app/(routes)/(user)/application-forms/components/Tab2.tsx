@@ -100,6 +100,7 @@ export const Tab2 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="checkbox"
           name="isPrivacyNoticeAccepted"
+          required
           checked={formData.isPrivacyNoticeAccepted}
           onChange={(e) =>
             updateFormData({ isPrivacyNoticeAccepted: e.target.checked })
