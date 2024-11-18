@@ -11,7 +11,7 @@ const formatLogId = (number: number): string => {
   return String(number).padStart(9, '0'); // Ensures the number is 9 digits with leading zeros
 };
 
-const useApplicationStatus = () => {
+export const useApplicationStatus = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [statusLogs, setStatusLogs] = useState<ApplicationStatusLog[]>([]);
@@ -149,5 +149,3 @@ const fetchStatusLogs = useCallback((applicationId: string) => {
 
   return { updateApplicationStatus, fetchStatusLogs, statusLogs, loading, error };
 };
-
-export default useApplicationStatus;

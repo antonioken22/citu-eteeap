@@ -16,7 +16,7 @@ import {
 import { firestore } from "@/firebase/config";
 import { ApplicantData } from "@/types/ApplicantData";
 
-const useApplications = () => {
+export const useApplications = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [applications, setApplications] = useState<ApplicantData[]>([]);
@@ -108,5 +108,3 @@ const useApplications = () => {
 
   return { createApplication, deleteApplication, applications, loading, error };
 };
-
-export default useApplications;

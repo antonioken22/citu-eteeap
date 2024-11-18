@@ -5,7 +5,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 
 import { data } from "./data";
-import useApplications from "@/hooks/use-applications";
+import { useApplications } from "@/hooks/use-applications";
 import { useUser } from "@clerk/nextjs";
 
 interface ApplicationControlsProps {

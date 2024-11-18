@@ -1,8 +1,20 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
-  const handleInputChange = (e: any) => {
+import { ApplicantData } from "@/types/ApplicantData";
+
+interface Tab3Props {
+  formData: ApplicantData;
+  updateFormData: (newData: Partial<ApplicantData>) => void;
+  handleTabChange: (tabValue: string) => void;
+}
+
+export const Tab3 = ({
+  formData,
+  updateFormData,
+  handleTabChange,
+}: Tab3Props) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({
       [name]: name === "birthdate" ? new Date(value) : value,
@@ -19,7 +31,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="text"
           name="lastName"
-          placeholder="Dela Cruz"
+          placeholder="e.g. Dela Cruz"
           value={formData.lastName}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -32,7 +44,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="text"
           name="firstName"
-          placeholder="Juan"
+          placeholder="e.g. Juan"
           value={formData.firstName}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -45,7 +57,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="number"
           name="age"
-          placeholder="(e.g 29)"
+          placeholder="e.g. 29"
           value={formData.age}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -84,7 +96,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="text"
           name="religion"
-          placeholder="e.g. Catholic"
+          placeholder="e.g. Roman Catholic"
           value={formData.religion}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -98,8 +110,8 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
           type="date"
           name="birthdate"
           value={
-            formData.birthdate instanceof Date
-              ? formData.birthdate.toISOString().split("T")[0]
+            formData.birthdate && !isNaN(new Date(formData.birthdate).getTime())
+              ? new Date(formData.birthdate).toISOString().split("T")[0]
               : ""
           }
           onChange={handleInputChange}
@@ -113,7 +125,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="text"
           name="birthplace"
-          placeholder="City, Province, Country"
+          placeholder="Barangay, City, Province"
           value={formData.birthplace}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -188,7 +200,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="text"
           name="homeAddress"
-          placeholder="Home address"
+          placeholder="Barangay, City, Province"
           value={formData.homeAddress}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -200,7 +212,7 @@ export const Tab3 = ({ formData, updateFormData, handleTabChange }: any) => {
         <Input
           type="text"
           name="cityAddress"
-          placeholder="City address"
+          placeholder="Barangay, City, Province"
           value={formData.cityAddress}
           onChange={handleInputChange}
           className="w-full mt-1"

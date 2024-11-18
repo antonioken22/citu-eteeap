@@ -15,7 +15,7 @@ export type ApplicantData = {
   isPrivacyNoticeAccepted: boolean;
   isWaiverAccepted: boolean;
 
-// TAB 1: Personal Information 
+// SECTION 1: Personal Information 
   // Personal
       applicantId: string;
       activeEmail: string;
@@ -40,7 +40,7 @@ export type ApplicantData = {
       facebookURL: string;
       mobileNumber: string;
 
-// TAB 2: Parents Profile
+// SECTION 2: Parents Profile
     fatherName: string;
     fatherAge: number;
     fatherBirthplace: string;
@@ -57,7 +57,7 @@ export type ApplicantData = {
     motherEducation: string;
     motherOccupation: string;
 
-// TAB 3: Educational Background
+// SECTION 3: Educational Background
   // Previous Education
       prevCourse: string;
       lastSchool: string;
@@ -78,7 +78,7 @@ export type ApplicantData = {
       progChoice2: string;
       progChoice3: string;
 
-// TAB 4: Requirement Documents
+// SECTION 4: Requirement Documents
   // Pre-evaluation Requirements
       evalSheet: string | null; // file url
       jobDescription: string | null; // file url
@@ -95,7 +95,7 @@ export type ApplicantData = {
       missingDocs: string[];
       photoWithID: string | null; // file url
 
-// TAB 5: Emergency Contact & Essay Admission Test
+// SECTION 5: Emergency Contact & Essay Admission Test
   // Emergency Contact   
       contactName: string;
       relation: string;

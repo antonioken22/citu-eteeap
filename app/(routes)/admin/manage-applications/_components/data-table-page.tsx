@@ -20,7 +20,7 @@ import { PaginationControls } from "./pagination-controls";
 import { columns } from "./columns";
 import ApplicationControls from "./application-controls";
 
-import useApplications from "@/hooks/use-applications";
+import { useApplications } from "@/hooks/use-applications";
 
 export function DataTablePage() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
