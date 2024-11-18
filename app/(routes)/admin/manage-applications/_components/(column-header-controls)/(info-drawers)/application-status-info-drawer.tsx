@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import useApplicationStatus from "@/hooks/use-application-status";
+import { useApplicationStatus } from "@/hooks/use-application-status";
 
 interface DrawerDemoProps {
   isDrawerOpen: boolean;

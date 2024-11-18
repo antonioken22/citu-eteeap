@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import useApplicationStatus from "@/hooks/use-application-status";
+import { useApplicationStatus } from "@/hooks/use-application-status";
 import { ApplicationStatusInfoDrawer } from "./(info-drawers)/application-status-info-drawer";
 
 interface ApplicationStatusCellProps {

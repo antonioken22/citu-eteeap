@@ -1,4 +1,5 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeSwitch } from "@/components/ThemeSwitcher";
+
 import { UserNav } from "./user-nav";
 import { SheetMenu } from "../(sidebar)/sheet-menu";
 interface NavbarProps {
@@ -14,7 +15,7 @@ export function Navbar({ title }: NavbarProps) {
           <h1 className="font-bold">{title}</h1>
         </div>
         <div className="flex flex-1 items-center space-x-2 justify-end">
-          <ModeToggle />
+          <ThemeSwitch />
           <UserNav />
         </div>
       </div>

@@ -5,6 +5,8 @@ import { useUser } from "@clerk/nextjs";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { ApplicantData } from "@/types/ApplicantData";
+
 import { Tab1 } from "./components/Tab1";
 import { Tab2 } from "./components/Tab2";
 import { Tab3 } from "./components/Tab3";
@@ -17,7 +19,7 @@ import { Tab8 } from "./components/Tab8";
 export const ApplicationFormsView = () => {
   const { user } = useUser();
 
-  const [formData, setFormData] = useState(() => {
+  const [formData, setFormData] = useState<ApplicantData>(() => {
     const savedFormData = localStorage.getItem("applicationFormData");
     return savedFormData
       ? JSON.parse(savedFormData)
@@ -26,7 +28,7 @@ export const ApplicationFormsView = () => {
           isPrivacyNoticeAccepted: false,
           isWaiverAccepted: false,
 
-          // TAB 1: Personal Information
+          // SECTION 1: Personal Information
           // Personal
           applicantId: user?.id,
           activeEmail: user?.primaryEmailAddress?.emailAddress,
@@ -51,7 +53,7 @@ export const ApplicationFormsView = () => {
           facebookURL: "",
           mobileNumber: "",
 
-          // TAB 2: Parents Profile
+          // SECTION 2: Parents Profile
           fatherName: "",
           fatherAge: "",
           fatherBirthplace: "",
@@ -68,7 +70,7 @@ export const ApplicationFormsView = () => {
           motherEducation: "",
           motherOccupation: "",
 
-          // TAB 3: Educational Background
+          // SECTION 3: Educational Background
           // Previous Education
           prevCourse: "",
           lastSchool: "",
@@ -89,7 +91,7 @@ export const ApplicationFormsView = () => {
           progChoice2: "",
           progChoice3: "",
 
-          // TAB 4: Requirement Documents
+          // SECTION 4: Requirement Documents
           // Pre-evaluation Requirements
           evalSheet: "",
           jobDescription: "",
@@ -106,7 +108,7 @@ export const ApplicationFormsView = () => {
           missingDocs: "",
           photoWithID: "",
 
-          // TAB 5: Emergency Contact & Essay Admission Test
+          // SECTION 5: Emergency Contact & Essay Admission Test
           // Emergency Contact
           contactName: "",
           relation: "",
@@ -124,8 +126,8 @@ export const ApplicationFormsView = () => {
   });
 
   // Function to update form data and save to localStorage
-  const updateFormData = (newData: any) => {
-    setFormData((prevData: any) => {
+  const updateFormData = (newData: Partial<ApplicantData>) => {
+    setFormData((prevData: ApplicantData) => {
       const updatedData = { ...prevData, ...newData };
       localStorage.setItem("applicationFormData", JSON.stringify(updatedData));
       return updatedData;
@@ -193,19 +195,27 @@ export const ApplicationFormsView = () => {
           />
         </TabsContent>
         <TabsContent value="tab4">
-          {/* <Tab4 formData={formData} updateFormData={updateFormData} /> */}
+          <Tab4
+            formData={formData}
+            updateFormData={updateFormData}
+            handleTabChange={handleTabChange}
+          />
         </TabsContent>
         <TabsContent value="tab5">
-          {/* <Tab5 formData={formData} updateFormData={updateFormData} /> */}
+          <Tab5
+            formData={formData}
+            updateFormData={updateFormData}
+            handleTabChange={handleTabChange}
+          />
         </TabsContent>
         <TabsContent value="tab6">
-          {/* <Tab6 formData={formData} updateFormData={updateFormData} /> */}
+          {/* <Tab6 formData={formData} updateFormData={updateFormData} handleTabChange={handleTabChange}/> */}
         </TabsContent>
         <TabsContent value="tab7">
-          {/* <Tab7 formData={formData} updateFormData={updateFormData} /> */}
+          {/* <Tab7 formData={formData} updateFormData={updateFormData} handleTabChange={handleTabChange}/> */}
         </TabsContent>
         <TabsContent value="tab8">
-          {/* <Tab8 formData={formData} updateFormData={updateFormData} /> */}
+          {/* <Tab8 formData={formData} updateFormData={updateFormData} handleTabChange={handleTabChange}/> */}
         </TabsContent>
       </div>
     </Tabs>

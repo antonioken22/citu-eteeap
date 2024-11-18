@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { ClerkLoaded, ClerkLoading, SignUp } from "@clerk/nextjs";
 
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/ThemeSwitcher";
 import ETEEAPMarketingPoster from "@/public/marketing-side-panel.jpg";
 import WildCatsWallpaper from "@/public/wildcats-wallpaper.png";
 
