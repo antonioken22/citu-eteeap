@@ -22,12 +22,17 @@ export const Tab4 = ({
     <div className="p-6 space-y-4">
       <h2 className="text-lg font-bold text-center">Parents Profile</h2>
 
+      {/* Father */}
+      <h3 className="text-md font-semibold text-center">
+        Father&apos;s Profile
+      </h3>
       {/* Father's Name */}
       <label className="block">
         <span className="font-medium">Father&apos;s Name:</span>
         <Input
           type="text"
           name="fatherName"
+          required
           placeholder="e.g. Juan A. Dela Cruz Sr."
           value={formData.fatherName}
           onChange={handleInputChange}
@@ -41,6 +46,7 @@ export const Tab4 = ({
         <Input
           type="number"
           name="fatherAge"
+          required
           placeholder="e.g. 50"
           value={formData.fatherAge}
           onChange={handleInputChange}
@@ -54,6 +60,7 @@ export const Tab4 = ({
         <Input
           type="text"
           name="fatherBirthplace"
+          required
           placeholder="City, Province"
           value={formData.fatherBirthplace}
           onChange={handleInputChange}
@@ -64,14 +71,40 @@ export const Tab4 = ({
       {/* Father's Nationality */}
       <label className="block">
         <span className="font-medium">Father&apos;s Nationality:</span>
-        <Input
-          type="text"
-          name="fatherNationality"
-          placeholder="Filipino"
-          value={formData.fatherNationality}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          <label>
+            <input
+              type="radio"
+              name="fatherNationality"
+              value="Filipino"
+              checked={formData.fatherNationality === "Filipino"}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Filipino</span>
+          </label>
+          <label className="flex items-center mt-1">
+            <input
+              type="radio"
+              name="fatherNationality"
+              value=""
+              checked={formData.fatherNationality !== "Filipino"}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Other:</span>
+            <Input
+              type="text"
+              name="fatherNationality"
+              placeholder="Specify nationality"
+              value={
+                formData.fatherNationality !== "Filipino"
+                  ? formData.fatherNationality
+                  : ""
+              }
+              onChange={handleInputChange}
+              className="w-full ml-2"
+            />
+          </label>
+        </div>
       </label>
 
       {/* Father's Religion */}
@@ -80,6 +113,7 @@ export const Tab4 = ({
         <Input
           type="text"
           name="fatherReligion"
+          required
           placeholder="e.g. Roman Catholic"
           value={formData.fatherReligion}
           onChange={handleInputChange}
@@ -90,14 +124,51 @@ export const Tab4 = ({
       {/* Father's Education */}
       <label className="block">
         <span className="font-medium">Father&apos;s Education:</span>
-        <Input
-          type="text"
-          name="fatherEducation"
-          placeholder="e.g. Bachelor's Degree"
-          value={formData.fatherEducation}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          {["Post-Graduate", "College", "High School", "Elementary"].map(
+            (level) => (
+              <label key={level}>
+                <input
+                  type="radio"
+                  name="fatherEducation"
+                  value={level}
+                  checked={formData.fatherEducation === level}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">{level}</span>
+              </label>
+            )
+          )}
+          <label className="flex items-center mt-1">
+            <input
+              type="radio"
+              name="fatherEducation"
+              value=""
+              checked={[
+                "Post-Graduate",
+                "College",
+                "High School",
+                "Elementary",
+              ].every((level) => formData.fatherEducation !== level)}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Other:</span>
+            <Input
+              type="text"
+              name="fatherEducation"
+              placeholder="Specify education level"
+              value={
+                ["Post-Graduate", "College", "High School", "Elementary"].every(
+                  (level) => formData.fatherEducation !== level
+                )
+                  ? formData.fatherEducation
+                  : ""
+              }
+              onChange={handleInputChange}
+              className="w-full ml-2"
+            />
+          </label>
+        </div>
       </label>
 
       {/* Father's Occupation */}
@@ -106,6 +177,7 @@ export const Tab4 = ({
         <Input
           type="text"
           name="fatherOccupation"
+          required
           placeholder="e.g. Civil Engineer"
           value={formData.fatherOccupation}
           onChange={handleInputChange}
@@ -113,12 +185,17 @@ export const Tab4 = ({
         />
       </label>
 
+      {/* Mother */}
+      <h3 className="text-md font-semibold text-center">
+        Mother&apos;s Profile
+      </h3>
       {/* Mother's Name */}
       <label className="block mt-6">
         <span className="font-medium">Mother&apos;s Name:</span>
         <Input
           type="text"
           name="motherName"
+          required
           placeholder="e.g. Maria C. Dela Cruz"
           value={formData.motherName}
           onChange={handleInputChange}
@@ -132,6 +209,7 @@ export const Tab4 = ({
         <Input
           type="number"
           name="motherAge"
+          required
           placeholder="e.g. 48"
           value={formData.motherAge}
           onChange={handleInputChange}
@@ -145,6 +223,7 @@ export const Tab4 = ({
         <Input
           type="text"
           name="motherBirthplace"
+          required
           placeholder="City, Province"
           value={formData.motherBirthplace}
           onChange={handleInputChange}
@@ -155,14 +234,40 @@ export const Tab4 = ({
       {/* Mother's Nationality */}
       <label className="block">
         <span className="font-medium">Mother&apos;s Nationality:</span>
-        <Input
-          type="text"
-          name="motherNationality"
-          placeholder="Filipino"
-          value={formData.motherNationality}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          <label>
+            <input
+              type="radio"
+              name="motherNationality"
+              value="Filipino"
+              checked={formData.motherNationality === "Filipino"}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Filipino</span>
+          </label>
+          <label className="flex items-center mt-1">
+            <input
+              type="radio"
+              name="motherNationality"
+              value=""
+              checked={formData.motherNationality !== "Filipino"}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Other:</span>
+            <Input
+              type="text"
+              name="motherNationality"
+              placeholder="Specify nationality"
+              value={
+                formData.motherNationality !== "Filipino"
+                  ? formData.motherNationality
+                  : ""
+              }
+              onChange={handleInputChange}
+              className="w-full ml-2"
+            />
+          </label>
+        </div>
       </label>
 
       {/* Mother's Religion */}
@@ -171,6 +276,7 @@ export const Tab4 = ({
         <Input
           type="text"
           name="motherReligion"
+          required
           placeholder="e.g. Roman Catholic"
           value={formData.motherReligion}
           onChange={handleInputChange}
@@ -181,14 +287,51 @@ export const Tab4 = ({
       {/* Mother's Education */}
       <label className="block">
         <span className="font-medium">Mother&apos;s Education:</span>
-        <Input
-          type="text"
-          name="motherEducation"
-          placeholder="e.g. Bachelor's Degree"
-          value={formData.motherEducation}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          {["Post-Graduate", "College", "High School", "Elementary"].map(
+            (level) => (
+              <label key={level}>
+                <input
+                  type="radio"
+                  name="motherEducation"
+                  value={level}
+                  checked={formData.motherEducation === level}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">{level}</span>
+              </label>
+            )
+          )}
+          <label className="flex items-center mt-1">
+            <input
+              type="radio"
+              name="motherEducation"
+              value=""
+              checked={[
+                "Post-Graduate",
+                "College",
+                "High School",
+                "Elementary",
+              ].every((level) => formData.motherEducation !== level)}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Other:</span>
+            <Input
+              type="text"
+              name="motherEducation"
+              placeholder="Specify education level"
+              value={
+                ["Post-Graduate", "College", "High School", "Elementary"].every(
+                  (level) => formData.motherEducation !== level
+                )
+                  ? formData.motherEducation
+                  : ""
+              }
+              onChange={handleInputChange}
+              className="w-full ml-2"
+            />
+          </label>
+        </div>
       </label>
 
       {/* Mother's Occupation */}
@@ -197,6 +340,7 @@ export const Tab4 = ({
         <Input
           type="text"
           name="motherOccupation"
+          required
           placeholder="e.g. Teacher"
           value={formData.motherOccupation}
           onChange={handleInputChange}

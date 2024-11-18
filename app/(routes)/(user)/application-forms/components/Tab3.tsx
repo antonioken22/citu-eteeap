@@ -67,27 +67,57 @@ export const Tab3 = ({
       {/* Gender */}
       <label className="block">
         <span className="font-medium">Gender:</span>
-        <Input
-          type="text"
-          name="gender"
-          placeholder="Male/Female"
-          value={formData.gender}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          {["Male", "Female"].map((option) => (
+            <label key={option}>
+              <input
+                type="radio"
+                name="gender"
+                value={option}
+                checked={formData.gender === option}
+                onChange={handleInputChange}
+              />
+              <span className="ml-2">{option}</span>
+            </label>
+          ))}
+        </div>
       </label>
 
       {/* Nationality */}
       <label className="block">
         <span className="font-medium">Nationality:</span>
-        <Input
-          type="text"
-          name="nationality"
-          placeholder="Filipino"
-          value={formData.nationality}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          <label>
+            <input
+              type="radio"
+              name="nationality"
+              value="Filipino"
+              checked={formData.nationality === "Filipino"}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Filipino</span>
+          </label>
+          <label className="flex items-center mt-1">
+            <input
+              type="radio"
+              name="nationality"
+              value=""
+              checked={formData.nationality !== "Filipino"}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Other:</span>
+            <Input
+              type="text"
+              name="nationality"
+              placeholder="Specify nationality"
+              value={
+                formData.nationality !== "Filipino" ? formData.nationality : ""
+              }
+              onChange={handleInputChange}
+              className="w-full ml-2"
+            />
+          </label>
+        </div>
       </label>
 
       {/* Religion */}
@@ -135,14 +165,22 @@ export const Tab3 = ({
       {/* Civil Status */}
       <label className="block">
         <span className="font-medium">Civil Status:</span>
-        <Input
-          type="text"
-          name="civilStatus"
-          placeholder="e.g. Single"
-          value={formData.civilStatus}
-          onChange={handleInputChange}
-          className="w-full mt-1"
-        />
+        <div className="flex flex-col mt-1">
+          {["Single", "Married", "Divorced", "Widowed/Widower"].map(
+            (option) => (
+              <label key={option}>
+                <input
+                  type="radio"
+                  name="civilStatus"
+                  value={option}
+                  checked={formData.civilStatus === option}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">{option}</span>
+              </label>
+            )
+          )}
+        </div>
       </label>
 
       {/* Family Information */}
@@ -243,6 +281,12 @@ export const Tab3 = ({
           className="w-full mt-1"
         />
       </label>
+
+      <p className="text-sm text-muted-foreground italic">
+        Note: Make sure to input the correct Email Address, Facebook URL, and
+        Mobile Number. We will be communicating with you through the contact
+        information you have provided.
+      </p>
 
       {/* Previous and Next buttons */}
       <div className="flex justify-between mt-8">

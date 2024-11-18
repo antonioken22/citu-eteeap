@@ -23,6 +23,7 @@ export const Tab5 = ({
       <h2 className="text-lg font-bold text-center">Educational Background</h2>
 
       {/* Previous Education */}
+      <h3 className="text-md font-semibold text-center">Previous Education</h3>
       <label className="block">
         <span className="font-medium">Previous Course:</span>
         <Input
@@ -84,7 +85,7 @@ export const Tab5 = ({
       </label>
 
       {/* High School */}
-      <h3 className="text-md font-semibold mt-6">High School</h3>
+      <h3 className="text-md font-semibold text-center">High School</h3>
       <label className="block">
         <span className="font-medium">High School Name:</span>
         <Input
@@ -122,7 +123,7 @@ export const Tab5 = ({
       </label>
 
       {/* Elementary */}
-      <h3 className="text-md font-semibold mt-6">Elementary</h3>
+      <h3 className="text-md font-semibold text-center">Elementary</h3>
       <label className="block">
         <span className="font-medium">Elementary School Name:</span>
         <Input
@@ -160,7 +161,7 @@ export const Tab5 = ({
       </label>
 
       {/* Program Choices */}
-      <h3 className="text-md font-semibold mt-6">Program Choices</h3>
+      <h3 className="text-md font-semibold text-center">Program Choices</h3>
       <label className="block">
         <span className="font-medium">First Program Choice:</span>
         <Input
