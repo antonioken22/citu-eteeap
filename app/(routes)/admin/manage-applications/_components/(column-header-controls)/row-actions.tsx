@@ -79,7 +79,7 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
       row.original.evalSheet,
       row.original.jobDescription,
       row.original.tor,
-      row.original.hsForm,
+     // row.original.hsForm,
       row.original.transferCred,
       row.original.marriageCert,
       row.original.employmentCert,
