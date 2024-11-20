@@ -1,5 +1,4 @@
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 import { ApplicantData } from "@/types/ApplicantData";
 
@@ -24,7 +23,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
       </h3>
       {/* Father's Name */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Name:</span>
+        <span className="font-medium">Father&apos;s Name*:</span>
         <Input
           type="text"
           name="fatherName"
@@ -38,7 +37,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Father's Age */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Age:</span>
+        <span className="font-medium">Father&apos;s Age*:</span>
         <Input
           type="number"
           name="fatherAge"
@@ -52,7 +51,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Father's Birthplace */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Birthplace:</span>
+        <span className="font-medium">Father&apos;s Birthplace*:</span>
         <Input
           type="text"
           name="fatherBirthplace"
@@ -66,7 +65,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Father's Nationality */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Nationality:</span>
+        <span className="font-medium">Father&apos;s Nationality*:</span>
         <div className="flex flex-col mt-1">
           <label>
             <input
@@ -105,7 +104,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Father's Religion */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Religion:</span>
+        <span className="font-medium">Father&apos;s Religion*:</span>
         <Input
           type="text"
           name="fatherReligion"
@@ -119,7 +118,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Father's Education */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Education:</span>
+        <span className="font-medium">Father&apos;s Education*:</span>
         <div className="flex flex-col mt-1">
           {["Post-Graduate", "College", "High School", "Elementary"].map(
             (level) => (
@@ -169,7 +168,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Father's Occupation */}
       <label className="block">
-        <span className="font-medium">Father&apos;s Occupation:</span>
+        <span className="font-medium">Father&apos;s Occupation*:</span>
         <Input
           type="text"
           name="fatherOccupation"
@@ -187,7 +186,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
       </h3>
       {/* Mother's Name */}
       <label className="block mt-6">
-        <span className="font-medium">Mother&apos;s Name:</span>
+        <span className="font-medium">Mother&apos;s Name*:</span>
         <Input
           type="text"
           name="motherName"
@@ -201,7 +200,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Mother's Age */}
       <label className="block">
-        <span className="font-medium">Mother&apos;s Age:</span>
+        <span className="font-medium">Mother&apos;s Age*:</span>
         <Input
           type="number"
           name="motherAge"
@@ -215,7 +214,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Mother's Birthplace */}
       <label className="block">
-        <span className="font-medium">Mother&apos;s Birthplace:</span>
+        <span className="font-medium">Mother&apos;s Birthplace*:</span>
         <Input
           type="text"
           name="motherBirthplace"
@@ -229,7 +228,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Mother's Nationality */}
       <label className="block">
-        <span className="font-medium">Mother&apos;s Nationality:</span>
+        <span className="font-medium">Mother&apos;s Nationality*:</span>
         <div className="flex flex-col mt-1">
           <label>
             <input
@@ -268,7 +267,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Mother's Religion */}
       <label className="block">
-        <span className="font-medium">Mother&apos;s Religion:</span>
+        <span className="font-medium">Mother&apos;s Religion*:</span>
         <Input
           type="text"
           name="motherReligion"
@@ -282,7 +281,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Mother's Education */}
       <label className="block">
-        <span className="font-medium">Mother&apos;s Education:</span>
+        <span className="font-medium">Mother&apos;s Education*:</span>
         <div className="flex flex-col mt-1">
           {["Post-Graduate", "College", "High School", "Elementary"].map(
             (level) => (
@@ -332,13 +331,70 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
 
       {/* Mother's Occupation */}
       <label className="block">
-        <span className="font-medium">Mother&apos;s Occupation:</span>
+        <span className="font-medium">Mother&apos;s Occupation*:</span>
         <Input
           type="text"
           name="motherOccupation"
           required
           placeholder="e.g. Teacher"
           value={formData.motherOccupation}
+          onChange={handleInputChange}
+          className="w-full mt-1"
+        />
+      </label>
+
+      {/* Emergency Contact */}
+      <h2 className="text-lg font-bold text-center">Emergency Contact</h2>
+      {/* Contact Person's Name */}
+      <label className="block mt-6">
+        <span className="font-medium">Contact Person&apos;s Name*:</span>
+        <Input
+          type="text"
+          name="emergencyContactName"
+          required
+          placeholder="e.g. John Michael A. Dela Cerna"
+          value={formData.emergencyContactName}
+          onChange={handleInputChange}
+          className="w-full mt-1"
+        />
+      </label>
+      {/* Contact Person's Relationship*/}
+      <label className="block mt-6">
+        <span className="font-medium">
+          Contact Person&apos;s Relationship*:
+        </span>
+        <Input
+          type="text"
+          name="emergencyContactRelationship"
+          required
+          placeholder="e.g. Friend"
+          value={formData.emergencyContactRelationship}
+          onChange={handleInputChange}
+          className="w-full mt-1"
+        />
+      </label>
+      {/* Contact Person's Address */}
+      <label className="block mt-6">
+        <span className="font-medium">Contact Person&apos;s Address*:</span>
+        <Input
+          type="text"
+          name="emergencyContactAddress"
+          required
+          placeholder="e.g. Barangay, City, Province"
+          value={formData.emergencyContactAddress}
+          onChange={handleInputChange}
+          className="w-full mt-1"
+        />
+      </label>
+      {/* Contact Person's Number */}
+      <label className="block mt-6">
+        <span className="font-medium">Contact Person&apos;s Number*:</span>
+        <Input
+          type="text"
+          name="emergencyContactNumber"
+          required
+          placeholder="e.g. 0929 690 1573"
+          value={formData.emergencyContactNumber}
           onChange={handleInputChange}
           className="w-full mt-1"
         />

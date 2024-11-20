@@ -64,6 +64,7 @@ export type ApplicantData = {
     emergencyContactNumber: string;
 
 // SECTION 3: Educational Background
+      educationalAttainment: string;
   // Previous Education
       prevCourse: string;
       lastSchool: string;

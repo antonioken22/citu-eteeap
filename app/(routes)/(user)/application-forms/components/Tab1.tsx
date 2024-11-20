@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 import { ApplicantData } from "@/types/ApplicantData";
 
@@ -62,12 +61,15 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
         readable, and recognizable.
       </p>
       <p className="text-red-600 font-semibold">
+        ● Note: Fields marked with &quot;*&quot; are REQUIRED fields.
+      </p>
+      <p className="text-red-600 font-semibold">
         ● Please tick the “I have read and understood.” box.
       </p>
 
       {/* Email input field */}
       <label className="block mt-4">
-        <span className="font-medium">Email:</span>
+        <span className="font-medium">Email*:</span>
         <Input
           type="email"
           name="activeEmail"
@@ -90,7 +92,7 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
           }
           className="w-4 h-4 mr-2"
         />
-        <span>I have read and understood.</span>
+        <span>I have read and understood.*</span>
       </label>
     </div>
   );

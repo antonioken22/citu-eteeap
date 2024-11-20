@@ -52,6 +52,7 @@ export const data: ApplicantData[] = [
     motherEducation: "College Graduate",
     motherOccupation: "Teacher",
 
+    educationalAttainment: "Collge",
     prevCourse: "BS Computer Science",
     lastSchool: "XYZ University",
     schoolYear: "2023",

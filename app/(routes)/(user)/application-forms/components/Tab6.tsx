@@ -25,7 +25,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
 
       {/* Applicant Type */}
       <label className="block">
-        <span className="font-medium">Applicant Type:</span>
+        <span className="font-medium">Applicant Type*:</span>
         <div className="flex flex-col mt-1">
           {["ETEEAP"].map((option) => (
             <label key={option}>
@@ -49,7 +49,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
       </h3>
       {/* Evaluation Sheet */}
       <div>
-        <h4 className="font-medium">Attach Evaluation Sheet:</h4>
+        <h4 className="font-medium">Attach Evaluation Sheet*:</h4>
         <div className="flex items-center justify-between space-x-2">
           <Input
             type="text"
@@ -86,7 +86,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
       {/* Job Description */}
       <div>
         <h4 className="font-medium">
-          Attach Employer-Certified Detailed Job Description:
+          Attach Employer-Certified Detailed Job Description*:
         </h4>
         <div className="flex items-center justify-between space-x-2">
           <Input
@@ -163,42 +163,44 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
         <p className="p-1 text-xs text-muted-foreground">Max size is 10MB.</p>
       </div>
 
-      {/* HS Form 137/138 */}
-      <div>
-        <h4 className="font-medium">
-          Attach Form 137/Form 138 (High School Graduate Only):
-        </h4>
-        <div className="flex items-center justify-between space-x-2">
-          <Input
-            type="text"
-            name="hsForm"
-            disabled
-            placeholder="Your HS Form 137/Form138 URL will appear here after upload."
-            value={formData.hsForm || fileUrls.hsForm || ""}
-            onChange={handleInputChange}
-            className="w-full mt-1"
-          />
-          <Input
-            type="file"
-            accept=".pdf, .docx"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file && file.size <= 10 * 1024 * 1024) {
-                setSelectedFileUpload(file);
-              } else {
-                toast.error("File is too large. Max size is 10MB.");
-              }
-            }}
-          />
-          <Button
-            type="button"
-            onClick={() => uploadPhoto("hs-form-137-138", "hsForm")}
-          >
-            Upload
-          </Button>
+      {/* HS Form 137/138 or TOR */}
+      {formData.educationalAttainment === "High School" && (
+        <div>
+          <h4 className="font-medium">
+            Attach Form 137/Form 138 (High School Graduate Only):
+          </h4>
+          <div className="flex items-center justify-between space-x-2">
+            <Input
+              type="text"
+              name="hsForm"
+              disabled
+              placeholder="Your HS Form 137/Form138 URL will appear here after upload."
+              value={formData.hsForm || fileUrls.hsForm || ""}
+              onChange={handleInputChange}
+              className="w-full mt-1"
+            />
+            <Input
+              type="file"
+              accept=".pdf, .docx"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file && file.size <= 10 * 1024 * 1024) {
+                  setSelectedFileUpload(file);
+                } else {
+                  toast.error("File is too large. Max size is 10MB.");
+                }
+              }}
+            />
+            <Button
+              type="button"
+              onClick={() => uploadPhoto("hs-form-137-138", "hsForm")}
+            >
+              Upload
+            </Button>
+          </div>
+          <p className="p-1 text-xs text-muted-foreground">Max size is 10MB.</p>
         </div>
-        <p className="p-1 text-xs text-muted-foreground">Max size is 10MB.</p>
-      </div>
+      )}
 
       {/* PSA Birth Certificate */}
       <div>
@@ -271,41 +273,48 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
       </div>
 
       {/* Marriage Certificate */}
-      <div>
-        <h4 className="font-medium">
-          Marriage Certificate (Form Married Women Only):
-        </h4>
-        <div className="flex items-center justify-between space-x-2">
-          <Input
-            type="text"
-            name="marriageCert"
-            disabled
-            placeholder="Your Marriage Certificate URL will appear here after upload."
-            value={formData.marriageCert || fileUrls.marriageCert || ""}
-            onChange={handleInputChange}
-            className="w-full mt-1"
-          />
-          <Input
-            type="file"
-            accept=".pdf, .docx"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file && file.size <= 10 * 1024 * 1024) {
-                setSelectedFileUpload(file);
-              } else {
-                toast.error("File is too large. Max size is 10MB.");
-              }
-            }}
-          />
-          <Button
-            type="button"
-            onClick={() => uploadPhoto("marriage-cert", "marriageCert")}
-          >
-            Upload
-          </Button>
-        </div>
-        <p className="p-1 text-xs text-muted-foreground">Max size is 10MB.</p>
-      </div>
+      {formData.gender === "Female" &&
+        (formData.civilStatus === "Married" ||
+          formData.civilStatus === "Divorced" ||
+          formData.civilStatus === "Widowed/Widower") && (
+          <div>
+            <h4 className="font-medium">
+              Marriage Certificate (Form Married Women Only):
+            </h4>
+            <div className="flex items-center justify-between space-x-2">
+              <Input
+                type="text"
+                name="marriageCert"
+                disabled
+                placeholder="Your Marriage Certificate URL will appear here after upload."
+                value={formData.marriageCert || fileUrls.marriageCert || ""}
+                onChange={handleInputChange}
+                className="w-full mt-1"
+              />
+              <Input
+                type="file"
+                accept=".pdf, .docx"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file && file.size <= 10 * 1024 * 1024) {
+                    setSelectedFileUpload(file);
+                  } else {
+                    toast.error("File is too large. Max size is 10MB.");
+                  }
+                }}
+              />
+              <Button
+                type="button"
+                onClick={() => uploadPhoto("marriage-cert", "marriageCert")}
+              >
+                Upload
+              </Button>
+            </div>
+            <p className="p-1 text-xs text-muted-foreground">
+              Max size is 10MB.
+            </p>
+          </div>
+        )}
 
       {/* Certificate of Employment (COE) */}
       <div>

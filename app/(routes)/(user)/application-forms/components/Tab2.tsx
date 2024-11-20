@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 import { ApplicantData } from "@/types/ApplicantData";
 
@@ -97,7 +96,7 @@ export const Tab2 = ({ formData, updateFormData }: Tab2Props) => {
 
       <p>
         I hereby affirm that I have read and understood the terms presented in
-        the foregoing Privacy Notice. Thus, by ticking the &quot;I ACCEPT&quot;
+        the foregoing Privacy Notice. Thus, by ticking the &quot;I ACCEPT.&quot;
         box I hereby give my consent for the processing and retention of my
         personal information collected through this form.
       </p>
@@ -114,7 +113,7 @@ export const Tab2 = ({ formData, updateFormData }: Tab2Props) => {
           }
           className="w-4 h-4 mr-2"
         />
-        <span>I ACCEPT</span>
+        <span>I ACCEPT.*</span>
       </label>
     </div>
   );

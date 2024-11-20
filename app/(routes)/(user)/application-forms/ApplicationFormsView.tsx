@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -79,6 +80,7 @@ export const ApplicationFormsView = () => {
           emergencyContactNumber: "",
 
           // SECTION 3: Educational Background
+          educationalAttainment: "",
           // Previous Education
           prevCourse: "",
           lastSchool: "",
@@ -222,10 +224,10 @@ export const ApplicationFormsView = () => {
       </div>
       <div className="flex justify-between mt-8">
         <Button className="px-4 py-2 " onClick={decrementTab}>
-          Previous
+          <ChevronLeft />
         </Button>
         <Button className="px-4 py-2 " onClick={incrementTab}>
-          Next
+          <ChevronRight />
         </Button>
       </div>
     </Tabs>

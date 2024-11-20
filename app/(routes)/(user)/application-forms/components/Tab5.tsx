@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { ApplicantData } from "@/types/ApplicantData";
 
 import ProgramsOffered from "@/public/application-forms/programs-offered.png";
@@ -21,11 +20,61 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
     <div className="p-6 space-y-4">
       <h2 className="text-lg font-bold text-center">Educational Background</h2>
 
+      {/* Educational Attainment */}
+      <label className="block">
+        <span className="font-medium">Highest Educational Attainment*:</span>
+        <div className="flex flex-col mt-1">
+          {["Post-Graduate", "College", "High School", "Elementary"].map(
+            (level) => (
+              <label key={level}>
+                <input
+                  type="radio"
+                  name="educationalAttainment"
+                  value={level}
+                  checked={formData.educationalAttainment === level}
+                  onChange={handleInputChange}
+                />
+                <span className="ml-2">{level}</span>
+              </label>
+            )
+          )}
+          <label className="flex items-center mt-1">
+            <input
+              type="radio"
+              name="educationalAttainment"
+              value=""
+              checked={[
+                "Post-Graduate",
+                "College",
+                "High School",
+                "Elementary",
+              ].every((level) => formData.educationalAttainment !== level)}
+              onChange={handleInputChange}
+            />
+            <span className="ml-2">Other:</span>
+            <Input
+              type="text"
+              name="educationalAttainment"
+              placeholder="Specify education level"
+              value={
+                ["Post-Graduate", "College", "High School", "Elementary"].every(
+                  (level) => formData.educationalAttainment !== level
+                )
+                  ? formData.educationalAttainment
+                  : ""
+              }
+              onChange={handleInputChange}
+              className="w-full ml-2"
+            />
+          </label>
+        </div>
+      </label>
+
       {/* Previous Education */}
       <h3 className="text-md font-semibold text-center">Previous Education</h3>
       <label className="block">
         <span className="font-medium">
-          Previous Course (If Transferee/College Graduate):
+          Previous Course (If Transferee/College Graduate)*:
         </span>
         <Input
           type="text"
@@ -39,7 +88,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Last School Attended:</span>
+        <span className="font-medium">Last School Attended*:</span>
         <Input
           type="text"
           name="lastSchool"
@@ -52,7 +101,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">School Year:</span>
+        <span className="font-medium">School Year*:</span>
         <Input
           type="text"
           name="schoolYear"
@@ -65,7 +114,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">School Type:</span>
+        <span className="font-medium">School Type*:</span>
         <div className="flex flex-col mt-1">
           {["Public", "Private"].map((option) => (
             <label key={option}>
@@ -84,7 +133,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Previous School Address:</span>
+        <span className="font-medium">Previous School Address*:</span>
         <Input
           type="text"
           name="prevSchoolAddress"
@@ -99,7 +148,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       {/* High School */}
       <h3 className="text-md font-semibold text-center">High School</h3>
       <label className="block">
-        <span className="font-medium">High School Name:</span>
+        <span className="font-medium">High School Name*:</span>
         <Input
           type="text"
           name="hsSchoolName"
@@ -112,7 +161,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">High School Address:</span>
+        <span className="font-medium">High School Address*:</span>
         <Input
           type="text"
           name="hsSchoolAddress"
@@ -125,7 +174,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Year Graduated:</span>
+        <span className="font-medium">Year Graduated*:</span>
         <Input
           type="text"
           name="hsYearGraduated"
@@ -140,7 +189,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       {/* Elementary */}
       <h3 className="text-md font-semibold text-center">Elementary</h3>
       <label className="block">
-        <span className="font-medium">Elementary School Name:</span>
+        <span className="font-medium">Elementary School Name*:</span>
         <Input
           type="text"
           name="elemSchoolName"
@@ -153,7 +202,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Elementary School Address:</span>
+        <span className="font-medium">Elementary School Address*:</span>
         <Input
           type="text"
           name="elemSchoolAddress"
@@ -166,7 +215,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Year Graduated:</span>
+        <span className="font-medium">Year Graduated*:</span>
         <Input
           type="text"
           name="elemYearGraduated"
@@ -193,12 +242,12 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </div>
 
       <label className="block">
-        <span className="font-medium">First Program Choice:</span>
+        <span className="font-medium">First Program Choice*:</span>
         <Input
           type="text"
           name="progChoice1"
           required
-          placeholder="e.g. BS Computer Engineering"
+          placeholder="e.g. BSBA General Business Management"
           value={formData.progChoice1}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -206,12 +255,12 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Second Program Choice:</span>
+        <span className="font-medium">Second Program Choice*:</span>
         <Input
           type="text"
           name="progChoice2"
           required
-          placeholder="e.g. BS Information Technology"
+          placeholder="e.g. BSBA Marketing Management"
           value={formData.progChoice2}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -219,12 +268,12 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Third Program Choice:</span>
+        <span className="font-medium">Third Program Choice*:</span>
         <Input
           type="text"
           name="progChoice3"
           required
-          placeholder="e.g. BS Computer Science"
+          placeholder="e.g. BS in Civil Engineering"
           value={formData.progChoice3}
           onChange={handleInputChange}
           className="w-full mt-1"

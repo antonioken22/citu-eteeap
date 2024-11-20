@@ -1,5 +1,4 @@
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 import { ApplicantData } from "@/types/ApplicantData";
 
@@ -22,7 +21,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Last Name */}
       <label className="block">
-        <span className="font-medium">Last Name:</span>
+        <span className="font-medium">Last Name*:</span>
         <Input
           type="text"
           name="lastName"
@@ -36,7 +35,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* First Name */}
       <label className="block">
-        <span className="font-medium">First Name:</span>
+        <span className="font-medium">First Name*:</span>
         <Input
           type="text"
           name="firstName"
@@ -50,7 +49,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Age */}
       <label className="block">
-        <span className="font-medium">Age:</span>
+        <span className="font-medium">Age*:</span>
         <Input
           type="number"
           name="age"
@@ -64,7 +63,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Gender */}
       <label className="block">
-        <span className="font-medium">Gender:</span>
+        <span className="font-medium">Gender*:</span>
         <div className="flex flex-col mt-1">
           {["Male", "Female"].map((option) => (
             <label key={option}>
@@ -84,7 +83,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Nationality */}
       <label className="block">
-        <span className="font-medium">Nationality:</span>
+        <span className="font-medium">Nationality*:</span>
         <div className="flex flex-col mt-1">
           <label>
             <input
@@ -121,7 +120,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Religion */}
       <label className="block">
-        <span className="font-medium">Religion:</span>
+        <span className="font-medium">Religion*:</span>
         <Input
           type="text"
           name="religion"
@@ -135,7 +134,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Birthdate */}
       <label className="block">
-        <span className="font-medium">Birthdate:</span>
+        <span className="font-medium">Birthdate*:</span>
         <Input
           type="date"
           name="birthdate"
@@ -151,7 +150,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Birthplace */}
       <label className="block">
-        <span className="font-medium">Birthplace:</span>
+        <span className="font-medium">Birthplace*:</span>
         <Input
           type="text"
           name="birthplace"
@@ -165,7 +164,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Civil Status */}
       <label className="block">
-        <span className="font-medium">Civil Status:</span>
+        <span className="font-medium">Civil Status*:</span>
         <div className="flex flex-col mt-1">
           {["Single", "Married", "Divorced", "Widowed/Widower"].map(
             (option) => (
@@ -187,7 +186,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Family Information */}
       <label className="block">
-        <span className="font-medium">Birth Rank:</span>
+        <span className="font-medium">Birth Rank*:</span>
         <Input
           type="text"
           name="birthRank"
@@ -200,7 +199,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Number of Brothers:</span>
+        <span className="font-medium">Number of Brothers*:</span>
         <Input
           type="number"
           name="numBrothers"
@@ -213,7 +212,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Number of Sisters:</span>
+        <span className="font-medium">Number of Sisters*:</span>
         <Input
           type="number"
           name="numSisters"
@@ -226,7 +225,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Number of Brothers/Sisters at CIT:</span>
+        <span className="font-medium">Number of Brothers/Sisters at CIT*:</span>
         <Input
           type="number"
           name="numCITBrothersSisters"
@@ -240,7 +239,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Address Information */}
       <label className="block">
-        <span className="font-medium">Home Address:</span>
+        <span className="font-medium">Home Address*:</span>
         <Input
           type="text"
           name="homeAddress"
@@ -253,7 +252,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">City Address:</span>
+        <span className="font-medium">City Address*:</span>
         <Input
           type="text"
           name="cityAddress"
@@ -267,7 +266,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
 
       {/* Social Information */}
       <label className="block">
-        <span className="font-medium">Facebook URL:</span>
+        <span className="font-medium">Facebook URL*:</span>
         <Input
           type="url"
           name="facebookURL"
@@ -280,7 +279,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
       </label>
 
       <label className="block">
-        <span className="font-medium">Mobile Number:</span>
+        <span className="font-medium">Mobile Number*:</span>
         <Input
           type="text"
           name="mobileNumber"
