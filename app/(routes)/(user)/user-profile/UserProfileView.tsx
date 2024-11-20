@@ -101,7 +101,7 @@ export const UserProfileView = () => {
           // Undertaking/Waiver
           applicantType: "",
           missingDocs: "",
-          photoWithID: "",
+          photoWithValidId: "",
 
           // TAB 5: Emergency Contact & Essay Admission Test
           // Emergency Contact

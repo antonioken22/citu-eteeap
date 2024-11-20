@@ -309,7 +309,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "Missing Docs",
   },
   {
-    accessorKey: "photoWithID",
+    accessorKey: "photoWithValidId",
     header: "Photo ID",
   },
   {

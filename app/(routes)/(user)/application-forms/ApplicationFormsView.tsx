@@ -108,7 +108,8 @@ export const ApplicationFormsView = () => {
           jobDescription: "",
           // Other Requirements
           tor: "",
-          hsForm: "",
+          hsForm137A: "",
+          hsForm138: "",
           psaBirthCert: "",
           transferCred: "",
           marriageCert: "",
@@ -116,7 +117,7 @@ export const ApplicationFormsView = () => {
           businessProof: "",
           // Undertaking/Waiver
           missingDocs: "",
-          photoWithID: "",
+          photoWithValidId: "",
 
           // SECTION 5: Essay Admission Test
           examSet: "",

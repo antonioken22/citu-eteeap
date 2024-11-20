@@ -86,7 +86,7 @@ export function FilterAndColumnControls({
       // "businessProof",
       // "applicantType",
       // "missingDocs",
-      "photoWithID",
+      "photoWithValidId",
       "examSet",
       "firstQuestionAnswer",
       "secondQuestionAnswer",

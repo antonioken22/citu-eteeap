@@ -94,7 +94,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="jobDescription"
             disabled
             required
-            placeholder="Your Employer-Certified Detailed Job Description URL will appear here after upload."
+            placeholder="Your File URL will appear here after upload."
             value={formData.jobDescription || fileUrls.jobDescription || ""}
             onChange={handleInputChange}
             className="w-full mt-1"
@@ -139,7 +139,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             type="text"
             name="tor"
             disabled
-            placeholder="Your TOR URL will appear here after upload."
+            placeholder="Your File URL will appear here after upload."
             value={formData.tor || fileUrls.tor || ""}
             onChange={handleInputChange}
             className="w-full mt-1"
@@ -163,43 +163,87 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
         <p className="p-1 text-xs text-muted-foreground">Max size is 10MB.</p>
       </div>
 
-      {/* HS Form 137/138 or TOR */}
+      {/* HS Forms */}
       {formData.educationalAttainment === "High School" && (
-        <div>
-          <h4 className="font-medium">
-            Attach Form 137/Form 138 (High School Graduate Only):
-          </h4>
-          <div className="flex items-center justify-between space-x-2">
-            <Input
-              type="text"
-              name="hsForm"
-              disabled
-              placeholder="Your HS Form 137/Form138 URL will appear here after upload."
-              value={formData.hsForm || fileUrls.hsForm || ""}
-              onChange={handleInputChange}
-              className="w-full mt-1"
-            />
-            <Input
-              type="file"
-              accept=".pdf, .docx"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file && file.size <= 10 * 1024 * 1024) {
-                  setSelectedFileUpload(file);
-                } else {
-                  toast.error("File is too large. Max size is 10MB.");
-                }
-              }}
-            />
-            <Button
-              type="button"
-              onClick={() => uploadPhoto("hs-form-137-138", "hsForm")}
-            >
-              Upload
-            </Button>
+        <>
+          {/* HS Form 137A*/}
+          <div>
+            <h4 className="font-medium">
+              Attach Form 137-A (High School Graduate Only):
+            </h4>
+            <div className="flex items-center justify-between space-x-2">
+              <Input
+                type="text"
+                name="hsForm137A"
+                disabled
+                placeholder="Your File URL will appear here after upload."
+                value={formData.hsForm137A || fileUrls.hsForm137A || ""}
+                onChange={handleInputChange}
+                className="w-full mt-1"
+              />
+              <Input
+                type="file"
+                accept=".pdf, .docx"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file && file.size <= 10 * 1024 * 1024) {
+                    setSelectedFileUpload(file);
+                  } else {
+                    toast.error("File is too large. Max size is 10MB.");
+                  }
+                }}
+              />
+              <Button
+                type="button"
+                onClick={() => uploadPhoto("hs-form-137a", "hsForm137A")}
+              >
+                Upload
+              </Button>
+            </div>
+            <p className="p-1 text-xs text-muted-foreground">
+              Max size is 10MB.
+            </p>
           </div>
-          <p className="p-1 text-xs text-muted-foreground">Max size is 10MB.</p>
-        </div>
+
+          {/* HS Form 138*/}
+          <div>
+            <h4 className="font-medium">
+              Attach Form 138 (High School Graduate Only):
+            </h4>
+            <div className="flex items-center justify-between space-x-2">
+              <Input
+                type="text"
+                name="hsForm138"
+                disabled
+                placeholder="Your File URL will appear here after upload."
+                value={formData.hsForm138 || fileUrls.hsForm138 || ""}
+                onChange={handleInputChange}
+                className="w-full mt-1"
+              />
+              <Input
+                type="file"
+                accept=".pdf, .docx"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file && file.size <= 10 * 1024 * 1024) {
+                    setSelectedFileUpload(file);
+                  } else {
+                    toast.error("File is too large. Max size is 10MB.");
+                  }
+                }}
+              />
+              <Button
+                type="button"
+                onClick={() => uploadPhoto("hs-form-138", "hsForm138")}
+              >
+                Upload
+              </Button>
+            </div>
+            <p className="p-1 text-xs text-muted-foreground">
+              Max size is 10MB.
+            </p>
+          </div>
+        </>
       )}
 
       {/* PSA Birth Certificate */}
@@ -210,7 +254,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             type="text"
             name="psaBirthCert"
             disabled
-            placeholder="Your PSA-Authenticated Birth Certificate URL will appear here after upload."
+            placeholder="Your File URL will appear here after upload."
             value={formData.psaBirthCert || fileUrls.psaBirthCert || ""}
             onChange={handleInputChange}
             className="w-full mt-1"
@@ -245,7 +289,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             type="text"
             name="transferCred"
             disabled
-            placeholder="Your Certificate of Transfer Credential will appear here after upload."
+            placeholder="Your File URL will appear here after upload."
             value={formData.transferCred || fileUrls.transferCred || ""}
             onChange={handleInputChange}
             className="w-full mt-1"
@@ -286,7 +330,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
                 type="text"
                 name="marriageCert"
                 disabled
-                placeholder="Your Marriage Certificate URL will appear here after upload."
+                placeholder="Your File URL will appear here after upload."
                 value={formData.marriageCert || fileUrls.marriageCert || ""}
                 onChange={handleInputChange}
                 className="w-full mt-1"
@@ -324,7 +368,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             type="text"
             name="employmentCert"
             disabled
-            placeholder="Your Certificate of Employment (COE) URL will appear here after upload."
+            placeholder="Your File URL will appear here after upload."
             value={formData.employmentCert || fileUrls.employmentCert || ""}
             onChange={handleInputChange}
             className="w-full mt-1"
@@ -361,7 +405,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             type="text"
             name="businessProof"
             disabled
-            placeholder="Your Evidence of Business Ownership URL will appear here after upload."
+            placeholder="Your File URL will appear here after upload."
             value={formData.businessProof || fileUrls.businessProof || ""}
             onChange={handleInputChange}
             className="w-full mt-1"

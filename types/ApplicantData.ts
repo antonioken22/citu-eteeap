@@ -92,7 +92,8 @@ export type ApplicantData = {
       jobDescription: string | null; // file url
   // Other Requirements
       tor: string | null; // file url
-      hsForm: string | null; // file url
+      hsForm137A: string | null; // file url
+      hsForm138: string | null; // file url
       psaBirthCert: string | null; // file url
       transferCred: string | null; // file url
       marriageCert: string | null; // file url
@@ -100,7 +101,7 @@ export type ApplicantData = {
       businessProof: string | null; // file url
   // Undertaking/Waiver
       missingDocs: string[];
-      photoWithID: string | null; // file url
+      photoWithValidId: string | null; // file url
 
 // SECTION 5: Essay Admission Test
       examSet: string;

@@ -86,7 +86,7 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
       row.original.businessProof,
       row.original.applicantType,
       row.original.missingDocs,
-      row.original.photoWithID,
+      row.original.photoWithValidId,
       row.original.examSet,
       row.original.firstQuestionAnswer,
       row.original.secondQuestionAnswer,

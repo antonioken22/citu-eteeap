@@ -72,7 +72,8 @@ export const data: ApplicantData[] = [
     jobDescription: null,
 
     tor: null,
-    hsForm: null,
+    hsForm137A: null,
+    hsForm138: null,
     psaBirthCert: null,
     transferCred: null,
     marriageCert: null,
@@ -81,7 +82,7 @@ export const data: ApplicantData[] = [
 
     applicantType: "ETEEAP",
     missingDocs: ["TOR", "HS From", "PSA", "Marriage Cert", "COE", "Business Proof"],
-    photoWithID: null,
+    photoWithValidId: null,
 
     emergencyContactName: "Smith, Anna B.",
     emergencyContactRelationship: "Sister",
