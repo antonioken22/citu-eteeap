@@ -1,5 +1,5 @@
-import { toast } from "sonner";
 import Image from "next/image";
+import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,64 +22,6 @@ export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
-  };
-
-  const renderRadioButtons = (formData: ApplicantData) => {
-    const missingDocs: string[] = [];
-
-    // Conditional logic to check which fields are missing
-    if (!formData.tor)
-      missingDocs.push("Informative Copy of the Transcript of Records (TOR)");
-    if (!formData.psaBirthCert)
-      missingDocs.push("PSA-Authenticated Birth Certificate");
-    if (!formData.transferCred)
-      missingDocs.push("Certificate of Transfer Credential");
-    if (
-      formData.gender === "Female" &&
-      (formData.civilStatus === "Married" ||
-        formData.civilStatus === "Divorced" ||
-        formData.civilStatus === "Widowed/Widower") &&
-      !formData.marriageCert
-    ) {
-      missingDocs.push("Marriage Certificate (for Women Only)");
-    }
-    if (!formData.employmentCert)
-      missingDocs.push("Certificate/s of Employment (COE)");
-    if (!formData.businessProof)
-      missingDocs.push("Evidence of Business Ownership");
-    if (formData.educationalAttainment === "High School") {
-      if (!formData.hsForm137A) missingDocs.push("HS Form 137-A");
-      if (!formData.hsForm138) missingDocs.push("HS Form 138");
-    }
-
-    // Render the radio buttons
-    return (
-      <div>
-        {[
-          "Informative Copy of the Transcript of Records (TOR)",
-          "PSA-Authenticated Birth Certificate",
-          "Certificate of Transfer Credential",
-          "Marriage Certificate (for Women Only)",
-          "Certificate/s of Employment (COE)",
-          "Employer-Certified Detailed Job Description",
-          "Evidence of Business Ownership",
-          "HS Form 137-A",
-          "HS Form 138",
-        ].map((doc, index) => (
-          <div key={index} className="flex items-center space-x-2">
-            <input
-              type="radio"
-              id={`doc-${index}`}
-              name="missingDocs"
-              value={doc}
-              disabled={true}
-              checked={missingDocs.includes(doc)}
-            />
-            <label htmlFor={`doc-${index}`}>{doc}</label>
-          </div>
-        ))}
-      </div>
-    );
   };
 
   return (
