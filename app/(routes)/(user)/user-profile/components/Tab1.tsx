@@ -1,162 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { doc, updateDoc } from "firebase/firestore";
-import { firestore } from "@/firebase/config";
+import React from "react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import useUserState from "@/hooks/use-user-state";
+
+import { ApplicantData } from "@/types/ApplicantData";
+
 import UserProfileUpdatePhoto from "./userProfileUpdatePhoto";
 
-export const Tab1 = ({ handleTabChange }: any) => {
-  const {
-    userId,
-    userFirstName,
-    userLastName,
-    userBio,
-    userAge,
-    userGender,
-    userNationality,
-    userReligion,
-    userBirthdate,
-    userBirthplace,
-    userCivilStatus,
-    userBirthRank,
-    userNumBrothers,
-    userNumSisters,
-    userNumCITBrothersSisters,
-    userHomeAddress,
-    userCityAddress,
-    userFacebookURL,
-    userMobileNumber,
-  } = useUserState();
-  const [bio, setBio] = useState(userBio || "");
-  const [firstName, setFirstName] = useState(userFirstName || "");
-  const [lastName, setLastName] = useState(userLastName || "");
-  const [age, setAge] = useState(userAge || "");
-  const [gender, setGender] = useState(userGender || "");
-  const [nationality, setNationality] = useState(userNationality || "");
-  const [religion, setReligion] = useState(userReligion || "");
-  const [birthdate, setBirthdate] = useState(userBirthdate || "");
-  const [birthplace, setBirthplace] = useState(userBirthplace || "");
-  const [civilStatus, setCivilStatus] = useState(userCivilStatus || "");
-  const [birthRank, setBirthRank] = useState(userBirthRank || "");
-  const [numBrothers, setNumBrothers] = useState(userNumBrothers || "");
-  const [numSisters, setNumSisters] = useState(userNumSisters || "");
-  const [numCITBrothersSisters, setNumCITBrothersSisters] = useState(
-    userNumCITBrothersSisters || ""
-  );
-  const [homeAddress, setHomeAddress] = useState(userHomeAddress || "");
-  const [cityAddress, setCityAddress] = useState(userCityAddress || "");
-  const [facebookURL, setFacebookURL] = useState(userFacebookURL || "");
-  const [mobileNumber, setMobileNumber] = useState(userMobileNumber || "");
+interface Tab1Props {
+  formData: ApplicantData;
+  updateFormData: (newData: Partial<ApplicantData>) => void;
+}
 
-  useEffect(() => {
-    if (userId) {
-      setFirstName(userFirstName || "");
-      setLastName(userLastName || "");
-      setBio(userBio || "");
-      setAge(userAge || "");
-      setGender(userGender || "");
-      setNationality(userNationality || "");
-      setReligion(userReligion || "");
-      setBirthdate(userBirthdate || "");
-      setBirthplace(userBirthplace || "");
-      setCivilStatus(userCivilStatus || "");
-      setBirthRank(userBirthRank || "");
-      setNumBrothers(userNumBrothers || "");
-      setNumSisters(userNumSisters || "");
-      setNumCITBrothersSisters(userNumCITBrothersSisters || "");
-      setHomeAddress(userHomeAddress || "");
-      setCityAddress(userCityAddress || "");
-      setFacebookURL(userFacebookURL || "");
-      setMobileNumber(userMobileNumber || "");
-    }
-  }, [
-    userId,
-    userFirstName,
-    userLastName,
-    userBio,
-    userAge,
-    userGender,
-    userNationality,
-    userReligion,
-    userBirthdate,
-    userBirthplace,
-    userCivilStatus,
-    userBirthRank,
-    userNumBrothers,
-    userNumSisters,
-    userNumCITBrothersSisters,
-    userHomeAddress,
-    userCityAddress,
-    userFacebookURL,
-    userMobileNumber,
-  ]);
-
-  const handleCancelChanges = () => {
-    setFirstName(userFirstName || "");
-    setLastName(userLastName || "");
-    setBio(userBio || "");
-    setAge(userAge || age || "");
-    setGender(userGender || gender || "");
-    setNationality(userNationality || nationality || "");
-    setReligion(userReligion || "");
-    setBirthdate(userBirthdate || "");
-    setBirthplace(userBirthplace || "");
-    setCivilStatus(userCivilStatus || "");
-    setBirthRank(userBirthRank || "");
-    setNumBrothers(userNumBrothers || "");
-    setNumSisters(userNumSisters || "");
-    setNumCITBrothersSisters(userNumCITBrothersSisters || "");
-    setHomeAddress(userHomeAddress || "");
-    setCityAddress(userCityAddress || "");
-    setFacebookURL(userFacebookURL || "");
-    setMobileNumber(userMobileNumber || "");
-  };
-  const handleSaveChanges = async () => {
-    if (userId) {
-      try {
-        const userRef = doc(firestore, "users", userId);
-        await updateDoc(userRef, {
-          bio,
-          firstName,
-          lastName,
-          age,
-          gender,
-          nationality,
-          religion,
-          birthdate,
-          birthplace,
-          civilStatus,
-          birthRank,
-          numBrothers,
-          numSisters,
-          numCITBrothersSisters,
-          homeAddress,
-          cityAddress,
-          facebookURL,
-          mobileNumber,
-        });
-        toast.success("Profile updated successfully!");
-      } catch (error) {
-        // console.error("Error updating profile:", error);
-        toast.error("Error updating profile.");
-      }
-    }
+export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    updateFormData({
+      [name]: name === "birthdate" ? new Date(value) : value,
+    });
   };
 
   return (
@@ -176,12 +38,13 @@ export const Tab1 = ({ handleTabChange }: any) => {
             <Textarea
               placeholder="Write a brief introduction about yourself..."
               className="min-h-[265px] text-justify"
-              value={bio || ""}
-              onChange={(e) => setBio(e.target.value)}
+              value={""}
+              onChange={() => {}}
             />
           </CardContent>
         </Card>
       </div>
+
       {/* Personal Information Section */}
       <Card>
         <CardHeader>
@@ -198,8 +61,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="firstName"
                 placeholder="Juan"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={formData.firstName}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -210,8 +73,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="lastName"
                 placeholder="Dela Cruz"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={formData.lastName}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -220,8 +83,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="number"
                 name="age"
                 placeholder="e.g. 29"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
+                value={formData.age}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -230,8 +93,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="gender"
                 placeholder="Male/Female"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                value={formData.gender}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -246,8 +109,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="nationality"
                 placeholder="Filipino"
-                value={nationality}
-                onChange={(e) => setNationality(e.target.value)}
+                value={formData.nationality}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -256,8 +119,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="religion"
                 placeholder="e.g. Catholic"
-                value={religion}
-                onChange={(e) => setReligion(e.target.value)}
+                value={formData.religion}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -268,11 +131,12 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="date"
                 name="birthdate"
                 value={
-                  birthdate instanceof Date
-                    ? birthdate.toISOString().split("T")[0]
+                  formData.birthdate &&
+                  !isNaN(new Date(formData.birthdate).getTime())
+                    ? new Date(formData.birthdate).toISOString().split("T")[0]
                     : ""
                 }
-                onChange={(e) => setBirthdate(e.target.value)}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -283,8 +147,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="birthplace"
                 placeholder="City, Province, Country"
-                value={birthplace}
-                onChange={(e) => setBirthplace(e.target.value)}
+                value={formData.birthplace}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -299,8 +163,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="civilStatus"
                 placeholder="e.g. Single"
-                value={civilStatus}
-                onChange={(e) => setCivilStatus(e.target.value)}
+                value={formData.civilStatus}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -311,8 +175,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="birthRank"
                 placeholder="e.g. 1st"
-                value={birthRank}
-                onChange={(e) => setBirthRank(e.target.value)}
+                value={formData.birthRank}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -327,8 +191,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="number"
                 name="numBrothers"
                 placeholder="e.g. 2"
-                value={numBrothers}
-                onChange={(e) => setNumBrothers(e.target.value)}
+                value={formData.numBrothers}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -339,8 +203,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="number"
                 name="numSisters"
                 placeholder="e.g. 3"
-                value={numSisters}
-                onChange={(e) => setNumSisters(e.target.value)}
+                value={formData.numSisters}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -351,8 +215,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="number"
                 name="numCITBrothersSisters"
                 placeholder="e.g. 1"
-                value={numCITBrothersSisters}
-                onChange={(e) => setNumCITBrothersSisters(e.target.value)}
+                value={formData.numCITBrothersSisters}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -373,8 +237,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="homeAddress"
                 placeholder="Home address"
-                value={homeAddress}
-                onChange={(e) => setHomeAddress(e.target.value)}
+                value={formData.homeAddress}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -385,8 +249,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="cityAddress"
                 placeholder="City address"
-                value={cityAddress}
-                onChange={(e) => setCityAddress(e.target.value)}
+                value={formData.cityAddress}
+                onChange={handleInputChange}
               />
             </div>
           </CardContent>
@@ -406,8 +270,8 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="url"
                 name="facebookURL"
                 placeholder="https://facebook.com/username"
-                value={facebookURL}
-                onChange={(e) => setFacebookURL(e.target.value)}
+                value={formData.facebookURL}
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -418,46 +282,12 @@ export const Tab1 = ({ handleTabChange }: any) => {
                 type="text"
                 name="mobileNumber"
                 placeholder="e.g. 09296901573"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
+                value={formData.mobileNumber}
+                onChange={handleInputChange}
               />
             </div>
           </CardContent>
         </Card>
-      </div>
-      <div className="mt-4 flex justify-end space-x-2">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <div
-              role="button"
-              className="mt-auto flex items-center justify-start py-2 "
-            >
-              <Button type="button" className="flex justify-end py-4">
-                Save Changes
-              </Button>
-            </div>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Update Profile</AlertDialogTitle>
-              <AlertDialogDescription>
-                Are you sure you want to save these changes?
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel onClick={handleCancelChanges}>
-                Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction onClick={handleSaveChanges}>
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-      {/* Next Button */}
-      <div className="flex justify-end">
-        <Button onClick={() => handleTabChange("tab2")}>Next</Button>
       </div>
     </div>
   );

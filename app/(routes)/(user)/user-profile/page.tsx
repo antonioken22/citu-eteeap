@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { ContentLayout } from "@/app/_components/(content-layout)/content-layout";
@@ -10,9 +12,21 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
+import { useUser } from "@clerk/nextjs";
+import { useApplications } from "@/hooks/use-applications";
+
 import { UserProfileView } from "./UserProfileView";
+import { ApplicantData } from "@/types/ApplicantData";
 
 export default function UserProfilePage() {
+  const { user } = useUser();
+  const { applications } = useApplications();
+
+  // Filter to get the application that matches user.id
+  const userApplication: ApplicantData | undefined = applications.find(
+    (application) => application.applicantId === user?.id
+  );
+
   return (
     <ContentLayout title="User Profile">
       <Breadcrumb>
@@ -28,7 +42,7 @@ export default function UserProfilePage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <UserProfileView />
+      <UserProfileView application={userApplication} />
     </ContentLayout>
   );
 }

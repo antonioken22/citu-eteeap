@@ -2,16 +2,16 @@ export type ApplicantData = {
   applicationId?: string; // Firestore - auto generated 
   dateCreated?: Date;
 
-  isDeleted: boolean;
+  isDeleted?: boolean;
   dateDeleted?: Date;
 
-  isSubmitted: boolean;
+  isSubmitted?: boolean;
   dateSubmitted?: Date;
   applicationStatus: string;
 
   canEdit?: boolean;
   isEdited: boolean;
-  isApplicationStatusEdited: boolean;
+  isApplicationStatusEdited?: boolean;
   isQuestionReadAndUnderstood: boolean,
   isPrivacyNoticeAccepted: boolean;
   isWaiverAccepted: boolean;

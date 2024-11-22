@@ -49,7 +49,7 @@ const config = {
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--maroon))",
+          DEFAULT: "hsl(var(--citu))",
           foreground: "hsl(var(--card-foreground))",
         },
       },

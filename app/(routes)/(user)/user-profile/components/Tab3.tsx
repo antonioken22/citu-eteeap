@@ -380,15 +380,6 @@ export const Tab3 = ({ handleTabChange }: any) => {
           </AlertDialogContent>
         </AlertDialog>
       </div>
-      {/* Previous and Next buttons */}
-      <div className="flex justify-between mt-8">
-        <Button className="px-4 py-2 " onClick={() => handleTabChange("tab2")}>
-          Previous
-        </Button>
-        <Button className="px-4 py-2 " onClick={() => handleTabChange("tab4")}>
-          Next
-        </Button>
-      </div>
     </div>
   );
 };
