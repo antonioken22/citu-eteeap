@@ -15,8 +15,7 @@ interface ApplicationControlsProps {
 export const ApplicationControls: React.FC<ApplicationControlsProps> = ({
   selectedApplicationIds,
 }) => {
-  const { createApplication, deleteApplication, loading, error } =
-    useApplications();
+  const { createApplication, deleteApplication, loading } = useApplications();
   const { user } = useUser();
 
   // Handler for saving data from data.ts to Firestore
