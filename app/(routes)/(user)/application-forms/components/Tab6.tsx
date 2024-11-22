@@ -12,7 +12,7 @@ interface Tab6Props {
 }
 
 export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
-  const { setSelectedFileUpload, uploadPhoto, fileUrls } = useFileUpload();
+  const { setSelectedFileUpload, uploadPhoto } = useFileUpload();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -56,8 +56,8 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="evalSheet"
             disabled
             required
-            placeholder="Your Evaluation Sheet URL will appear here after upload."
-            value={formData.evalSheet || fileUrls.evalSheet || ""}
+            placeholder="Your File URL will appear here after upload."
+            value={formData.evalSheet as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -75,7 +75,11 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
-            onClick={() => uploadPhoto("eval-sheets", "evalSheet")}
+            onClick={async () => {
+              updateFormData({
+                evalSheet: await uploadPhoto("eval-sheets", "evalSheet"),
+              });
+            }}
           >
             Upload
           </Button>
@@ -95,7 +99,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             disabled
             required
             placeholder="Your File URL will appear here after upload."
-            value={formData.jobDescription || fileUrls.jobDescription || ""}
+            value={formData.jobDescription as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -113,7 +117,11 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
-            onClick={() => uploadPhoto("job-desc", "jobDescription")}
+            onClick={async () => {
+              updateFormData({
+                jobDescription: await uploadPhoto("job-desc", "jobDescription"),
+              });
+            }}
           >
             Upload
           </Button>
@@ -140,8 +148,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="tor"
             disabled
             placeholder="Your File URL will appear here after upload."
-            value={formData.tor || fileUrls.tor || ""}
-            onChange={handleInputChange}
+            value={formData.tor as string}
             className="w-full mt-1"
           />
           <Input
@@ -156,7 +163,12 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               }
             }}
           />
-          <Button type="button" onClick={() => uploadPhoto("tor", "tor")}>
+          <Button
+            type="button"
+            onClick={async () => {
+              updateFormData({ tor: await uploadPhoto("tor", "tor") });
+            }}
+          >
             Upload
           </Button>
         </div>
@@ -177,7 +189,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
                 name="hsForm137A"
                 disabled
                 placeholder="Your File URL will appear here after upload."
-                value={formData.hsForm137A || fileUrls.hsForm137A || ""}
+                value={formData.hsForm137A as string}
                 onChange={handleInputChange}
                 className="w-full mt-1"
               />
@@ -195,7 +207,11 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Button
                 type="button"
-                onClick={() => uploadPhoto("hs-form-137a", "hsForm137A")}
+                onClick={async () => {
+                  updateFormData({
+                    hsForm137A: await uploadPhoto("hs-form-137a", "hsForm137A"),
+                  });
+                }}
               >
                 Upload
               </Button>
@@ -216,7 +232,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
                 name="hsForm138"
                 disabled
                 placeholder="Your File URL will appear here after upload."
-                value={formData.hsForm138 || fileUrls.hsForm138 || ""}
+                value={formData.hsForm138 as string}
                 onChange={handleInputChange}
                 className="w-full mt-1"
               />
@@ -234,7 +250,11 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Button
                 type="button"
-                onClick={() => uploadPhoto("hs-form-138", "hsForm138")}
+                onClick={async () => {
+                  updateFormData({
+                    hsForm138: await uploadPhoto("hs-form-138", "hsForm138"),
+                  });
+                }}
               >
                 Upload
               </Button>
@@ -255,7 +275,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="psaBirthCert"
             disabled
             placeholder="Your File URL will appear here after upload."
-            value={formData.psaBirthCert || fileUrls.psaBirthCert || ""}
+            value={formData.psaBirthCert as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -273,7 +293,14 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
-            onClick={() => uploadPhoto("psa-birth-cert", "psaBirthCert")}
+            onClick={async () => {
+              updateFormData({
+                psaBirthCert: await uploadPhoto(
+                  "psa-birth-cert",
+                  "psaBirthCert"
+                ),
+              });
+            }}
           >
             Upload
           </Button>
@@ -290,7 +317,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="transferCred"
             disabled
             placeholder="Your File URL will appear here after upload."
-            value={formData.transferCred || fileUrls.transferCred || ""}
+            value={formData.transferCred as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -308,7 +335,14 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
-            onClick={() => uploadPhoto("transfer-cred", "transferCred")}
+            onClick={async () => {
+              updateFormData({
+                transferCred: await uploadPhoto(
+                  "transfer-cred",
+                  "transferCred"
+                ),
+              });
+            }}
           >
             Upload
           </Button>
@@ -331,7 +365,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
                 name="marriageCert"
                 disabled
                 placeholder="Your File URL will appear here after upload."
-                value={formData.marriageCert || fileUrls.marriageCert || ""}
+                value={formData.marriageCert as string}
                 onChange={handleInputChange}
                 className="w-full mt-1"
               />
@@ -349,7 +383,14 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Button
                 type="button"
-                onClick={() => uploadPhoto("marriage-cert", "marriageCert")}
+                onClick={async () => {
+                  updateFormData({
+                    marriageCert: await uploadPhoto(
+                      "marriage-cert",
+                      "marriageCert"
+                    ),
+                  });
+                }}
               >
                 Upload
               </Button>
@@ -369,7 +410,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="employmentCert"
             disabled
             placeholder="Your File URL will appear here after upload."
-            value={formData.employmentCert || fileUrls.employmentCert || ""}
+            value={formData.employmentCert as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -387,7 +428,14 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
-            onClick={() => uploadPhoto("employment-cert", "employmentCert")}
+            onClick={async () => {
+              updateFormData({
+                employmentCert: await uploadPhoto(
+                  "employment-cert",
+                  "employmentCert"
+                ),
+              });
+            }}
           >
             Upload
           </Button>
@@ -406,7 +454,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             name="businessProof"
             disabled
             placeholder="Your File URL will appear here after upload."
-            value={formData.businessProof || fileUrls.businessProof || ""}
+            value={formData.businessProof as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -424,7 +472,14 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
-            onClick={() => uploadPhoto("business-proof", "businessProof")}
+            onClick={async () => {
+              updateFormData({
+                businessProof: await uploadPhoto(
+                  "business-proof",
+                  "businessProof"
+                ),
+              });
+            }}
           >
             Upload
           </Button>

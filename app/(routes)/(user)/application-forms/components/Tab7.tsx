@@ -17,7 +17,7 @@ interface Tab7Props {
 }
 
 export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
-  const { setSelectedFileUpload, uploadPhoto, fileUrls } = useFileUpload();
+  const { setSelectedFileUpload, uploadPhoto } = useFileUpload();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -138,7 +138,7 @@ export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
             disabled
             required
             placeholder="Your File URL will appear here after upload."
-            value={formData.photoWithValidId || fileUrls.photoWithValidId || ""}
+            value={formData.photoWithValidId as string}
             onChange={handleInputChange}
             className="w-full mt-1"
           />
@@ -157,9 +157,14 @@ export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
 
           <Button
             type="button"
-            onClick={() =>
-              uploadPhoto("photo-with-valid-id", "photoWithValidId")
-            }
+            onClick={async () => {
+              updateFormData({
+                photoWithValidId: await uploadPhoto(
+                  "photo-with-valid-id",
+                  "photoWithValidId"
+                ),
+              });
+            }}
           >
             Upload
           </Button>
