@@ -18,7 +18,6 @@ import { ApplicantData } from "@/types/ApplicantData";
 
 export const useApplications = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const [applications, setApplications] = useState<ApplicantData[]>([]);
 
   // Real-time read query for fetching applications where isDeleted is false
@@ -66,15 +65,14 @@ export const useApplications = () => {
   // Create application with custom applicationId as document ID
   const createApplication = async (data: ApplicantData) => {
     setLoading(true);
-    setError(null);
 
     try {
       const applicationId = await generateApplicationId(); // Generate custom ID
-      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false }; // Add the custom ID and isDeleted flag
+      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false, isSubmitted: true }; 
 
       // Use setDoc with custom ID (applicationId) instead of addDoc
       await setDoc(doc(firestore, "applications", applicationId), applicationData);
-      toast.success("Application successfully created.");
+      toast.success("Application successfully submitted.");
     } catch (e) {
       toast.error("Error adding document: " + e);
     } finally {
@@ -85,7 +83,6 @@ export const useApplications = () => {
   // Soft delete application by updating isDeleted to true
   const deleteApplication = async (applicationId: string) => {
     setLoading(true);
-    setError(null);
 
     try {
       const applicationsCollection = collection(firestore, "applications");
@@ -106,5 +103,5 @@ export const useApplications = () => {
     }
   };
 
-  return { createApplication, deleteApplication, applications, loading, error };
+  return { createApplication, deleteApplication, applications, loading };
 };

@@ -9,6 +9,7 @@ export type ApplicantData = {
   dateSubmitted?: Date;
   applicationStatus: string;
 
+  canEdit?: boolean;
   isEdited: boolean;
   isApplicationStatusEdited: boolean;
   isQuestionReadAndUnderstood: boolean,

@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -8,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { ApplicantData } from "@/types/ApplicantData";
+
+import { useApplications } from "@/hooks/use-applications";
 
 import { Tab1 } from "./components/Tab1";
 import { Tab2 } from "./components/Tab2";
@@ -21,6 +24,7 @@ import { Tab9 } from "./components/Tab9";
 
 export const ApplicationFormsView = () => {
   const { user } = useUser();
+  const { createApplication } = useApplications();
 
   const [formData, setFormData] = useState<ApplicantData>(() => {
     const savedFormData = localStorage.getItem("applicationFormData");
@@ -130,6 +134,85 @@ export const ApplicationFormsView = () => {
         };
   });
 
+  // Helper to check if any required field is empty
+  const areRequiredFieldsValid = () => {
+    const requiredFields: Array<keyof ApplicantData> = [
+      // SECTION 1: Personal Information
+      "applicantId",
+      "activeEmail",
+      "lastName",
+      "firstName",
+      "age",
+      "gender",
+      "nationality",
+      "religion",
+      "birthdate",
+      "birthplace",
+      "civilStatus",
+      "homeAddress",
+      "cityAddress",
+      "facebookURL",
+      "mobileNumber",
+
+      // SECTION 2: Parents Profile & Emergency Contact
+      "fatherName",
+      "fatherAge",
+      "fatherBirthplace",
+      "fatherNationality",
+      "fatherReligion",
+      "fatherEducation",
+      "fatherOccupation",
+      "motherName",
+      "motherAge",
+      "motherBirthplace",
+      "motherNationality",
+      "motherReligion",
+      "motherEducation",
+      "motherOccupation",
+      "emergencyContactName",
+      "emergencyContactRelationship",
+      "emergencyContactAddress",
+      "emergencyContactNumber",
+
+      // SECTION 3: Educational Background
+      "educationalAttainment",
+      "lastSchool",
+      "schoolYear",
+      "hsSchoolName",
+      "hsSchoolAddress",
+      "hsYearGraduated",
+      "elemSchoolName",
+      "elemSchoolAddress",
+      "elemYearGraduated",
+
+      // SECTION 4: Requirement Documents
+      "applicantType",
+      "evalSheet",
+      "jobDescription",
+      "photoWithValidId",
+
+      // Program Choices
+      "progChoice1",
+      "progChoice2",
+      "progChoice3",
+
+      // SECTION 5: Essay Admission Test
+      "examSet",
+      "firstQuestionAnswer",
+      "secondQuestionAnswer",
+      "thirdQuestionAnswer",
+      "fourthQuestionAnswer",
+      "fifthQuestionAnswer",
+    ];
+
+    const emptyFields = requiredFields.filter((field) => !formData[field]);
+
+    return {
+      isValid: emptyFields.length === 0,
+      missingFields: emptyFields,
+    };
+  };
+
   // Function to update form data and save to localStorage
   const updateFormData = (newData: Partial<ApplicantData>) => {
     setFormData((prevData: ApplicantData) => {
@@ -176,61 +259,85 @@ export const ApplicationFormsView = () => {
     }
   };
 
+  // Handle form submission
+  const handleSubmit = async () => {
+    const { isValid, missingFields } = areRequiredFieldsValid();
+
+    if (!isValid) {
+      toast.error(
+        `Please fill in the required fields: ${missingFields
+          .map((field) => field)
+          .join(", ")}`
+      );
+      return;
+    }
+
+    await createApplication(formData);
+  };
+
   return (
-    <Tabs
-      defaultValue="tab1"
-      value={activeTab}
-      onValueChange={handleTabChange}
-      className="mt-6"
-    >
-      <TabsList className="w-full grid grid-cols-9">
-        <TabsTrigger value="tab1">1</TabsTrigger>
-        <TabsTrigger value="tab2">2</TabsTrigger>
-        <TabsTrigger value="tab3">3</TabsTrigger>
-        <TabsTrigger value="tab4">4</TabsTrigger>
-        <TabsTrigger value="tab5">5</TabsTrigger>
-        <TabsTrigger value="tab6">6</TabsTrigger>
-        <TabsTrigger value="tab7">7</TabsTrigger>
-        <TabsTrigger value="tab8">8</TabsTrigger>
-        <TabsTrigger value="tab9">9</TabsTrigger>
-      </TabsList>
-      <div className="mt-6">
-        <TabsContent value="tab1">
-          <Tab1 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab2">
-          <Tab2 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab3">
-          <Tab3 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab4">
-          <Tab4 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab5">
-          <Tab5 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab6">
-          <Tab6 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab7">
-          <Tab7 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab8">
-          <Tab8 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-        <TabsContent value="tab9">
-          <Tab9 formData={formData} updateFormData={updateFormData} />
-        </TabsContent>
-      </div>
-      <div className="flex justify-between mt-8">
-        <Button className="px-4 py-2 " onClick={decrementTab}>
-          <ChevronLeft />
-        </Button>
-        <Button className="px-4 py-2 " onClick={incrementTab}>
-          <ChevronRight />
-        </Button>
-      </div>
-    </Tabs>
+    <>
+      <Tabs
+        defaultValue="tab1"
+        value={activeTab}
+        onValueChange={handleTabChange}
+        className="mt-6"
+      >
+        <TabsList className="w-full grid grid-cols-9">
+          <TabsTrigger value="tab1">1</TabsTrigger>
+          <TabsTrigger value="tab2">2</TabsTrigger>
+          <TabsTrigger value="tab3">3</TabsTrigger>
+          <TabsTrigger value="tab4">4</TabsTrigger>
+          <TabsTrigger value="tab5">5</TabsTrigger>
+          <TabsTrigger value="tab6">6</TabsTrigger>
+          <TabsTrigger value="tab7">7</TabsTrigger>
+          <TabsTrigger value="tab8">8</TabsTrigger>
+          <TabsTrigger value="tab9">9</TabsTrigger>
+        </TabsList>
+        <div className="mt-6">
+          <TabsContent value="tab1">
+            <Tab1 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab2">
+            <Tab2 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab3">
+            <Tab3 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab4">
+            <Tab4 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab5">
+            <Tab5 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab6">
+            <Tab6 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab7">
+            <Tab7 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab8">
+            <Tab8 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+          <TabsContent value="tab9">
+            <Tab9 formData={formData} updateFormData={updateFormData} />
+          </TabsContent>
+        </div>
+        <div className="flex justify-between mt-8">
+          <Button className="px-4 py-2 " onClick={decrementTab}>
+            <ChevronLeft />
+          </Button>
+          {activeTab === "tab9" && (
+            <Button className="px-4 py-2 " onClick={handleSubmit}>
+              SUBMIT
+            </Button>
+          )}
+
+          <Button className="px-4 py-2 " onClick={incrementTab}>
+            <ChevronRight />
+          </Button>
+        </div>
+      </Tabs>
+    </>
   );
 };
