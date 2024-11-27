@@ -30,7 +30,7 @@ export function FilterAndColumnControls({
       // "lastName",
       // "firstName",
       "age",
-      "gender",
+      // "gender",
       "nationality",
       "religion",
       "birthdate",
