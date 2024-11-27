@@ -10,7 +10,10 @@ import {
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+
 import { ApplicantData } from "@/types/ApplicantData";
+
+import { columns } from "../columns";
 
 interface RowActionsProps {
   row: {
@@ -18,18 +21,27 @@ interface RowActionsProps {
   };
 }
 
-const RowActions: React.FC<RowActionsProps> = ({ row }) => {
+export const RowActions: React.FC<RowActionsProps> = ({ row }) => {
   // Function to copy the full row as Spreadsheet pasteable format (Tab-delimited)
   const copyRowAsTabDelimited = () => {
-  const { original } = row;
+    const { original } = row;
 
-  // Dynamically extract all values from the row object
-  const tabDelimitedRow = Object.values(original).join("\t");
+    // Use the columns array to extract values in the correct order
+    const columnOrder = columns
+      .filter((col) => (col as { accessorKey: string }).accessorKey || col.id) // Ensure we only include columns with accessorKey or id
+      .map((col) => {
+        const key = (col as { accessorKey: string }).accessorKey ?? col.id; // Use accessorKey if available, fallback to id
+        return original[key as keyof ApplicantData]; // Access the value dynamically
+      });
 
-  navigator.clipboard.writeText(tabDelimitedRow).then(() => {
-    toast.success("Row copied as Tab-delimited (Excel Pasteable)");
-  });
-};
+    // Join the values with tab delimiters
+    const tabDelimitedRow = columnOrder.join("\t");
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(tabDelimitedRow).then(() => {
+      toast.success("Row copied as Tab-delimited (Excel Pasteable)");
+    });
+  };
 
   return (
     <DropdownMenu>
@@ -77,6 +89,16 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
+        {/* Copy Entire Column Header */}
+        <DropdownMenuItem
+          onClick={() => {
+            const columnHeaders = columns.map((col) => col.header);
+            navigator.clipboard.writeText(columnHeaders.join("\t"));
+            toast.success("Column headers copied");
+          }}
+        >
+          Copy Entire Column Header
+        </DropdownMenuItem>
 
         {/* Copy Entire Row as Tab-delimited */}
         <DropdownMenuItem onClick={copyRowAsTabDelimited}>
@@ -86,5 +108,3 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => {
     </DropdownMenu>
   );
 };
-
-export default RowActions;

@@ -3,12 +3,14 @@ import { Timestamp } from "firebase/firestore";
 
 import { ApplicantData } from "@/types/ApplicantData";
 
-import RowActions from "./(column-header-controls)/row-actions";
-import DateSubmittedCell from "./(column-header-controls)/date-submitted-cell";
-import ApplicationStatusCell from "./(column-header-controls)/application-status-cell";
-import IsEditedCell from "./(column-header-controls)/is-edited-cell";
-import SelectRow from "./(column-header-controls)/select-row";
-import BirthdateCell from "./(column-header-controls)/birthdate-cell";
+import { RowActions } from "./(column-header-controls)/row-actions";
+import { DateSubmittedCell } from "./(column-header-controls)/date-submitted-cell";
+import { ApplicationStatusCell } from "./(column-header-controls)/application-status-cell";
+import { IsEditedCell } from "./(column-header-controls)/is-edited-cell";
+import { SelectRow } from "./(column-header-controls)/select-row";
+import { BirthdateCell } from "./(column-header-controls)/birthdate-cell";
+import { FileUrlCell } from "./(column-header-controls)/file-url-cell";
+import { BooleanIconizeCell } from "./(column-header-controls)/boolean-iconize-cell";
 
 export const columns: ColumnDef<ApplicantData>[] = [
   {
@@ -31,6 +33,15 @@ export const columns: ColumnDef<ApplicantData>[] = [
     id: "rowActions",
     header: "Row Actions",
     cell: ({ row }) => <RowActions row={row} />,
+  },
+  {
+    id: "index",
+    accessorKey: "index",
+    header: "#",
+    cell: ({ row }) => row.index + 1,
+    accessorFn: (row, index) => index + 1,
+    enableSorting: true,
+    sortingFn: "basic",
   },
   {
     accessorKey: "dateSubmitted",
@@ -56,6 +67,13 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "isEdited",
     header: "Edited Status",
     cell: ({ cell }) => <IsEditedCell isEdited={cell.getValue() as boolean} />,
+  },
+  {
+    accessorKey: "canEdit",
+    header: "Can Edit Response",
+    cell: ({ cell }) => (
+      <BooleanIconizeCell value={cell.getValue() as boolean} />
+    ),
   },
   {
     accessorKey: "applicationId",
@@ -238,15 +256,15 @@ export const columns: ColumnDef<ApplicantData>[] = [
   },
   {
     accessorKey: "progChoice1",
-    header: "Program 1",
+    header: "Program Choice 1",
   },
   {
     accessorKey: "progChoice2",
-    header: "Program 2",
+    header: "Program Choice 2",
   },
   {
     accessorKey: "progChoice3",
-    header: "Program 3",
+    header: "Program Choice 3",
   },
   {
     accessorKey: "emergencyContactName",
@@ -267,50 +285,90 @@ export const columns: ColumnDef<ApplicantData>[] = [
   {
     accessorKey: "evalSheet",
     header: "Eval Sheet",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "jobDescription",
     header: "Job Desc.",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
+  },
+  {
+    accessorKey: "missingDocs",
+    header: "Missing Docs",
+    cell: ({ getValue }) => {
+      const missingDocs = getValue() as string[]; // Ensure it's a string array
+      return (
+        <>
+          {missingDocs.length ? (
+            <div
+              className="h-[60px] w-[400px] overflow-y-scroll rounded p-2"
+              style={{ maxWidth: "fit-content" }}
+            >
+              <ol className="list-decimal pl-5">
+                {missingDocs.map((doc, index) => (
+                  <li key={index} className="text-sm break-words">
+                    {doc}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ) : (
+            <p className="text-xs text-muted-foreground text-center">
+              No missing documents.
+            </p>
+          )}
+        </>
+      );
+    },
   },
   {
     accessorKey: "tor",
     header: "TOR",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
-    accessorKey: "hsForm",
-    header: "HS Form",
+    accessorKey: "hsForm137A",
+    header: "HS Form 137-A",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
+  },
+  {
+    accessorKey: "hsForm138",
+    header: "HS Form 138",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "psaBirthCert",
     header: "PSA Birth Cert.",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "transferCred",
     header: "Transfer Cred.",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "marriageCert",
     header: "Marriage Cert.",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "employmentCert",
     header: "Employment Cert.",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "businessProof",
     header: "Business Proof",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "applicantType",
     header: "Applicant Type",
   },
   {
-    accessorKey: "missingDocs",
-    header: "Missing Docs",
-  },
-  {
     accessorKey: "photoWithValidId",
-    header: "Photo ID",
+    header: "Photo With Valid ID",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
     accessorKey: "examSet",

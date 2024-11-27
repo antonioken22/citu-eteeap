@@ -127,7 +127,7 @@ const useUserState = () => {
             setNationality(applicantData.nationality || null);
             setReligion(applicantData.religion || null);
             setBirthdate(
-              applicantData.birthdate ? new Date(applicantData.birthdate) : null
+              applicantData.birthdate ? new Date(applicantData.birthdate as Date) : null
             );
             setBirthplace(applicantData.birthplace || null);
             setCivilStatus(applicantData.civilStatus || null);

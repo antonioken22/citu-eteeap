@@ -22,7 +22,7 @@ export function FilterAndColumnControls({
   // Set default hidden columns
   useMemo(() => {
     const hiddenColumns = [
-      // "applicationId",
+      "applicationId",
       // "dateSubmitted",
       // "applicationStatus",
       // "isEdited",
@@ -79,14 +79,15 @@ export function FilterAndColumnControls({
       // "evalSheet",
       // "jobDescription",
       // "tor",
-      // "hsForm",
+      // "hsForm137A",
+      // "hsForm138",
       // "transferCred",
       // "marriageCert",
       // "employmentCert",
       // "businessProof",
-      // "applicantType",
+      "applicantType",
       // "missingDocs",
-      "photoWithValidId",
+      // "photoWithValidId",
       "examSet",
       "firstQuestionAnswer",
       "secondQuestionAnswer",

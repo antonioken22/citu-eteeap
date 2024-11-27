@@ -1,16 +1,21 @@
+import { Timestamp } from "firebase/firestore";
+
 export type ApplicantData = {
   applicationId?: string; // Firestore - auto generated 
-  dateCreated?: Date;
+  dateCreated?: Date | Timestamp;
 
   isDeleted?: boolean;
-  dateDeleted?: Date;
+  dateDeleted?: Date | Timestamp;
 
   isSubmitted?: boolean;
-  dateSubmitted?: Date;
+  dateSubmitted?: Date | Timestamp;
   applicationStatus: string;
 
   canEdit?: boolean;
   isEdited: boolean;
+  dateModified?: Date | Timestamp;
+
+
   isApplicationStatusEdited?: boolean;
   isQuestionReadAndUnderstood: boolean,
   isPrivacyNoticeAccepted: boolean;
@@ -26,7 +31,7 @@ export type ApplicantData = {
       gender: string;
       nationality: string;
       religion: string;
-      birthdate: Date;
+      birthdate: Date | Timestamp;
       birthplace: string;
       civilStatus: string;
   // Family
