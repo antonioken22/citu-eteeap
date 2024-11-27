@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -34,7 +34,7 @@ export function ApplicationStatusInfoDrawer({
 }: DrawerDemoProps) {
   const { statusLogs, fetchStatusLogs } = useApplicationStatus();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (applicationId) {
       fetchStatusLogs(applicationId);
     }
@@ -74,7 +74,7 @@ export function ApplicationStatusInfoDrawer({
                       className="text-xs"
                     >
                       <TableCell>
-                        {new Date(log.dateEdited).toLocaleString()}
+                        {new Date(log.dateEdited as Date).toLocaleString()}
                       </TableCell>
                       <TableCell>{log.oldApplicationStatus}</TableCell>
                       <TableCell>{log.newApplicationStatus}</TableCell>

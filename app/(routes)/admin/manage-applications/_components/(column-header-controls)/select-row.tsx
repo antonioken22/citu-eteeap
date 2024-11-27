@@ -10,7 +10,7 @@ interface SelectRowProps {
   onSelect: (applicationId: string, selected: boolean) => void;
 }
 
-const SelectRow: React.FC<SelectRowProps> = ({
+export const SelectRow: React.FC<SelectRowProps> = ({
   row,
   applicationId,
   onSelect,
@@ -29,5 +29,3 @@ const SelectRow: React.FC<SelectRowProps> = ({
     />
   );
 };
-
-export default SelectRow;

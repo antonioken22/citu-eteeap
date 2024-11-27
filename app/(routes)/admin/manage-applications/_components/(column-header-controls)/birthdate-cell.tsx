@@ -6,7 +6,7 @@ interface BirthdateCellProps {
   timestamp: Timestamp | Date; // Accept Firestore Timestamp or a Date object
 }
 
-const BirthdateCell: React.FC<BirthdateCellProps> = ({ timestamp }) => {
+export const BirthdateCell: React.FC<BirthdateCellProps> = ({ timestamp }) => {
   const date = timestamp instanceof Date ? timestamp : timestamp.toDate(); // Convert Firestore timestamp to Date
 
   // Format the date as MMM/DD/YYYY, e.g., Jan 4, 1999
@@ -18,5 +18,3 @@ const BirthdateCell: React.FC<BirthdateCellProps> = ({ timestamp }) => {
 
   return <span>{formattedDate}</span>;
 };
-
-export default BirthdateCell;

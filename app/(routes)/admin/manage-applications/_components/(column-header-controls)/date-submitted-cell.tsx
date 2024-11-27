@@ -5,7 +5,9 @@ interface DateSubmittedCellProps {
   date: string | Date | Timestamp; // date might be a string, Date object, or Firestore Timestamp
 }
 
-const DateSubmittedCell: React.FC<DateSubmittedCellProps> = ({ date }) => {
+export const DateSubmittedCell: React.FC<DateSubmittedCellProps> = ({
+  date,
+}) => {
   // Check if the date is a Firestore Timestamp and convert it to a Date
   const dateObj = date instanceof Timestamp ? date.toDate() : new Date(date);
 
@@ -31,5 +33,3 @@ const DateSubmittedCell: React.FC<DateSubmittedCellProps> = ({ date }) => {
 
   return <span className={textColor}>{formattedDate}</span>;
 };
-
-export default DateSubmittedCell;
