@@ -18,12 +18,17 @@ import { DataTable } from "./data-table";
 import { FilterAndColumnControls } from "./filter-and-column-controls";
 import { PaginationControls } from "./pagination-controls";
 import { columns } from "./columns";
-import ApplicationControls from "./application-controls";
+import { ApplicationControls } from "./application-controls";
 
 import { useApplications } from "@/hooks/use-applications";
 
 export function DataTablePage() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([
+    {
+      id: "index",
+      desc: true,
+    },
+  ]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
@@ -48,7 +53,7 @@ export function DataTablePage() {
     onRowSelectionChange: setRowSelection,
     state: { sorting, columnFilters, columnVisibility, rowSelection },
     initialState: {
-      pagination: { pageSize: 5 }, // Set to paginate n rows at a time
+      pagination: { pageSize: 10 }, // Set to paginate n rows at a time
     },
   });
 
@@ -61,8 +66,12 @@ export function DataTablePage() {
     <div className="w-full">
       <FilterAndColumnControls table={table} />
       <DataTable table={table} columns={columns} />
-      <div className="flex justify-between items-center">
-        <ApplicationControls selectedApplicationIds={selectedApplicationIds} />
+      <div className="flex justify-end">
+        <div className="mr-auto">
+          <ApplicationControls
+            selectedApplicationIds={selectedApplicationIds}
+          />
+        </div>
         <PaginationControls table={table} />
       </div>
     </div>

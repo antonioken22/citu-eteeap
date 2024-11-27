@@ -17,7 +17,7 @@ interface ApplicationStatusCellProps {
   currentApplicationStatus: string;
 }
 
-const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
+export const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
   applicationId,
   isApplicationStatusEdited,
   currentApplicationStatus,
@@ -108,5 +108,3 @@ const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
     </>
   );
 };
-
-export default ApplicationStatusCell;

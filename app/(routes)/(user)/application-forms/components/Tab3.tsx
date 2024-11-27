@@ -139,8 +139,9 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="date"
           name="birthdate"
           value={
-            formData.birthdate && !isNaN(new Date(formData.birthdate).getTime())
-              ? new Date(formData.birthdate).toISOString().split("T")[0]
+            formData.birthdate &&
+            !isNaN(new Date(formData.birthdate as Date).getTime())
+              ? new Date(formData.birthdate as Date).toISOString().split("T")[0]
               : ""
           }
           onChange={handleInputChange}

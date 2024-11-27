@@ -1,19 +1,24 @@
-import { File, FilePen } from "lucide-react";
+import { File, FilePen, Info } from "lucide-react";
 
 interface IsEditedCellProps {
   isEdited: boolean;
 }
 
-const IsEditedCell: React.FC<IsEditedCellProps> = ({ isEdited }) => {
+export const IsEditedCell: React.FC<IsEditedCellProps> = ({ isEdited }) => {
   return (
-    <>
+    <div className="w-[100px]">
       {isEdited ? (
-        <FilePen className="flex items-center w-full text-yellow-500" />
+        <div className="flex justify-center items-center space-x-2">
+          <p className="text-xs text-center">Edited.</p>
+          <button>
+            <Info />
+          </button>
+        </div>
       ) : (
-        <File className="flex items-center w-full" />
+        <p className="text-xs text-muted-foreground text-center">
+          Not yet edited.
+        </p>
       )}
-    </>
+    </div>
   );
 };
-
-export default IsEditedCell;

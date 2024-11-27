@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   collection,
-  setDoc, // Use setDoc instead of addDoc to specify custom ID
+  setDoc, 
   updateDoc,
   getDocs,
   query,
@@ -68,17 +68,39 @@ export const useApplications = () => {
 
     try {
       const applicationId = await generateApplicationId(); // Generate custom ID
-      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false, isSubmitted: true }; 
+      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false, isSubmitted: true, isEdited: false }; 
 
       // Use setDoc with custom ID (applicationId) instead of addDoc
       await setDoc(doc(firestore, "applications", applicationId), applicationData);
       toast.success("Application successfully submitted.");
     } catch (e) {
-      toast.error("Error adding document: " + e);
+      toast.error("Error adding document. Please contact the developer.");
+      console.error("Error adding document: " + e);
     } finally {
       setLoading(false);
     }
   };
+
+  // Update application 
+  const updateApplication = async (applicationId: string, data: Partial<ApplicantData>) => {
+    setLoading(true);
+    
+    try {
+      const applicationDoc = doc(firestore, "applications", applicationId) ;
+
+      await updateDoc(applicationDoc, data),{
+        ...data,
+        dateModified: new Date(),
+      };
+      toast.success("Application successfully updated.");
+    } catch (e) {
+      toast.error("Error updating document. Please contact the developer.");
+      console.error("Error updating document: " + e);
+    } finally {
+      setLoading(false);
+    }
+    
+  }
 
   // Soft delete application by updating isDeleted to true
   const deleteApplication = async (applicationId: string) => {
@@ -97,11 +119,12 @@ export const useApplications = () => {
         toast.error("Application not found with ID: " + applicationId);
       }
     } catch (e) {
-      toast.error("Error deleting document: " + e);
+      toast.error("Error deleting document. Please contact the developer.");
+      console.error("Error deleting document: " + e);
     } finally {
       setLoading(false);
     }
   };
 
-  return { createApplication, deleteApplication, applications, loading };
+  return { createApplication, updateApplication, deleteApplication, applications, loading };
 };
