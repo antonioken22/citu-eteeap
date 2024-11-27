@@ -132,8 +132,10 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
                 name="birthdate"
                 value={
                   formData.birthdate &&
-                  !isNaN(new Date(formData.birthdate).getTime())
-                    ? new Date(formData.birthdate).toISOString().split("T")[0]
+                  !isNaN(new Date(formData.birthdate as Date).getTime())
+                    ? new Date(formData.birthdate as Date)
+                        .toISOString()
+                        .split("T")[0]
                     : ""
                 }
                 onChange={handleInputChange}

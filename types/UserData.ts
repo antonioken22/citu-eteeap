@@ -1,9 +1,11 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface UserData {
   userId: string;
-  dateCreated?: Date;
-  dateModified?: Date;
+  dateCreated?: Date | Timestamp;
+  dateModified?: Date | Timestamp;
   isDeleted?: boolean;
-  dateDeleted?: Date;
+  dateDeleted?: Date | Timestamp;
 
   email: string;
   firstName: string;
