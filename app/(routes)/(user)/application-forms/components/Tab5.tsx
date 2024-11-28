@@ -8,9 +8,10 @@ import ProgramsOffered from "@/public/application-forms/programs-offered.png";
 interface Tab5Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
+export const Tab5 = ({ formData, updateFormData, canEdit }: Tab5Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
@@ -29,6 +30,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
               <label key={level}>
                 <input
                   type="radio"
+                  disabled={!canEdit}
                   name="educationalAttainment"
                   value={level}
                   checked={formData.educationalAttainment === level}
@@ -41,6 +43,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           <label className="flex items-center mt-1">
             <input
               type="radio"
+              disabled={!canEdit}
               name="educationalAttainment"
               value=""
               checked={[
@@ -55,6 +58,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
             <Input
               type="text"
               name="educationalAttainment"
+              readOnly={!canEdit}
               placeholder="Specify education level"
               value={
                 ["Post-Graduate", "College", "High School", "Elementary"].every(
@@ -80,6 +84,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="prevCourse"
           required
+          readOnly={!canEdit}
           placeholder="e.g. BS Computer Science"
           value={formData.prevCourse}
           onChange={handleInputChange}
@@ -93,6 +98,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="lastSchool"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Cebu Institute of Technology - University"
           value={formData.lastSchool}
           onChange={handleInputChange}
@@ -106,6 +112,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="schoolYear"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 2018-2022"
           value={formData.schoolYear}
           onChange={handleInputChange}
@@ -120,8 +127,10 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
             <label key={option}>
               <input
                 type="radio"
+                disabled={!canEdit}
                 name="schoolType"
                 required
+                readOnly={!canEdit}
                 value={option}
                 checked={formData.schoolType === option}
                 onChange={handleInputChange}
@@ -138,6 +147,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="prevSchoolAddress"
           required
+          readOnly={!canEdit}
           placeholder="Barangay, City, Province"
           value={formData.prevSchoolAddress}
           onChange={handleInputChange}
@@ -153,6 +163,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="hsSchoolName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Cebu Institute of Technology - University"
           value={formData.hsSchoolName}
           onChange={handleInputChange}
@@ -166,6 +177,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="hsSchoolAddress"
           required
+          readOnly={!canEdit}
           placeholder="Barangay, City, Province"
           value={formData.hsSchoolAddress}
           onChange={handleInputChange}
@@ -179,6 +191,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="hsYearGraduated"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 2016"
           value={formData.hsYearGraduated}
           onChange={handleInputChange}
@@ -194,6 +207,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="elemSchoolName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Cebu Institute of Technology - University"
           value={formData.elemSchoolName}
           onChange={handleInputChange}
@@ -207,6 +221,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="elemSchoolAddress"
           required
+          readOnly={!canEdit}
           placeholder="Barangay, City, Province"
           value={formData.elemSchoolAddress}
           onChange={handleInputChange}
@@ -220,6 +235,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="elemYearGraduated"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 2012"
           value={formData.elemYearGraduated}
           onChange={handleInputChange}
@@ -247,6 +263,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="progChoice1"
           required
+          readOnly={!canEdit}
           placeholder="e.g. BSBA General Business Management"
           value={formData.progChoice1}
           onChange={handleInputChange}
@@ -260,6 +277,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="progChoice2"
           required
+          readOnly={!canEdit}
           placeholder="e.g. BSBA Marketing Management"
           value={formData.progChoice2}
           onChange={handleInputChange}
@@ -273,6 +291,7 @@ export const Tab5 = ({ formData, updateFormData }: Tab5Props) => {
           type="text"
           name="progChoice3"
           required
+          readOnly={!canEdit}
           placeholder="e.g. BS in Civil Engineering"
           value={formData.progChoice3}
           onChange={handleInputChange}

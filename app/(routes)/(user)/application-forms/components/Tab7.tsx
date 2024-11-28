@@ -14,9 +14,10 @@ import PhotoWithValidID from "@/public/application-forms/photo-with-valid-id-sam
 interface Tab7Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
+export const Tab7 = ({ formData, updateFormData, canEdit }: Tab7Props) => {
   const { setSelectedFileUpload, uploadPhoto } = useFileUpload();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +90,7 @@ export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
           type="checkbox"
           name="isWaiverAccepted"
           required
+          disabled={!canEdit}
           checked={formData.isWaiverAccepted}
           onChange={(e) =>
             updateFormData({ isWaiverAccepted: e.target.checked })
@@ -144,6 +146,7 @@ export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".png, .jpg, .jpeg"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -157,6 +160,7 @@ export const Tab7 = ({ formData, updateFormData }: Tab7Props) => {
 
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 photoWithValidId: await uploadPhoto(

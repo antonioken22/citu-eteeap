@@ -9,9 +9,10 @@ import { useFileUpload } from "@/hooks/use-file-upload";
 interface Tab6Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
+export const Tab6 = ({ formData, updateFormData, canEdit }: Tab6Props) => {
   const { setSelectedFileUpload, uploadPhoto } = useFileUpload();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +32,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
             <label key={option}>
               <input
                 type="radio"
+                disabled={!canEdit}
                 name="applicantType"
                 required
                 value={option}
@@ -63,6 +65,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -75,6 +78,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 evalSheet: await uploadPhoto("eval-sheets", "evalSheet"),
@@ -105,6 +109,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -117,6 +122,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 jobDescription: await uploadPhoto("job-desc", "jobDescription"),
@@ -153,6 +159,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -165,6 +172,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({ tor: await uploadPhoto("tor", "tor") });
             }}
@@ -195,6 +203,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Input
                 type="file"
+                disabled={!canEdit}
                 accept=".pdf, .docx"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
@@ -207,6 +216,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Button
                 type="button"
+                disabled={!canEdit}
                 onClick={async () => {
                   updateFormData({
                     hsForm137A: await uploadPhoto("hs-form-137a", "hsForm137A"),
@@ -238,6 +248,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Input
                 type="file"
+                disabled={!canEdit}
                 accept=".pdf, .docx"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
@@ -250,6 +261,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Button
                 type="button"
+                disabled={!canEdit}
                 onClick={async () => {
                   updateFormData({
                     hsForm138: await uploadPhoto("hs-form-138", "hsForm138"),
@@ -281,6 +293,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -293,6 +306,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 psaBirthCert: await uploadPhoto(
@@ -323,6 +337,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -335,6 +350,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 transferCred: await uploadPhoto(
@@ -371,6 +387,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Input
                 type="file"
+                disabled={!canEdit}
                 accept=".pdf, .docx"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
@@ -383,6 +400,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
               />
               <Button
                 type="button"
+                disabled={!canEdit}
                 onClick={async () => {
                   updateFormData({
                     marriageCert: await uploadPhoto(
@@ -416,6 +434,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -428,6 +447,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 employmentCert: await uploadPhoto(
@@ -460,6 +480,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Input
             type="file"
+            disabled={!canEdit}
             accept=".pdf, .docx"
             onChange={(e) => {
               const file = e.target.files?.[0];
@@ -472,6 +493,7 @@ export const Tab6 = ({ formData, updateFormData }: Tab6Props) => {
           />
           <Button
             type="button"
+            disabled={!canEdit}
             onClick={async () => {
               updateFormData({
                 businessProof: await uploadPhoto(

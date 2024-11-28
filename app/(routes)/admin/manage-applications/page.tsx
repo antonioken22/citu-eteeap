@@ -13,8 +13,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { DataTablePage } from "./_components/data-table-page";
+
 import { useUser } from "@clerk/nextjs";
+
+import { ApplicationTable } from "./_components/application-table";
 
 export default function ManageApplicationsPage() {
   const { user, isLoaded } = useUser();
@@ -50,7 +52,7 @@ export default function ManageApplicationsPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <DataTablePage />
+      <ApplicationTable />
     </ContentLayout>
   );
 }

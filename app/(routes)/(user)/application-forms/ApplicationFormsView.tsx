@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { User } from "@clerk/backend";
 import { ApplicantData } from "@/types/ApplicantData";
 
 import { useApplications } from "@/hooks/use-applications";
@@ -22,116 +23,136 @@ import { Tab7 } from "./components/Tab7";
 import { Tab8 } from "./components/Tab8";
 import { Tab9 } from "./components/Tab9";
 
-export const ApplicationFormsView = () => {
+const initializeFormData = (applications?: ApplicantData, user?: User) => {
+  const defaultData = {
+    isQuestionReadAndUnderstood:
+      applications?.isQuestionReadAndUnderstood || false,
+    isPrivacyNoticeAccepted: applications?.isPrivacyNoticeAccepted || false,
+    isWaiverAccepted: applications?.isWaiverAccepted || false,
+
+    // SECTION 1: Personal Information
+    // Personal
+    applicantId: applications?.applicantId || user?.id,
+    activeEmail:
+      applications?.activeEmail || user?.primaryEmailAddress?.emailAddress,
+    lastName: applications?.lastName || user?.lastName,
+    firstName: applications?.firstName || user?.firstName,
+    age: applications?.age || "",
+    gender: applications?.gender || "Male",
+    nationality: applications?.nationality || "Filipino",
+    religion: applications?.religion || "",
+    birthdate: applications?.birthdate || "",
+    birthplace: applications?.birthplace || "",
+    civilStatus: applications?.civilStatus || "Single",
+    // Family
+    birthRank: applications?.birthRank || "",
+    numBrothers: applications?.numBrothers || "",
+    numSisters: applications?.numSisters || "",
+    numCITBrothersSisters: applications?.numCITBrothersSisters || "",
+    // Address
+    homeAddress: applications?.homeAddress || "",
+    cityAddress: applications?.cityAddress || "",
+    // Social
+    facebookURL: applications?.facebookURL || "",
+    mobileNumber: applications?.mobileNumber || "",
+
+    // SECTION 2: Parents Profile & Emergency Contact
+    // Father's Profile
+    fatherName: applications?.fatherName || "",
+    fatherAge: applications?.fatherAge || "",
+    fatherBirthplace: applications?.fatherBirthplace || "",
+    fatherNationality: applications?.fatherNationality || "Filipino",
+    fatherReligion: applications?.fatherReligion || "",
+    fatherEducation: applications?.fatherEducation || "High School",
+    fatherOccupation: applications?.fatherOccupation || "",
+    // Mother's Profile
+    motherName: applications?.motherName || "",
+    motherAge: applications?.motherAge || "",
+    motherBirthplace: applications?.motherBirthplace || "",
+    motherNationality: applications?.motherNationality || "Filipino",
+    motherReligion: applications?.motherReligion || "",
+    motherEducation: applications?.motherEducation || "High School",
+    motherOccupation: applications?.motherOccupation || "",
+    // Emergency Contact
+    emergencyContactName: applications?.emergencyContactName || "",
+    emergencyContactRelationship:
+      applications?.emergencyContactRelationship || "",
+    emergencyContactAddress: applications?.emergencyContactAddress || "",
+    emergencyContactNumber: applications?.emergencyContactNumber || "",
+
+    // SECTION 3: Educational Background
+    educationalAttainment: applications?.educationalAttainment || "High School",
+    // Previous Education
+    prevCourse: applications?.prevCourse || "",
+    lastSchool: applications?.lastSchool || "",
+    schoolYear: applications?.schoolYear || "",
+    schoolType: applications?.schoolType || "Public",
+    prevSchoolAddress: applications?.prevSchoolAddress || "",
+    // High School
+    hsSchoolName: applications?.hsSchoolName || "",
+    hsSchoolAddress: applications?.hsSchoolAddress || "",
+    hsYearGraduated: applications?.hsYearGraduated || "",
+    // Elementary
+    elemSchoolName: applications?.elemSchoolName || "",
+    elemSchoolAddress: applications?.elemSchoolAddress || "",
+    elemYearGraduated: applications?.elemYearGraduated || "",
+
+    // Program Choices
+    progChoice1: applications?.progChoice1 || "",
+    progChoice2: applications?.progChoice2 || "",
+    progChoice3: applications?.progChoice3 || "",
+
+    // SECTION 4: Requirement Documents
+    applicantType: applications?.applicantType || "",
+    // Pre-evaluation Requirements
+    evalSheet: applications?.evalSheet || "",
+    jobDescription: applications?.jobDescription || "",
+    // Other Requirements
+    tor: applications?.tor || "",
+    hsForm137A: applications?.hsForm137A || "",
+    hsForm138: applications?.hsForm138 || "",
+    psaBirthCert: applications?.psaBirthCert || "",
+    transferCred: applications?.transferCred || "",
+    marriageCert: applications?.marriageCert || "",
+    employmentCert: applications?.employmentCert || "",
+    businessProof: applications?.businessProof || "",
+    // Undertaking/Waiver
+    missingDocs: applications?.missingDocs || "",
+    photoWithValidId: applications?.photoWithValidId || "",
+
+    // SECTION 5: Essay Admission Test
+    examSet: applications?.examSet || "",
+    // Answers
+    firstQuestionAnswer: applications?.firstQuestionAnswer || "",
+    secondQuestionAnswer: applications?.secondQuestionAnswer || "",
+    thirdQuestionAnswer: applications?.thirdQuestionAnswer || "",
+    fourthQuestionAnswer: applications?.fourthQuestionAnswer || "",
+    fifthQuestionAnswer: applications?.fifthQuestionAnswer || "",
+  };
+
+  return { ...defaultData, ...applications };
+};
+
+interface ApplicationFormsViewProps {
+  applications?: ApplicantData;
+  canEdit: boolean;
+  isSubmitted: boolean;
+}
+
+export const ApplicationFormsView = ({
+  applications,
+  canEdit,
+  isSubmitted,
+}: ApplicationFormsViewProps) => {
   const { user } = useUser();
   const { createApplication } = useApplications();
 
   const [formData, setFormData] = useState<ApplicantData>(() => {
     const savedFormData = localStorage.getItem("applicationFormData");
-    return savedFormData
-      ? JSON.parse(savedFormData)
-      : {
-          isQuestionReadAndUnderstood: false,
-          isPrivacyNoticeAccepted: false,
-          isWaiverAccepted: false,
-
-          // SECTION 1: Personal Information
-          // Personal
-          applicantId: user?.id,
-          activeEmail: user?.primaryEmailAddress?.emailAddress,
-          lastName: user?.lastName,
-          firstName: user?.firstName,
-          age: "",
-          gender: "",
-          nationality: "Filipino",
-          religion: "",
-          birthdate: "",
-          birthplace: "",
-          civilStatus: "",
-          // Family
-          birthRank: "",
-          numBrothers: "",
-          numSisters: "",
-          numCITBrothersSisters: "",
-          // Address
-          homeAddress: "",
-          cityAddress: "",
-          // Social
-          facebookURL: "",
-          mobileNumber: "",
-
-          // SECTION 2: Parents Profile & Emergency Contact
-          // Father's Profile
-          fatherName: "",
-          fatherAge: "",
-          fatherBirthplace: "",
-          fatherNationality: "",
-          fatherReligion: "",
-          fatherEducation: "",
-          fatherOccupation: "",
-          // Mother's Profile
-          motherName: "",
-          motherAge: "",
-          motherBirthplace: "",
-          motherNationality: "",
-          motherReligion: "",
-          motherEducation: "",
-          motherOccupation: "",
-          // Emergency Contact
-          emergencyContactName: "",
-          emergencyContactRelationship: "",
-          emergencyContactAddress: "",
-          emergencyContactNumber: "",
-
-          // SECTION 3: Educational Background
-          educationalAttainment: "",
-          // Previous Education
-          prevCourse: "",
-          lastSchool: "",
-          schoolYear: "",
-          schoolType: "",
-          prevSchoolAddress: "",
-          // High School
-          hsSchoolName: "",
-          hsSchoolAddress: "",
-          hsYearGraduated: "",
-          // Elementary
-          elemSchoolName: "",
-          elemSchoolAddress: "",
-          elemYearGraduated: "",
-
-          // Program Choices
-          progChoice1: "",
-          progChoice2: "",
-          progChoice3: "",
-
-          // SECTION 4: Requirement Documents
-          applicantType: "",
-          // Pre-evaluation Requirements
-          evalSheet: "",
-          jobDescription: "",
-          // Other Requirements
-          tor: "",
-          hsForm137A: "",
-          hsForm138: "",
-          psaBirthCert: "",
-          transferCred: "",
-          marriageCert: "",
-          employmentCert: "",
-          businessProof: "",
-          // Undertaking/Waiver
-          missingDocs: "",
-          photoWithValidId: "",
-
-          // SECTION 5: Essay Admission Test
-          examSet: "",
-          // Answers
-          firstQuestionAnswer: "",
-          secondQuestionAnswer: "",
-          thirdQuestionAnswer: "",
-          fourthQuestionAnswer: "",
-          fifthQuestionAnswer: "",
-        };
+    if (savedFormData) {
+      return JSON.parse(savedFormData);
+    }
+    return initializeFormData(applications, user as unknown as User);
   });
 
   // Helper to check if any required field is empty
@@ -294,46 +315,96 @@ export const ApplicationFormsView = () => {
           <TabsTrigger value="tab8">8</TabsTrigger>
           <TabsTrigger value="tab9">9</TabsTrigger>
         </TabsList>
-        <div className="mt-6">
+        {isSubmitted && (
+          <h2 className="text-sm text-red-600 italic text-center mt-4">
+            To be able to edit your submitted application, please contact an
+            ETEEAP in-charge first.
+          </h2>
+        )}
+        <div>
           <TabsContent value="tab1">
-            <Tab1 formData={formData} updateFormData={updateFormData} />
+            <Tab1
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab2">
-            <Tab2 formData={formData} updateFormData={updateFormData} />
+            <Tab2
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab3">
-            <Tab3 formData={formData} updateFormData={updateFormData} />
+            <Tab3
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab4">
-            <Tab4 formData={formData} updateFormData={updateFormData} />
+            <Tab4
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab5">
-            <Tab5 formData={formData} updateFormData={updateFormData} />
+            <Tab5
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab6">
-            <Tab6 formData={formData} updateFormData={updateFormData} />
+            <Tab6
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab7">
-            <Tab7 formData={formData} updateFormData={updateFormData} />
+            <Tab7
+              formData={formData}
+              updateFormData={updateFormData}
+              canEdit={canEdit}
+            />
           </TabsContent>
           <TabsContent value="tab8">
-            <Tab8 formData={formData} updateFormData={updateFormData} />
+            <Tab8
+              formData={formData}
+              updateFormData={updateFormData}
+              isSubmitted={isSubmitted}
+            />
           </TabsContent>
           <TabsContent value="tab9">
             <Tab9 formData={formData} updateFormData={updateFormData} />
           </TabsContent>
         </div>
         <div className="flex justify-between mt-8">
-          <Button className="px-4 py-2 " onClick={decrementTab}>
+          <Button
+            disabled={activeTab === "tab1"}
+            className="px-4 py-2 "
+            onClick={decrementTab}
+          >
             <ChevronLeft />
           </Button>
           {activeTab === "tab9" && (
-            <Button className="px-4 py-2 " onClick={handleSubmit}>
-              SUBMIT
+            <Button
+              disabled={!canEdit}
+              className="px-4 py-2 "
+              onClick={handleSubmit}
+            >
+              {canEdit ? "UPDATE" : "SUBMIT"}
             </Button>
           )}
 
-          <Button className="px-4 py-2 " onClick={incrementTab}>
+          <Button
+            disabled={activeTab === "tab9"}
+            className="px-4 py-2 "
+            onClick={incrementTab}
+          >
             <ChevronRight />
           </Button>
         </div>

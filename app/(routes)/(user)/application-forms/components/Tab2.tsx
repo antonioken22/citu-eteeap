@@ -9,9 +9,10 @@ import ProgramsOffered from "@/public/application-forms/programs-offered.png";
 interface Tab2Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab2 = ({ formData, updateFormData }: Tab2Props) => {
+export const Tab2 = ({ formData, updateFormData, canEdit }: Tab2Props) => {
   return (
     <div className="p-6 space-y-6 rounded-lg shadow-md">
       {/* Welcome Message */}
@@ -107,6 +108,7 @@ export const Tab2 = ({ formData, updateFormData }: Tab2Props) => {
           type="checkbox"
           name="isPrivacyNoticeAccepted"
           required
+          disabled={!canEdit}
           checked={formData.isPrivacyNoticeAccepted}
           onChange={(e) =>
             updateFormData({ isPrivacyNoticeAccepted: e.target.checked })

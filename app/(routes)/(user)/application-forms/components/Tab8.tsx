@@ -1,5 +1,4 @@
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 
 import { ApplicantData } from "@/types/ApplicantData";
 import { examQuestionnaires } from "@/data";
@@ -7,9 +6,10 @@ import { examQuestionnaires } from "@/data";
 interface Tab8Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  isSubmitted: boolean;
 }
 
-export const Tab8 = ({ formData, updateFormData }: Tab8Props) => {
+export const Tab8 = ({ formData, updateFormData, isSubmitted }: Tab8Props) => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -35,6 +35,13 @@ export const Tab8 = ({ formData, updateFormData }: Tab8Props) => {
     <div className="p-6 space-y-4">
       <h2 className="text-lg font-bold text-center">Essay Admission Test</h2>
 
+      {/* Instructions */}
+      {isSubmitted && (
+        <p className="text-sm text-red-600 italic">
+          Note: Submitted answers cannot be changed anymore.
+        </p>
+      )}
+
       {/* Exam Set Selection */}
       <label className="block">
         <span className="font-medium">Choose Exam Set*:</span>
@@ -45,6 +52,7 @@ export const Tab8 = ({ formData, updateFormData }: Tab8Props) => {
                 type="radio"
                 name="examSet"
                 required
+                disabled={isSubmitted}
                 value={option}
                 checked={formData.examSet === option}
                 onChange={handleInputChange}
@@ -66,6 +74,7 @@ export const Tab8 = ({ formData, updateFormData }: Tab8Props) => {
               <Textarea
                 name={answerKeys[index]} // Use specific keys
                 required
+                readOnly={isSubmitted}
                 placeholder="Enter your answer."
                 value={
                   formData[answerKeys[index] as keyof ApplicantData] as string

@@ -5,9 +5,10 @@ import { ApplicantData } from "@/types/ApplicantData";
 interface Tab3Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
+export const Tab3 = ({ formData, updateFormData, canEdit }: Tab3Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({
@@ -26,6 +27,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="lastName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Dela Cruz"
           value={formData.lastName}
           onChange={handleInputChange}
@@ -40,6 +42,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="firstName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Juan"
           value={formData.firstName}
           onChange={handleInputChange}
@@ -54,6 +57,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="number"
           name="age"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 29"
           value={formData.age}
           onChange={handleInputChange}
@@ -71,6 +75,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
                 type="radio"
                 name="gender"
                 required
+                disabled={!canEdit}
                 value={option}
                 checked={formData.gender === option}
                 onChange={handleInputChange}
@@ -90,6 +95,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
               type="radio"
               name="nationality"
               value="Filipino"
+              disabled={!canEdit}
               checked={formData.nationality === "Filipino"}
               onChange={handleInputChange}
             />
@@ -100,6 +106,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
               type="radio"
               name="nationality"
               value=""
+              disabled={!canEdit}
               checked={formData.nationality !== "Filipino"}
               onChange={handleInputChange}
             />
@@ -107,6 +114,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
             <Input
               type="text"
               name="nationality"
+              readOnly={!canEdit}
               placeholder="Specify nationality"
               value={
                 formData.nationality !== "Filipino" ? formData.nationality : ""
@@ -125,6 +133,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="religion"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Roman Catholic"
           value={formData.religion}
           onChange={handleInputChange}
@@ -138,6 +147,8 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
         <Input
           type="date"
           name="birthdate"
+          required
+          readOnly={!canEdit}
           value={
             formData.birthdate &&
             !isNaN(new Date(formData.birthdate as Date).getTime())
@@ -156,6 +167,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="birthplace"
           required
+          readOnly={!canEdit}
           placeholder="Barangay, City, Province"
           value={formData.birthplace}
           onChange={handleInputChange}
@@ -174,6 +186,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
                   type="radio"
                   name="civilStatus"
                   required
+                  disabled={!canEdit}
                   value={option}
                   checked={formData.civilStatus === option}
                   onChange={handleInputChange}
@@ -192,6 +205,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="birthRank"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 1st"
           value={formData.birthRank}
           onChange={handleInputChange}
@@ -205,6 +219,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="number"
           name="numBrothers"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 2"
           value={formData.numBrothers}
           onChange={handleInputChange}
@@ -218,6 +233,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="number"
           name="numSisters"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 3"
           value={formData.numSisters}
           onChange={handleInputChange}
@@ -231,6 +247,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="number"
           name="numCITBrothersSisters"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 1"
           value={formData.numCITBrothersSisters}
           onChange={handleInputChange}
@@ -245,6 +262,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="homeAddress"
           required
+          readOnly={!canEdit}
           placeholder="Barangay, City, Province"
           value={formData.homeAddress}
           onChange={handleInputChange}
@@ -258,6 +276,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="cityAddress"
           required
+          readOnly={!canEdit}
           placeholder="Barangay, City, Province"
           value={formData.cityAddress}
           onChange={handleInputChange}
@@ -272,6 +291,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="url"
           name="facebookURL"
           required
+          readOnly={!canEdit}
           placeholder="https://facebook.com/username"
           value={formData.facebookURL}
           onChange={handleInputChange}
@@ -285,6 +305,7 @@ export const Tab3 = ({ formData, updateFormData }: Tab3Props) => {
           type="text"
           name="mobileNumber"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 09296901573"
           value={formData.mobileNumber}
           onChange={handleInputChange}

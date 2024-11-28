@@ -9,9 +9,10 @@ import CITUBanner from "@/public/application-forms/citu-banner.png";
 interface Tab1Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
+export const Tab1 = ({ formData, updateFormData, canEdit }: Tab1Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
@@ -73,7 +74,7 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
         <Input
           type="email"
           name="activeEmail"
-          disabled
+          readOnly
           value={formData.activeEmail}
           onChange={handleInputChange}
           className="w-full mt-1"
@@ -86,6 +87,7 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
           type="checkbox"
           name="isQuestionReadAndUnderstood"
           required
+          disabled={!canEdit}
           checked={formData.isQuestionReadAndUnderstood}
           onChange={(e) =>
             updateFormData({ isQuestionReadAndUnderstood: e.target.checked })

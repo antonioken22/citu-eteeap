@@ -5,9 +5,10 @@ import { ApplicantData } from "@/types/ApplicantData";
 interface Tab4Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
+  canEdit: boolean;
 }
 
-export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
+export const Tab4 = ({ formData, updateFormData, canEdit }: Tab4Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
@@ -28,6 +29,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="fatherName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Juan A. Dela Cruz Sr."
           value={formData.fatherName}
           onChange={handleInputChange}
@@ -42,6 +44,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="number"
           name="fatherAge"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 50"
           value={formData.fatherAge}
           onChange={handleInputChange}
@@ -56,6 +59,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="fatherBirthplace"
           required
+          readOnly={!canEdit}
           placeholder="City, Province"
           value={formData.fatherBirthplace}
           onChange={handleInputChange}
@@ -70,6 +74,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           <label>
             <input
               type="radio"
+              disabled={!canEdit}
               name="fatherNationality"
               value="Filipino"
               checked={formData.fatherNationality === "Filipino"}
@@ -80,6 +85,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           <label className="flex items-center mt-1">
             <input
               type="radio"
+              disabled={!canEdit}
               name="fatherNationality"
               value=""
               checked={formData.fatherNationality !== "Filipino"}
@@ -89,6 +95,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
             <Input
               type="text"
               name="fatherNationality"
+              readOnly={!canEdit}
               placeholder="Specify nationality"
               value={
                 formData.fatherNationality !== "Filipino"
@@ -109,6 +116,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="fatherReligion"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Roman Catholic"
           value={formData.fatherReligion}
           onChange={handleInputChange}
@@ -125,6 +133,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
               <label key={level}>
                 <input
                   type="radio"
+                  disabled={!canEdit}
                   name="fatherEducation"
                   value={level}
                   checked={formData.fatherEducation === level}
@@ -137,6 +146,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           <label className="flex items-center mt-1">
             <input
               type="radio"
+              disabled={!canEdit}
               name="fatherEducation"
               value=""
               checked={[
@@ -151,6 +161,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
             <Input
               type="text"
               name="fatherEducation"
+              readOnly={!canEdit}
               placeholder="Specify education level"
               value={
                 ["Post-Graduate", "College", "High School", "Elementary"].every(
@@ -173,6 +184,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="fatherOccupation"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Civil Engineer"
           value={formData.fatherOccupation}
           onChange={handleInputChange}
@@ -191,6 +203,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="motherName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Maria C. Dela Cruz"
           value={formData.motherName}
           onChange={handleInputChange}
@@ -205,6 +218,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="number"
           name="motherAge"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 48"
           value={formData.motherAge}
           onChange={handleInputChange}
@@ -219,6 +233,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="motherBirthplace"
           required
+          readOnly={!canEdit}
           placeholder="City, Province"
           value={formData.motherBirthplace}
           onChange={handleInputChange}
@@ -233,6 +248,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           <label>
             <input
               type="radio"
+              disabled={!canEdit}
               name="motherNationality"
               value="Filipino"
               checked={formData.motherNationality === "Filipino"}
@@ -243,6 +259,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           <label className="flex items-center mt-1">
             <input
               type="radio"
+              disabled={!canEdit}
               name="motherNationality"
               value=""
               checked={formData.motherNationality !== "Filipino"}
@@ -252,6 +269,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
             <Input
               type="text"
               name="motherNationality"
+              readOnly={!canEdit}
               placeholder="Specify nationality"
               value={
                 formData.motherNationality !== "Filipino"
@@ -272,6 +290,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="motherReligion"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Roman Catholic"
           value={formData.motherReligion}
           onChange={handleInputChange}
@@ -288,6 +307,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
               <label key={level}>
                 <input
                   type="radio"
+                  disabled={!canEdit}
                   name="motherEducation"
                   value={level}
                   checked={formData.motherEducation === level}
@@ -300,6 +320,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           <label className="flex items-center mt-1">
             <input
               type="radio"
+              disabled={!canEdit}
               name="motherEducation"
               value=""
               checked={[
@@ -314,6 +335,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
             <Input
               type="text"
               name="motherEducation"
+              readOnly={!canEdit}
               placeholder="Specify education level"
               value={
                 ["Post-Graduate", "College", "High School", "Elementary"].every(
@@ -336,6 +358,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="motherOccupation"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Teacher"
           value={formData.motherOccupation}
           onChange={handleInputChange}
@@ -352,6 +375,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="emergencyContactName"
           required
+          readOnly={!canEdit}
           placeholder="e.g. John Michael A. Dela Cerna"
           value={formData.emergencyContactName}
           onChange={handleInputChange}
@@ -367,6 +391,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="emergencyContactRelationship"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Friend"
           value={formData.emergencyContactRelationship}
           onChange={handleInputChange}
@@ -380,6 +405,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="emergencyContactAddress"
           required
+          readOnly={!canEdit}
           placeholder="e.g. Barangay, City, Province"
           value={formData.emergencyContactAddress}
           onChange={handleInputChange}
@@ -393,6 +419,7 @@ export const Tab4 = ({ formData, updateFormData }: Tab4Props) => {
           type="text"
           name="emergencyContactNumber"
           required
+          readOnly={!canEdit}
           placeholder="e.g. 0929 690 1573"
           value={formData.emergencyContactNumber}
           onChange={handleInputChange}

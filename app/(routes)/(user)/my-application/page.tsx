@@ -14,8 +14,9 @@ import {
 
 import { useApplications } from "@/hooks/use-applications";
 
-import { ApplicationFormsView } from "./ApplicationFormsView";
-import { IsApplicationSubmitted } from "./IsApplicationSubmitted";
+import { ApplicationFormsView } from "../application-forms/ApplicationFormsView";
+import { IsApplicationSubmitted } from "../application-forms/IsApplicationSubmitted";
+import { app } from "@/firebase/config";
 
 export default function ApplicationFormsPage() {
   const { applications } = useApplications();
@@ -31,18 +32,18 @@ export default function ApplicationFormsPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Application Forms</BreadcrumbPage>
+            <BreadcrumbPage>My Application</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       {applications.length > 0 ? (
-        <IsApplicationSubmitted isSubmitted={true} />
-      ) : (
         <ApplicationFormsView
           applications={applications[0]}
-          canEdit={true}
-          isSubmitted={false}
+          canEdit={applications[0].canEdit as boolean}
+          isSubmitted={applications[0].isSubmitted as boolean}
         />
+      ) : (
+        <IsApplicationSubmitted isSubmitted={false} />
       )}
     </ContentLayout>
   );

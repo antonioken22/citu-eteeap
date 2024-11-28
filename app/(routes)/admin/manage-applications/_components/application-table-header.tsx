@@ -1,4 +1,8 @@
 import React from "react";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpAZ, ArrowUpZA } from "lucide-react";
+import { flexRender, Table as ReactTable } from "@tanstack/react-table";
+
 import {
   Table,
   TableBody,
@@ -7,16 +11,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { flexRender, Table as ReactTable } from "@tanstack/react-table";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpAZ, ArrowUpZA } from "lucide-react";
 
-interface DataTableProps {
-  table: ReactTable<any>;
-  columns: ColumnDef<any>[];
+import { ApplicantData } from "@/types/ApplicantData";
+
+interface ApplicationTableHeaderProps {
+  table: ReactTable<ApplicantData>;
+  columns: ColumnDef<ApplicantData>[];
 }
 
-export function DataTable({ table, columns }: DataTableProps) {
+export function ApplicationTableHeader({
+  table,
+  columns,
+}: ApplicationTableHeaderProps) {
   return (
     <div className="rounded-md border">
       <Table>

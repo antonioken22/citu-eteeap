@@ -1,4 +1,7 @@
 import React, { useEffect, useCallback } from "react";
+
+import { Input } from "@/components/ui/input";
+
 import { ApplicantData } from "@/types/ApplicantData";
 
 interface RenderMissingDocsProps {
@@ -111,13 +114,13 @@ export const RenderMissingDocs = ({
       {allDocuments.map((doc, index) =>
         shouldShowDocument(doc) ? (
           <div key={index} className="flex items-center space-x-2">
-            <input
-              type="radio"
+            <Input
+              type="checkbox"
               id={`doc-${index}`}
               name={`doc-${index}`}
               checked={formData.missingDocs?.includes(doc)}
               readOnly
-              className="cursor-not-allowed"
+              className="cursor-not-allowed w-4 h-4"
             />
             <label htmlFor={`doc-${index}`} className="text-sm">
               {doc}

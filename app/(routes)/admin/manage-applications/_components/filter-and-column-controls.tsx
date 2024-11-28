@@ -1,17 +1,20 @@
+import { ChevronDown } from "lucide-react";
 import React, { useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Table as ReactTable } from "@tanstack/react-table";
+
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
-import { Table as ReactTable } from "@tanstack/react-table";
+
+import { ApplicantData } from "@/types/ApplicantData";
 
 interface FilterAndColumnControlsProps {
-  table: ReactTable<any>;
+  table: ReactTable<ApplicantData>;
 }
 
 export function FilterAndColumnControls({

@@ -14,7 +14,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 
-import { DataTable } from "./data-table";
+import { ApplicationTableHeader } from "./application-table-header";
 import { FilterAndColumnControls } from "./filter-and-column-controls";
 import { PaginationControls } from "./pagination-controls";
 import { columns } from "./columns";
@@ -22,7 +22,7 @@ import { ApplicationControls } from "./application-controls";
 
 import { useApplications } from "@/hooks/use-applications";
 
-export function DataTablePage() {
+export function ApplicationTable() {
   const [sorting, setSorting] = React.useState<SortingState>([
     {
       id: "index",
@@ -37,11 +37,11 @@ export function DataTablePage() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   // Use the custom hook for Firestore operations
-  const { applications } = useApplications(); // We only need applications here
+  const { allApplications } = useApplications(); // We only need applications here
 
   // Initialize the table with Firestore data
   const table = useReactTable({
-    data: applications, // Use Firestore data
+    data: allApplications,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -65,7 +65,7 @@ export function DataTablePage() {
   return (
     <div className="w-full">
       <FilterAndColumnControls table={table} />
-      <DataTable table={table} columns={columns} />
+      <ApplicationTableHeader table={table} columns={columns} />
       <div className="flex justify-end">
         <div className="mr-auto">
           <ApplicationControls

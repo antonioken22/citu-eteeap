@@ -4,7 +4,8 @@ import {
   LucideIcon,
   BookUser,
   SquareUserRound,
-  FileUser
+  FileUser,
+  FileCheck
 } from "lucide-react";
 
 type Submenu = {
@@ -44,6 +45,13 @@ export function getMenuList(pathname: string, role?: string): Group[] {
           label: "Application Forms",
           active: pathname.includes("/application-forms"),
           icon: FileUser,
+          submenus: []
+        },
+        {
+          href: "/my-application",
+          label: "My Application",
+          active: pathname.includes("/my-application"),
+          icon: FileCheck,
           submenus: []
         },
         {
