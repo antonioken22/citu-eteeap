@@ -145,7 +145,7 @@ export const ApplicationFormsView = ({
   isSubmitted,
 }: ApplicationFormsViewProps) => {
   const { user } = useUser();
-  const { createApplication } = useApplications();
+  const { createApplication, updateApplication } = useApplications();
 
   const [formData, setFormData] = useState<ApplicantData>(() => {
     const savedFormData = localStorage.getItem("applicationFormData");
@@ -158,6 +158,10 @@ export const ApplicationFormsView = ({
   // Helper to check if any required field is empty
   const areRequiredFieldsValid = () => {
     const requiredFields: Array<keyof ApplicantData> = [
+      "isQuestionReadAndUnderstood",
+      "isPrivacyNoticeAccepted",
+      "isWaiverAccepted",
+
       // SECTION 1: Personal Information
       "applicantId",
       "activeEmail",
@@ -293,7 +297,9 @@ export const ApplicationFormsView = ({
       return;
     }
 
-    await createApplication(formData);
+    isSubmitted
+      ? await updateApplication(formData.applicationId as string, formData)
+      : await createApplication(formData);
   };
 
   return (
@@ -396,7 +402,7 @@ export const ApplicationFormsView = ({
               className="px-4 py-2 "
               onClick={handleSubmit}
             >
-              {canEdit ? "UPDATE" : "SUBMIT"}
+              {isSubmitted ? "UPDATE" : "SUBMIT"}
             </Button>
           )}
 

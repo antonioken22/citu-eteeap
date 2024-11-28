@@ -21,7 +21,7 @@ import {
 
 import { useApplicationStatus } from "@/hooks/use-application-status";
 
-interface DrawerDemoProps {
+interface DrawerProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (open: boolean) => void;
   applicationId: string;
@@ -31,7 +31,7 @@ export function ApplicationStatusInfoDrawer({
   isDrawerOpen,
   setIsDrawerOpen,
   applicationId,
-}: DrawerDemoProps) {
+}: DrawerProps) {
   const { statusLogs, fetchStatusLogs } = useApplicationStatus();
 
   useEffect(() => {

@@ -20,10 +20,10 @@ export const columns: ColumnDef<ApplicantData>[] = [
       <SelectRow
         row={row}
         applicationId={row.original.applicationId as string} // Pass the applicationId from the row data
-        onSelect={(applicationId, selected) => {
-          // FOR DEBUGGING PURPOSES
-          // console.log(`Applicant ${applicationId} selected: ${selected}`);
-        }}
+        // FOR DEBUGGING PURPOSES
+        // onSelect={(applicationId, selected) => {
+        //   console.log(`Applicant ${applicationId} selected: ${selected}`);
+        // }}
       />
     ),
     enableSorting: false,
@@ -66,7 +66,13 @@ export const columns: ColumnDef<ApplicantData>[] = [
   {
     accessorKey: "isEdited",
     header: "Edited Status",
-    cell: ({ cell }) => <IsEditedCell isEdited={cell.getValue() as boolean} />,
+    cell: ({ cell }) => (
+      <IsEditedCell
+        isEdited={cell.getValue() as boolean}
+        applicantId={cell.row.original.applicantId as string}
+        applicantEmail={cell.row.original.activeEmail as string}
+      />
+    ),
   },
   {
     accessorKey: "canEdit",

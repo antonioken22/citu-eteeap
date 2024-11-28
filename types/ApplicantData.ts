@@ -14,6 +14,7 @@ export type ApplicantData = {
   canEdit?: boolean;
   isEdited: boolean;
   dateModified?: Date | Timestamp;
+  dateArchived?: Date | Timestamp;
 
 
   isApplicationStatusEdited?: boolean;

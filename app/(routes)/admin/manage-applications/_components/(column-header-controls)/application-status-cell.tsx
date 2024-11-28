@@ -8,7 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { useApplicationStatus } from "@/hooks/use-application-status";
+
 import { ApplicationStatusInfoDrawer } from "./(info-drawers)/application-status-info-drawer";
 
 interface ApplicationStatusCellProps {
@@ -26,7 +28,7 @@ export const ApplicationStatusCell: React.FC<ApplicationStatusCellProps> = ({
     currentApplicationStatus || "Unreviewed"
   );
   const { updateApplicationStatus, loading } = useApplicationStatus();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // Drawer open state
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const statusOptions = [
     { value: "Transferred", bgColor: "bg-green-500" },

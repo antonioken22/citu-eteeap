@@ -24,6 +24,41 @@ export const useApplications = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [applications, setApplications] = useState<ApplicantData[]>([]);
   const [allApplications, setAllApplications] = useState<ApplicantData[]>([]);
+  const [allOldApplications, setAllOldApplications] = useState<ApplicantData[]>([]);
+
+  // Read All Old Applications (Admin)
+  useEffect(() => {
+    if (!user){
+      return;
+    }
+
+    if (user.publicMetadata.role !== "admin"){
+      toast.error("You are not authorized.");
+      return;
+    } 
+
+    const allOldApplicationsCollection = collection(firestore, "oldApplications");
+
+    // Subscribe to real-time updates
+    const unsubscribe = onSnapshot(
+      allOldApplicationsCollection,
+      (snapshot: QuerySnapshot<DocumentData>) => {
+        const updatedApplications: ApplicantData[] = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id, // Attach the document ID
+        } as unknown as ApplicantData));
+
+        setAllOldApplications(updatedApplications);
+      },
+      (e) => {
+        toast.error("Error fetching applications.");
+        console.error("Error fetching applications: " + e);
+      }
+    );
+
+    // Cleanup subscription on component unmount
+    return () => unsubscribe();
+  }, [user]);
 
   // Read All Applications (Admin)
   useEffect(() => {
@@ -130,23 +165,58 @@ export const useApplications = () => {
   // Update application 
   const updateApplication = async (applicationId: string, data: Partial<ApplicantData>) => {
     setLoading(true);
-    
+  
     try {
-      const applicationDoc = doc(firestore, "applications", applicationId) ;
-
-      await updateDoc(applicationDoc, data),{
-        ...data,
-        dateModified: new Date(),
-      };
-      toast.success("Application successfully updated.");
+      const applicationsCollection = collection(firestore, "applications");
+      const q = query(applicationsCollection, where("applicationId", "==", applicationId));
+      const snapshot = await getDocs(q);
+  
+      if (!snapshot.empty) {
+        const currentApp = snapshot.docs[0];
+        const currentData = currentApp.data() as ApplicantData;
+  
+        // Generate the custom ID for oldApplications
+        const now = new Date();
+        const timestamp = now.toLocaleString("en-US", {
+          year: "2-digit",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          hour12: true,
+        }).replace(/\//g, "-"); 
+        const oldApplicationId = `${applicationId} ${timestamp}`;
+  
+        // Save the current version to "oldApplications" table with the custom ID
+        const oldApplicationsCollection = collection(firestore, "oldApplications");
+        await setDoc(doc(oldApplicationsCollection, oldApplicationId), {
+          ...currentData,
+          dateArchived: now,
+        });
+        toast.success("Old application successfully archived.");
+  
+        // Update the application with new data
+        const applicationDoc = doc(firestore, "applications", currentApp.id);
+        await updateDoc(applicationDoc, {
+          ...data,
+          dateModified: now,
+          isEdited: true,
+          canEdit: false,
+        });
+  
+        toast.success("Application successfully updated.");
+      } else {
+        toast.error("Application not found with ID: " + applicationId);
+      }
     } catch (e) {
-      toast.error("Error updating document. Please contact the developer.");
-      console.error("Error updating document: " + e);
+      toast.error("Error updating application. Please contact the developer.");
+      console.error("Error updating application: " + e);
     } finally {
       setLoading(false);
     }
-    
-  }
+  };
+  
 
   // Soft delete application by updating isDeleted to true
   const deleteApplication = async (applicationId: string) => {
@@ -172,5 +242,5 @@ export const useApplications = () => {
     }
   };
 
-  return { createApplication, updateApplication, deleteApplication, applications,allApplications, loading };
+  return { createApplication, updateApplication, deleteApplication, applications, allApplications, allOldApplications, loading };
 };
