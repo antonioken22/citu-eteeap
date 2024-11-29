@@ -1,5 +1,7 @@
 "use client";
 
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -23,7 +25,7 @@ interface ApplicationControlsProps {
 export const ApplicationControls = ({
   selectedApplicationIds,
 }: ApplicationControlsProps) => {
-  const { updateApplication, deleteApplication, loading } = useApplications();
+  const { updateCanEdit, deleteApplication, loading } = useApplications();
   const { user } = useUser();
 
   // Handler for allowing users to edit their response
@@ -32,7 +34,7 @@ export const ApplicationControls = ({
       try {
         // Loop through all selected application IDs and update isSubmitted to false
         for (const applicationId of selectedApplicationIds) {
-          await updateApplication(applicationId, { canEdit: true });
+          await updateCanEdit(applicationId, { canEdit: true });
         }
       } catch (error) {
         console.error("Error updating applications: " + error);
@@ -46,7 +48,7 @@ export const ApplicationControls = ({
       try {
         // Loop through all selected application IDs and update isSubmitted to false
         for (const applicationId of selectedApplicationIds) {
-          await updateApplication(applicationId, { canEdit: false });
+          await updateCanEdit(applicationId, { canEdit: false });
         }
       } catch (error) {
         console.error("Error updating applications: " + error);

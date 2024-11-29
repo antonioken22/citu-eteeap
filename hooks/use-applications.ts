@@ -217,6 +217,32 @@ export const useApplications = () => {
       setLoading(false);
     }
   };
+
+  // Update canEdit 
+  const updateCanEdit = async (applicationId: string, canEdit: Pick<ApplicantData, "canEdit">) => {
+    setLoading(true);
+  
+    try {
+      const applicationsCollection = collection(firestore, "applications");
+      const q = query(applicationsCollection, where("applicationId", "==", applicationId));
+      const snapshot = await getDocs(q);
+  
+      if (!snapshot.empty) {
+        const currentApp = snapshot.docs[0];
+        const applicationDoc = doc(firestore, "applications", currentApp.id);
+        await updateDoc(applicationDoc, canEdit);
+  
+        toast.success("Editing response privileges has been changed.");
+      } else {
+        toast.error("Application not found with ID: " + applicationId);
+      }
+    } catch (e) {
+      toast.error("Error updating editing response privileges. Please contact the developer.");
+      console.error("Error updating editing response privileges: " + e);
+    } finally {
+      setLoading(false);
+    }
+  }
   
 
   // Soft delete application by updating isDeleted to true
@@ -243,5 +269,5 @@ export const useApplications = () => {
     }
   };
 
-  return { createApplication, updateApplication, deleteApplication, applications, allApplications, allOldApplications, loading };
+  return { createApplication, updateApplication, updateCanEdit, deleteApplication, applications, allApplications, allOldApplications, loading };
 };
