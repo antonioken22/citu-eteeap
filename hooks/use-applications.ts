@@ -200,6 +200,7 @@ export const useApplications = () => {
         const applicationDoc = doc(firestore, "applications", currentApp.id);
         await updateDoc(applicationDoc, {
           ...data,
+          dateSubmitted: now,
           dateModified: now,
           isEdited: true,
           canEdit: false,

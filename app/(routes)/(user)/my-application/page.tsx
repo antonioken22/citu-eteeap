@@ -36,15 +36,17 @@ export default function ApplicationFormsPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      {applications.length > 0 ? (
-        <ApplicationFormsView
-          applications={applications[0]}
-          canEdit={applications[0].canEdit as boolean}
-          isSubmitted={applications[0].isSubmitted as boolean}
-        />
-      ) : (
-        <IsApplicationSubmitted isSubmitted={false} />
-      )}
+      {applications ? (
+        applications.length > 0 ? (
+          <ApplicationFormsView
+            applications={applications[0]}
+            canEdit={applications[0].canEdit as boolean}
+            isSubmitted={applications[0].isSubmitted as boolean}
+          />
+        ) : (
+          <IsApplicationSubmitted isSubmitted={false} />
+        )
+      ) : null}
     </ContentLayout>
   );
 }

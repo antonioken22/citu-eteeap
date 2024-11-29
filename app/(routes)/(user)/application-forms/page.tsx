@@ -20,6 +20,8 @@ import { IsApplicationSubmitted } from "./IsApplicationSubmitted";
 export default function ApplicationFormsPage() {
   const { applications } = useApplications();
 
+  console.log(applications);
+
   return (
     <ContentLayout title="Application Forms">
       <Breadcrumb>
@@ -35,7 +37,7 @@ export default function ApplicationFormsPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      {applications.length > 0 ? (
+      {applications ? (
         <IsApplicationSubmitted isSubmitted={true} />
       ) : (
         <ApplicationFormsView
