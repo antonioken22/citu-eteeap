@@ -1,50 +1,15 @@
 import React from "react";
 
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
-import { ApplicantData } from "@/types/ApplicantData";
+import useApplicantData from "@/hooks/use-applicant-data";
 
-import UserProfileUpdatePhoto from "./userProfileUpdatePhoto";
-
-interface Tab1Props {
-  formData: ApplicantData;
-  updateFormData: (newData: Partial<ApplicantData>) => void;
-}
-
-export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    updateFormData({
-      [name]: name === "birthdate" ? new Date(value) : value,
-    });
-  };
+export const Tab1 = () => {
+  const { applicantData } = useApplicantData();
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Photo Section */}
-        <section className="relative flex-1">
-          <UserProfileUpdatePhoto />
-        </section>
-
-        {/* Bio Section */}
-        <Card className="flex-1">
-          <CardHeader>
-            <h2 className="text-xl font-semibold">Bio</h2>
-          </CardHeader>
-          <CardContent>
-            <Textarea
-              placeholder="Write a brief introduction about yourself..."
-              className="min-h-[265px] text-justify"
-              value={""}
-              onChange={() => {}}
-            />
-          </CardContent>
-        </Card>
-      </div>
-
       {/* Personal Information Section */}
       <Card>
         <CardHeader>
@@ -59,10 +24,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="firstName"
-                placeholder="Juan"
-                value={formData.firstName}
-                onChange={handleInputChange}
+                value={applicantData?.firstName || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -71,30 +34,24 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="lastName"
-                placeholder="Dela Cruz"
-                value={formData.lastName}
-                onChange={handleInputChange}
+                value={applicantData?.lastName || ""}
+                readOnly={true}
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Age</label>
               <Input
-                type="number"
-                name="age"
-                placeholder="e.g. 29"
-                value={formData.age}
-                onChange={handleInputChange}
+                type="text"
+                value={applicantData?.age || ""}
+                readOnly={true}
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Gender</label>
               <Input
                 type="text"
-                name="gender"
-                placeholder="Male/Female"
-                value={formData.gender}
-                onChange={handleInputChange}
+                value={applicantData?.gender || ""}
+                readOnly={true}
               />
             </div>
           </div>
@@ -107,20 +64,16 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="nationality"
-                placeholder="Filipino"
-                value={formData.nationality}
-                onChange={handleInputChange}
+                value={applicantData?.nationality || ""}
+                readOnly={true}
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Religion</label>
               <Input
                 type="text"
-                name="religion"
-                placeholder="e.g. Catholic"
-                value={formData.religion}
-                onChange={handleInputChange}
+                value={applicantData?.religion || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -128,17 +81,16 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
                 Birthdate
               </label>
               <Input
-                type="date"
-                name="birthdate"
+                type="text"
                 value={
-                  formData.birthdate &&
-                  !isNaN(new Date(formData.birthdate as Date).getTime())
-                    ? new Date(formData.birthdate as Date)
+                  applicantData?.birthdate &&
+                  !isNaN(new Date(applicantData.birthdate as Date).getTime())
+                    ? new Date(applicantData.birthdate as Date)
                         .toISOString()
                         .split("T")[0]
                     : ""
                 }
-                onChange={handleInputChange}
+                readOnly={true}
               />
             </div>
             <div>
@@ -147,10 +99,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="birthplace"
-                placeholder="City, Province, Country"
-                value={formData.birthplace}
-                onChange={handleInputChange}
+                value={applicantData?.birthplace || ""}
+                readOnly={true}
               />
             </div>
           </div>
@@ -163,10 +113,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="civilStatus"
-                placeholder="e.g. Single"
-                value={formData.civilStatus}
-                onChange={handleInputChange}
+                value={applicantData?.civilStatus || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -175,10 +123,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="birthRank"
-                placeholder="e.g. 1st"
-                value={formData.birthRank}
-                onChange={handleInputChange}
+                value={applicantData?.birthRank || ""}
+                readOnly={true}
               />
             </div>
           </div>
@@ -190,11 +136,9 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
                 Number of Brothers
               </label>
               <Input
-                type="number"
-                name="numBrothers"
-                placeholder="e.g. 2"
-                value={formData.numBrothers}
-                onChange={handleInputChange}
+                type="text"
+                value={applicantData?.numBrothers || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -202,11 +146,9 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
                 Number of Sisters
               </label>
               <Input
-                type="number"
-                name="numSisters"
-                placeholder="e.g. 3"
-                value={formData.numSisters}
-                onChange={handleInputChange}
+                type="text"
+                value={applicantData?.numSisters || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -214,16 +156,15 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
                 Brothers/Sisters at CIT
               </label>
               <Input
-                type="number"
-                name="numCITBrothersSisters"
-                placeholder="e.g. 1"
-                value={formData.numCITBrothersSisters}
-                onChange={handleInputChange}
+                type="text"
+                value={applicantData?.numCITBrothersSisters || ""}
+                readOnly={true}
               />
             </div>
           </div>
         </CardContent>
       </Card>
+
       <div className="flex flex-col md:flex-row gap-6">
         {/* Address Information */}
         <Card className="flex-1">
@@ -237,10 +178,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="homeAddress"
-                placeholder="Home address"
-                value={formData.homeAddress}
-                onChange={handleInputChange}
+                value={applicantData?.homeAddress || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -249,10 +188,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="cityAddress"
-                placeholder="City address"
-                value={formData.cityAddress}
-                onChange={handleInputChange}
+                value={applicantData?.cityAddress || ""}
+                readOnly={true}
               />
             </div>
           </CardContent>
@@ -269,11 +206,9 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
                 Facebook URL
               </label>
               <Input
-                type="url"
-                name="facebookURL"
-                placeholder="https://facebook.com/username"
-                value={formData.facebookURL}
-                onChange={handleInputChange}
+                type="text"
+                value={applicantData?.facebookURL || ""}
+                readOnly={true}
               />
             </div>
             <div>
@@ -282,10 +217,8 @@ export const Tab1 = ({ formData, updateFormData }: Tab1Props) => {
               </label>
               <Input
                 type="text"
-                name="mobileNumber"
-                placeholder="e.g. 09296901573"
-                value={formData.mobileNumber}
-                onChange={handleInputChange}
+                value={applicantData?.mobileNumber || ""}
+                readOnly={true}
               />
             </div>
           </CardContent>

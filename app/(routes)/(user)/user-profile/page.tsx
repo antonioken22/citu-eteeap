@@ -42,7 +42,7 @@ export default function UserProfilePage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <UserProfileView application={userApplication} />
+      <UserProfileView />
     </ContentLayout>
   );
 }
