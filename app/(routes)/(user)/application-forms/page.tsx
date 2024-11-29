@@ -20,8 +20,6 @@ import { IsApplicationSubmitted } from "./IsApplicationSubmitted";
 export default function ApplicationFormsPage() {
   const { applications } = useApplications();
 
-  console.log(applications);
-
   return (
     <ContentLayout title="Application Forms">
       <Breadcrumb>
@@ -38,14 +36,16 @@ export default function ApplicationFormsPage() {
         </BreadcrumbList>
       </Breadcrumb>
       {applications ? (
-        <IsApplicationSubmitted isSubmitted={true} />
-      ) : (
-        <ApplicationFormsView
-          applications={applications[0]}
-          canEdit={true}
-          isSubmitted={false}
-        />
-      )}
+        applications.length > 0 ? (
+          <IsApplicationSubmitted isSubmitted={true} />
+        ) : (
+          <ApplicationFormsView
+            applications={applications[0]}
+            canEdit={true}
+            isSubmitted={false}
+          />
+        )
+      ) : null}
     </ContentLayout>
   );
 }
