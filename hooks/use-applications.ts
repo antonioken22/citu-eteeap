@@ -194,7 +194,7 @@ export const useApplications = () => {
           ...currentData,
           dateArchived: now,
         });
-        toast.success("Old application successfully archived.");
+        // toast.success("Old application successfully archived.");
   
         // Update the application with new data
         const applicationDoc = doc(firestore, "applications", currentApp.id);
