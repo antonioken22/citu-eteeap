@@ -6,12 +6,14 @@ import { ApplicationEditedDiffInfoDrawer } from "./(info-drawers)/application-ed
 
 interface IsEditedCellProps {
   isEdited: boolean;
+  applicationId: string;
   applicantId: string;
   applicantEmail: string;
 }
 
 export const IsEditedCell = ({
   isEdited,
+  applicationId,
   applicantId,
   applicantEmail,
 }: IsEditedCellProps) => {
@@ -37,6 +39,7 @@ export const IsEditedCell = ({
       <ApplicationEditedDiffInfoDrawer
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
+        applicationId={applicationId}
         applicantId={applicantId}
         applicantEmail={applicantEmail}
       />

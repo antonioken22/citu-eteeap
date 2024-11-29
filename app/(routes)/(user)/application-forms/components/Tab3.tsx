@@ -153,7 +153,6 @@ export const Tab3 = ({ formData, updateFormData, canEdit }: Tab3Props) => {
       </label>
 
       {/* Birthdate */}
-      {/* Birthdate */}
       <label className="block">
         <span className="font-medium">Birthdate*:</span>
         <Input

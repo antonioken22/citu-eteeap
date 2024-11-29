@@ -25,7 +25,7 @@ import { useApplications } from "@/hooks/use-applications";
 export function ApplicationTable() {
   const [sorting, setSorting] = React.useState<SortingState>([
     {
-      id: "index",
+      id: "dateSubmitted",
       desc: true,
     },
   ]);

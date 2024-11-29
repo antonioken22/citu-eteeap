@@ -37,6 +37,7 @@ const formatCellValue = (value: any): React.ReactNode => {
 interface DrawerProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (open: boolean) => void;
+  applicationId: string;
   applicantId: string;
   applicantEmail: string;
 }
@@ -44,6 +45,7 @@ interface DrawerProps {
 export function ApplicationEditedDiffInfoDrawer({
   isDrawerOpen,
   setIsDrawerOpen,
+  applicationId,
   applicantId,
   applicantEmail,
 }: DrawerProps) {
@@ -53,17 +55,19 @@ export function ApplicationEditedDiffInfoDrawer({
   const [oldApplications, setOldApplications] = useState<ApplicantData[]>([]);
 
   useEffect(() => {
-    if (applicantId) {
+    if (applicantId && applicationId) {
       const application = allApplications.find(
-        (app) => app.applicantId === applicantId
+        (app) =>
+          app.applicantId === applicantId && app.applicationId === applicationId
       );
       const oldApps = allOldApplications.filter(
-        (app) => app.applicantId === applicantId
+        (app) =>
+          app.applicantId === applicantId && app.applicationId === applicationId
       );
       setCurrentApplication(application || null);
       setOldApplications(oldApps);
     }
-  }, [applicantId, allApplications, allOldApplications]);
+  }, [applicantId, applicationId, allApplications, allOldApplications]);
 
   const getColumnOrder = (columns: ColumnDef<ApplicantData>[]) =>
     columns

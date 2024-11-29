@@ -149,6 +149,11 @@ export const useApplications = () => {
 
     try {
       const applicationId = await generateApplicationId(); // Generate custom ID
+      // Ensure birthdate is set to midnight
+      if (data.birthdate instanceof Date) {
+        data.birthdate.setHours(0, 0, 0, 0);
+    }
+
       const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false, isSubmitted: true, isEdited: false }; 
 
       // Use setDoc with custom ID (applicationId) instead of addDoc
@@ -165,6 +170,11 @@ export const useApplications = () => {
   // Update application 
   const updateApplication = async (applicationId: string, data: Partial<ApplicantData>) => {
     setLoading(true);
+
+    // Ensure birthdate is set to midnight
+    if (data.birthdate instanceof Date) {
+      data.birthdate.setHours(0, 0, 0, 0);
+  }
   
     try {
       const applicationsCollection = collection(firestore, "applications");

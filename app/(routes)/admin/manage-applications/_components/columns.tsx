@@ -44,6 +44,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
     sortingFn: "basic",
   },
   {
+    id: "dateSubmitted",
     accessorKey: "dateSubmitted",
     header: "Date Submitted",
     cell: ({ cell }) => (
@@ -69,6 +70,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
     cell: ({ cell }) => (
       <IsEditedCell
         isEdited={cell.getValue() as boolean}
+        applicationId={cell.row.original.applicationId as string}
         applicantId={cell.row.original.applicantId as string}
         applicantEmail={cell.row.original.activeEmail as string}
       />
