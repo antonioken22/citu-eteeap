@@ -5,7 +5,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 import useApplicantData from "@/hooks/use-applicant-data";
 
-export const Tab2 = () => {
+export const ParentsInformation = () => {
   const { applicantData } = useApplicantData();
 
   return (
