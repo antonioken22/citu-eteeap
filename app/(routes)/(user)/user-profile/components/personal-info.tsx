@@ -5,7 +5,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 import useApplicantData from "@/hooks/use-applicant-data";
 
-export const Tab1 = () => {
+export const PersonalInformation = () => {
   const { applicantData } = useApplicantData();
 
   return (
@@ -81,7 +81,7 @@ export const Tab1 = () => {
                 Birthdate
               </label>
               <Input
-                type="text"
+                type="date"
                 value={
                   applicantData?.birthdate &&
                   !isNaN(new Date(applicantData.birthdate as Date).getTime())
