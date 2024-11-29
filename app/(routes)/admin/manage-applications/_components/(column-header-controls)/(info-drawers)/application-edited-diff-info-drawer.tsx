@@ -71,7 +71,9 @@ export function ApplicationEditedDiffInfoDrawer({
       .map((col) => (col as { accessorKey: string }).accessorKey ?? col.id);
 
   const renderDiffHighlight = (oldValue: any, currentValue: any) => {
-    if (oldValue !== currentValue) {
+    const formattedOldValue = formatCellValue(oldValue);
+    const formattedCurrentValue = formatCellValue(currentValue);
+    if (formattedOldValue !== formattedCurrentValue) {
       return "bg-yellow-200 dark:bg-red-800";
     }
     return "";
@@ -90,14 +92,14 @@ export function ApplicationEditedDiffInfoDrawer({
         return (
           <TableCell
             key={index}
-            className={`text-xs max-w-[200px] truncate ${highlightClass}`}
+            className={`text-xs max-w-[150px] truncate ${highlightClass}`}
           >
             {formatCellValue(oldApp[field])}
           </TableCell>
         );
       })}
       <TableCell
-        className={`text-xs max-w-[200px] truncate ${
+        className={`text-xs max-w-[150px] truncate ${
           currentApplication
             ? renderDiffHighlight(
                 oldApplications[oldApplications.length - 1]?.[field],
@@ -123,7 +125,7 @@ export function ApplicationEditedDiffInfoDrawer({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Field</TableHead>
+                  <TableHead className="w-[150px] truncate">Field</TableHead>
                   {oldApplications.map((_, index) => (
                     <TableHead key={index}>
                       Old Application {index + 1}

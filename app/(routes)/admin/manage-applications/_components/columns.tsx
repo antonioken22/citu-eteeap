@@ -8,9 +8,9 @@ import { DateSubmittedCell } from "./(column-header-controls)/date-submitted-cel
 import { ApplicationStatusCell } from "./(column-header-controls)/application-status-cell";
 import { IsEditedCell } from "./(column-header-controls)/is-edited-cell";
 import { SelectRow } from "./(column-header-controls)/select-row";
-import { BirthdateCell } from "./(column-header-controls)/birthdate-cell";
 import { FileUrlCell } from "./(column-header-controls)/file-url-cell";
 import { BooleanIconizeCell } from "./(column-header-controls)/boolean-iconize-cell";
+import { DateFormatCell } from "./(column-header-controls)/date-format-cell";
 
 export const columns: ColumnDef<ApplicantData>[] = [
   {
@@ -85,6 +85,12 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "applicationId",
     header: "Application ID",
   },
+
+  // SECTION 1: Personal Information
+  {
+    accessorKey: "applicantId",
+    header: "Applicant ID",
+  },
   {
     accessorKey: "activeEmail",
     header: "Active Email Address",
@@ -117,7 +123,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "birthdate",
     header: "Birthdate",
     cell: ({ cell }) => (
-      <BirthdateCell timestamp={cell.getValue() as Timestamp} />
+      <DateFormatCell timestamp={cell.getValue() as Timestamp} />
     ),
   },
   {
@@ -160,6 +166,8 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "mobileNumber",
     header: "Mobile No.",
   },
+
+  // SECTION 2: Parents Profile & Emergency Contact
   {
     accessorKey: "fatherName",
     header: "Father's Name",
@@ -217,6 +225,28 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "Mother's Occupation",
   },
   {
+    accessorKey: "emergencyContactName",
+    header: "Contact Name",
+  },
+  {
+    accessorKey: "emergencyContactRelationship",
+    header: "Relation",
+  },
+  {
+    accessorKey: "emergencyContactAddress",
+    header: "Contact Addr.",
+  },
+  {
+    accessorKey: "emergencyContactNumber",
+    header: "Contact No.",
+  },
+
+  // SECTION 3: Educational Background
+  {
+    accessorKey: "educationalAttainment",
+    header: "Highest Educational Attainment",
+  },
+  {
     accessorKey: "prevCourse",
     header: "Prev. Course",
   },
@@ -272,22 +302,8 @@ export const columns: ColumnDef<ApplicantData>[] = [
     accessorKey: "progChoice3",
     header: "Program Choice 3",
   },
-  {
-    accessorKey: "emergencyContactName",
-    header: "Contact Name",
-  },
-  {
-    accessorKey: "emergencyContactRelationship",
-    header: "Relation",
-  },
-  {
-    accessorKey: "emergencyContactAddress",
-    header: "Contact Addr.",
-  },
-  {
-    accessorKey: "emergencyContactNumber",
-    header: "Contact No.",
-  },
+
+  // SECTION 4: Requirement Documents
   {
     accessorKey: "evalSheet",
     header: "Eval Sheet",
@@ -376,6 +392,8 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "Photo With Valid ID",
     cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
+
+  // SECTION 5: Essay Admission Test
   {
     accessorKey: "examSet",
     header: "Exam Set",

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { ContentLayout } from "@/app/_components/(content-layout)/content-layout";
@@ -12,6 +14,8 @@ import {
 import CITUETEEAPWebPage from "./_components/citu-web";
 
 export default function DashboardPage() {
+  localStorage.removeItem("applicationFormData");
+
   return (
     <ContentLayout title="Dashboard">
       <Breadcrumb>

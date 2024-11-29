@@ -2,6 +2,17 @@ import { Input } from "@/components/ui/input";
 
 import { ApplicantData } from "@/types/ApplicantData";
 
+// Helper function
+const isFirestoreTimestamp = (
+  value: any
+): value is { seconds: number; nanoseconds: number } => {
+  return (
+    value &&
+    typeof value.seconds === "number" &&
+    typeof value.nanoseconds === "number"
+  );
+};
+
 interface Tab3Props {
   formData: ApplicantData;
   updateFormData: (newData: Partial<ApplicantData>) => void;
@@ -142,6 +153,7 @@ export const Tab3 = ({ formData, updateFormData, canEdit }: Tab3Props) => {
       </label>
 
       {/* Birthdate */}
+      {/* Birthdate */}
       <label className="block">
         <span className="font-medium">Birthdate*:</span>
         <Input
@@ -150,9 +162,12 @@ export const Tab3 = ({ formData, updateFormData, canEdit }: Tab3Props) => {
           required
           readOnly={!canEdit}
           value={
-            formData.birthdate &&
-            !isNaN(new Date(formData.birthdate as Date).getTime())
-              ? new Date(formData.birthdate as Date).toISOString().split("T")[0]
+            formData.birthdate
+              ? isFirestoreTimestamp(formData.birthdate)
+                ? new Date(formData.birthdate.seconds * 1000)
+                    .toISOString()
+                    .split("T")[0]
+                : new Date(formData.birthdate).toISOString().split("T")[0]
               : ""
           }
           onChange={handleInputChange}

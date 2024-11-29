@@ -29,6 +29,9 @@ export function FilterAndColumnControls({
       // "dateSubmitted",
       // "applicationStatus",
       // "isEdited",
+
+      // SECTION 1: Personal Information
+      "applicantId",
       // "activeEmail",
       // "lastName",
       // "firstName",
@@ -47,6 +50,8 @@ export function FilterAndColumnControls({
       "cityAddress",
       "facebookURL",
       "mobileNumber",
+
+      // SECTION 2: Parents Profile & Emergency Contact
       "fatherName",
       "fatherAge",
       "fatherBirthplace",
@@ -61,6 +66,13 @@ export function FilterAndColumnControls({
       "motherReligion",
       "motherEducation",
       "motherOccupation",
+      "emergencyContactName",
+      "emergencyContactRelationship",
+      "emergencyContactAddress",
+      "emergencyContactNumber",
+
+      // SECTION 3: Educational Background
+      // "educationalAttainment",
       "prevCourse",
       "lastSchool",
       "schoolYear",
@@ -75,10 +87,8 @@ export function FilterAndColumnControls({
       // "progChoice1",
       "progChoice2",
       "progChoice3",
-      "emergencyContactName",
-      "emergencyContactRelationship",
-      "emergencyContactAddress",
-      "emergencyContactNumber",
+
+      // SECTION 4: Requirement Documents
       // "evalSheet",
       // "jobDescription",
       // "tor",
@@ -91,6 +101,8 @@ export function FilterAndColumnControls({
       "applicantType",
       // "missingDocs",
       // "photoWithValidId",
+
+      // SECTION 5: Essay Admission Test
       "examSet",
       "firstQuestionAnswer",
       "secondQuestionAnswer",

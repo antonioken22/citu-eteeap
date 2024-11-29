@@ -11,14 +11,14 @@ const useApplicantData = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("useEffect triggered");
+    // console.log("useEffect triggered");
     const fetchApplicantData = async () => {
       if (isLoaded && user) {
         try {
           setLoading(true);
           setError(null);
 
-          console.log("Fetching applicant data for user ID:", user.id);
+          // console.log("Fetching applicant data for user ID:", user.id);
 
           // Query the applications collection for a document where applicantID matches user.id
           const applicationsRef = collection(firestore, "applications");
