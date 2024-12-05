@@ -41,6 +41,7 @@ export default function ApplicationFormsPage() {
         applications.length > 0 ? (
           <ApplicationFormsView
             applications={applications[0]}
+            applicationStatus={applications[0].applicationStatus}
             canEdit={applications[0].canEdit as boolean}
             isSubmitted={applications[0].isSubmitted as boolean}
           />

@@ -26,7 +26,7 @@ export function ApplicationTable() {
   const [sorting, setSorting] = React.useState<SortingState>([
     {
       id: "dateSubmitted",
-      desc: true,
+      desc: false,
     },
   ]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

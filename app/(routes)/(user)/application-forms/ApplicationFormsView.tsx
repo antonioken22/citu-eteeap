@@ -22,6 +22,7 @@ import { Tab6 } from "./components/Tab6";
 import { Tab7 } from "./components/Tab7";
 import { Tab8 } from "./components/Tab8";
 import { Tab9 } from "./components/Tab9";
+import { ApplicationStatusAlert } from "./ApplicationStatusAlert";
 
 const initializeFormData = (applications?: ApplicantData, user?: User) => {
   const defaultData = {
@@ -135,12 +136,14 @@ const initializeFormData = (applications?: ApplicantData, user?: User) => {
 
 interface ApplicationFormsViewProps {
   applications?: ApplicantData;
+  applicationStatus?: string;
   canEdit: boolean;
   isSubmitted: boolean;
 }
 
 export const ApplicationFormsView = ({
   applications,
+  applicationStatus,
   canEdit,
   isSubmitted,
 }: ApplicationFormsViewProps) => {
@@ -336,6 +339,12 @@ export const ApplicationFormsView = ({
             To be able to edit your submitted application, please contact an
             ETEEAP in-charge first.
           </h2>
+        )}
+        {isSubmitted && (
+          <ApplicationStatusAlert
+            applicationStatus={applicationStatus}
+            isSubmitted={isSubmitted}
+          />
         )}
         <div ref={contentRef}>
           <TabsContent value="tab1">
