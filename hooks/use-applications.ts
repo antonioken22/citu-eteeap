@@ -33,7 +33,6 @@ export const useApplications = () => {
     }
 
     if (user.publicMetadata.role !== "admin"){
-      toast.error("You are not authorized.");
       return;
     } 
 
@@ -67,7 +66,6 @@ export const useApplications = () => {
     }
 
     if (user.publicMetadata.role !== "admin"){
-      toast.error("You are not authorized.");
       return;
     }
 
@@ -154,7 +152,7 @@ export const useApplications = () => {
         data.birthdate.setHours(0, 0, 0, 0);
     }
 
-      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false, isSubmitted: true, isEdited: false }; 
+      const applicationData = { ...data, dateCreated: new Date(), dateSubmitted: new Date(), applicationId, isDeleted: false, isSubmitted: true, isEdited: false, canEdit: true }; 
 
       // Use setDoc with custom ID (applicationId) instead of addDoc
       await setDoc(doc(firestore, "applications", applicationId), applicationData);
@@ -213,7 +211,7 @@ export const useApplications = () => {
           dateSubmitted: now,
           dateModified: now,
           isEdited: true,
-          canEdit: false,
+          canEdit: true,
         });
   
         toast.success("Application successfully updated.");
@@ -253,7 +251,6 @@ export const useApplications = () => {
       setLoading(false);
     }
   }
-  
 
   // Soft delete application by updating isDeleted to true
   const deleteApplication = async (applicationId: string) => {

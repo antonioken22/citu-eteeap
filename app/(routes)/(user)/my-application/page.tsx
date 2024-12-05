@@ -16,9 +16,10 @@ import { useApplications } from "@/hooks/use-applications";
 
 import { ApplicationFormsView } from "../application-forms/ApplicationFormsView";
 import { IsApplicationSubmitted } from "../application-forms/IsApplicationSubmitted";
-import { app } from "@/firebase/config";
 
 export default function ApplicationFormsPage() {
+  localStorage.removeItem("applicationFormData");
+
   const { applications } = useApplications();
 
   return (

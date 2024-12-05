@@ -14,8 +14,6 @@ import {
 import CITUETEEAPWebPage from "./_components/citu-web";
 
 export default function DashboardPage() {
-  localStorage.removeItem("applicationFormData");
-
   return (
     <ContentLayout title="Dashboard">
       <Breadcrumb>

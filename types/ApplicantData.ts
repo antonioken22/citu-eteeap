@@ -98,15 +98,15 @@ export type ApplicantData = {
       evalSheet: string | null; // file url
       jobDescription: string | null; // file url
   // Other Requirements
+      employmentCert: string | null; // file url
       tor: string | null; // file url
-      hsForm137A: string | null; // file url
-      hsForm138: string | null; // file url
       psaBirthCert: string | null; // file url
       transferCred: string | null; // file url
-      marriageCert: string | null; // file url
-      employmentCert: string | null; // file url
       businessProof: string | null; // file url
-  // Undertaking/Waiver
+      hsForm137A: string | null; // file url
+      hsForm138: string | null; // file url
+      marriageCert: string | null; // file url
+      // Undertaking/Waiver
       missingDocs: string[];
       photoWithValidId: string | null; // file url
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { toast } from "sonner";
+import { useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import { ApplicantData } from "@/types/ApplicantData";
 import { RenderMissingDocs } from "./RenderMissingDocs";
 
 import PhotoWithValidID from "@/public/application-forms/photo-with-valid-id-sample.png";
+import { Check, X } from "lucide-react";
 
 interface Tab7Props {
   formData: ApplicantData;
@@ -19,6 +21,7 @@ interface Tab7Props {
 
 export const Tab7 = ({ formData, updateFormData, canEdit }: Tab7Props) => {
   const { setSelectedFileUpload, uploadPhoto } = useFileUpload();
+  const [isViewable, setIsViewable] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -134,16 +137,23 @@ export const Tab7 = ({ formData, updateFormData, canEdit }: Tab7Props) => {
       <div>
         <h4 className="font-medium">Attach Your Photo With Your Valid Id*:</h4>
         <div className="flex items-center justify-between space-x-2">
-          <Input
-            type="text"
-            name="photoWithValidId"
-            disabled
-            required
-            placeholder="Your File URL will appear here after upload."
-            value={formData.photoWithValidId as string}
-            onChange={handleInputChange}
-            className="w-full mt-1"
-          />
+          {isViewable && (
+            <Input
+              type="text"
+              name="photoWithValidId"
+              disabled
+              required
+              placeholder="Your File URL will appear here after upload."
+              value={formData.photoWithValidId as string}
+              onChange={handleInputChange}
+              className="w-full mt-1"
+            />
+          )}
+          {formData.photoWithValidId ? (
+            <Check className="text-green-600" />
+          ) : (
+            <X className="text-red-600" />
+          )}
           <Input
             type="file"
             disabled={!canEdit}

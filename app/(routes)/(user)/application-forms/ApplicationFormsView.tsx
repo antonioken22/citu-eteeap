@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -146,6 +146,7 @@ export const ApplicationFormsView = ({
 }: ApplicationFormsViewProps) => {
   const { user } = useUser();
   const { createApplication, updateApplication } = useApplications();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState<ApplicantData>(() => {
     const savedFormData = localStorage.getItem("applicationFormData");
@@ -284,6 +285,15 @@ export const ApplicationFormsView = ({
     }
   };
 
+  // Effect to scroll to top on tab change
+  useEffect(() => {
+    if (contentRef.current) {
+      const topOffset =
+        contentRef.current.getBoundingClientRect().top + window.scrollY - 200; // n px offset
+      window.scrollTo({ top: topOffset, behavior: "smooth" });
+    }
+  }, [activeTab]);
+
   // Handle form submission
   const handleSubmit = async () => {
     const { isValid, missingFields } = areRequiredFieldsValid();
@@ -321,13 +331,13 @@ export const ApplicationFormsView = ({
           <TabsTrigger value="tab8">8</TabsTrigger>
           <TabsTrigger value="tab9">9</TabsTrigger>
         </TabsList>
-        {isSubmitted && (
+        {!canEdit && (
           <h2 className="text-sm text-red-600 italic text-center mt-4">
             To be able to edit your submitted application, please contact an
             ETEEAP in-charge first.
           </h2>
         )}
-        <div>
+        <div ref={contentRef}>
           <TabsContent value="tab1">
             <Tab1
               formData={formData}

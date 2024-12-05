@@ -316,6 +316,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
     header: "Job Desc.",
     cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
+  // Missing Docs
   {
     accessorKey: "missingDocs",
     header: "Missing Docs",
@@ -346,18 +347,13 @@ export const columns: ColumnDef<ApplicantData>[] = [
     },
   },
   {
+    accessorKey: "employmentCert",
+    header: "Employment Cert.",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
+  },
+  {
     accessorKey: "tor",
     header: "TOR",
-    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
-  },
-  {
-    accessorKey: "hsForm137A",
-    header: "HS Form 137-A",
-    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
-  },
-  {
-    accessorKey: "hsForm138",
-    header: "HS Form 138",
     cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
@@ -371,18 +367,23 @@ export const columns: ColumnDef<ApplicantData>[] = [
     cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
-    accessorKey: "marriageCert",
-    header: "Marriage Cert.",
-    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
-  },
-  {
-    accessorKey: "employmentCert",
-    header: "Employment Cert.",
-    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
-  },
-  {
     accessorKey: "businessProof",
     header: "Business Proof",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
+  },
+  {
+    accessorKey: "hsForm137A",
+    header: "HS Form 137-A",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
+  },
+  {
+    accessorKey: "hsForm138",
+    header: "HS Form 138",
+    cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
+  },
+  {
+    accessorKey: "marriageCert",
+    header: "Marriage Cert.",
     cell: ({ cell }) => <FileUrlCell fileUrl={cell.getValue() as string} />,
   },
   {
