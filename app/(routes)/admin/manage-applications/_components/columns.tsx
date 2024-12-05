@@ -325,10 +325,7 @@ export const columns: ColumnDef<ApplicantData>[] = [
       return (
         <>
           {missingDocs.length ? (
-            <div
-              className="h-[60px] w-[400px] overflow-y-scroll rounded p-2"
-              style={{ maxWidth: "fit-content" }}
-            >
+            <div className="h-[60px] w-[400px] overflow-y-auto rounded p-2">
               <ol className="list-decimal pl-5">
                 {missingDocs.map((doc, index) => (
                   <li key={index} className="text-sm break-words">
