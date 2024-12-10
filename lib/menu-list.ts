@@ -5,7 +5,8 @@ import {
   BookUser,
   SquareUserRound,
   FileUser,
-  FileCheck
+  FileCheck,
+  MessageSquare
 } from "lucide-react";
 
 type Submenu = {
@@ -59,6 +60,13 @@ export function getMenuList(pathname: string, role?: string): Group[] {
           label: "User Profile",
           active: pathname.includes("/user-profile"),
           icon: SquareUserRound,
+          submenus: []
+        },
+        {
+          href: "/chat-support",
+          label: "Chat Support",
+          active: pathname.includes("/chat-support"),
+          icon: MessageSquare,
           submenus: []
         }
       ]

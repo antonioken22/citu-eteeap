@@ -7,17 +7,16 @@ import { firestore } from "@/firebase/config";
 import { UserData } from "@/types/UserData";
 import { ApplicantData } from "@/types/ApplicantData";
 
-const useUserState = () => {
+export const useUserState = () => {
   const { user, isLoaded } = useUser(); // Clerk's useUser hook
   const [userId, setUserId] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [userPhotoUrl, setUserPhotoUrl] = useState<string | null>(null);
+  const [userImageUrl, setUserImageUrl] = useState<string | null>(null);
   const [userFirstName, setUserFirstName] = useState<string | null>(null);
   const [userLastName, setUserLastName] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userPushNotificationStatus, setUserPushNotificationStatus] =
     useState<boolean>(false);
-  const [userBio, setBio] = useState<string | null>(null);
   const [userAge, setAge] = useState<number | null>(null);
   const [userGender, setGender] = useState<string | null>(null);
   const [userNationality, setNationality] = useState<string | null>(null);
@@ -114,14 +113,13 @@ const useUserState = () => {
             // Store locally
             setUserId(user.id);
             setUserEmail(user.emailAddresses[0]?.emailAddress || null);
-            setUserPhotoUrl(user.imageUrl);
+            setUserImageUrl(user.imageUrl);
             setUserFirstName(userData.firstName);
             setUserLastName(userData.lastName);
             setUserRole(userData.role);
             setUserPushNotificationStatus(userData.pushNotificationStatus);
 
             // Set additional details
-            setBio(userData.bio || null);
             setAge(applicantData.age || null);
             setGender(applicantData.gender || null);
             setNationality(applicantData.nationality || null);
@@ -202,14 +200,13 @@ const useUserState = () => {
   return {
     userId,
     userEmail,
-    userPhotoUrl,
-    setUserPhotoUrl,
+    userImageUrl,
+    setUserImageUrl,
     userFirstName,
     userLastName,
     userRole,
     userPushNotificationStatus,
     setUserPushNotificationStatus,
-    userBio,
     userAge,
     userGender,
     userNationality,
@@ -265,5 +262,3 @@ const useUserState = () => {
     loading,
   };
 };
-
-export default useUserState;
