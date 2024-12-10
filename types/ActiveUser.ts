@@ -1,4 +1,4 @@
-export interface ActiveUser {
+export type ActiveUser = {
     time: string;
     count: number;
     users: Array<{

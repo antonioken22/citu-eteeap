@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import { Timestamp } from "firebase/firestore";
 import { Trash } from "lucide-react";
+import { Timestamp } from "firebase/firestore";
+import React, { useEffect, useRef } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { ChatMessage } from "@/types/ChatMessage";
+
 import { useUserState } from "@/hooks/use-user-state";
 import { useChatMessages } from "@/hooks/use-chat-messages";
-import { ChatMessage } from "@/types/ChatMessage";
 
 interface ChatMessageHistoryProps {
   selectedUser: {
@@ -17,9 +19,9 @@ interface ChatMessageHistoryProps {
   } | null;
 }
 
-export const ChatMessageHistory: React.FC<ChatMessageHistoryProps> = ({
+export const ChatMessageHistory = ({
   selectedUser,
-}) => {
+}: ChatMessageHistoryProps) => {
   const { userId, userFirstName, userLastName, userImageUrl } = useUserState();
   const { chatMessages, loading, removeFromView } = useChatMessages();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);

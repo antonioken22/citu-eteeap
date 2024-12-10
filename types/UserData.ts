@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 
-export interface UserData {
+export type UserData = {
   id: string; 
   userId: string;
   dateCreated?: Date | Timestamp;

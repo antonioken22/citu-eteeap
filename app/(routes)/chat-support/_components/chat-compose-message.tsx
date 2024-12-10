@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Send } from "lucide-react";
 import { toast } from "sonner";
+import { Send } from "lucide-react";
+import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+
+import { ChatMessage } from "@/types/ChatMessage";
 import { useUserState } from "@/hooks/use-user-state";
 import { useChatMessages } from "@/hooks/use-chat-messages";
-import { ChatMessage } from "@/types/ChatMessage";
 
 interface ChatComposeMessageProps {
   selectedUser: {
@@ -17,9 +18,9 @@ interface ChatComposeMessageProps {
   } | null;
 }
 
-export const ChatComposeMessage: React.FC<ChatComposeMessageProps> = ({
+export const ChatComposeMessage = ({
   selectedUser,
-}) => {
+}: ChatComposeMessageProps) => {
   const { userId, userFirstName, userLastName } = useUserState();
   const { addChatMessage } = useChatMessages();
   const [message, setMessage] = useState("");

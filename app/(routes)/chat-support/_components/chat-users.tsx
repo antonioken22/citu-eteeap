@@ -1,14 +1,14 @@
-import React, { useState, useCallback, useMemo } from "react";
 import { Search } from "lucide-react";
+import React, { useState, useCallback, useMemo } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { useUserState } from "@/hooks/use-user-state";
 import { useChatUsers } from "@/hooks/use-chat-users";
-import { useChatMessages } from "@/hooks/use-chat-messages";
 import { useActiveUsers } from "@/hooks/use-active-user";
+import { useChatMessages } from "@/hooks/use-chat-messages";
 
 interface User {
   id: string;
@@ -27,7 +27,7 @@ interface ChatUsersProps {
   }) => void;
 }
 
-export const ChatUsers: React.FC<ChatUsersProps> = ({ onSelectUser }) => {
+export const ChatUsers = ({ onSelectUser }: ChatUsersProps) => {
   const { userId } = useUserState();
   const { users, loading: usersLoading } = useChatUsers();
   const {

@@ -1,5 +1,7 @@
 "use client";
+
 import { useUserState } from "@/hooks/use-user-state";
+
 import { ChatUI } from "./_components/chat-ui";
 
 export const UserChatView = () => {

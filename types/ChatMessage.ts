@@ -1,4 +1,4 @@
-export interface ChatMessage {
+export type ChatMessage = {
     id?: string;
     message: string;
     dateCreated?: Date;
@@ -6,11 +6,13 @@ export interface ChatMessage {
     isView: boolean;
     sender: {
       userId: string;
+      userEmail?: string;
       userFirstName: string;
       userLastName: string;
     };
     recipient: {
       userId: string;
+      userEmail?: string;
       userFirstName: string;
       userLastName: string;
     };
