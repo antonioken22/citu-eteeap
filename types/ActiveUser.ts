@@ -1,6 +1,7 @@
 export type ActiveUser = {
     time: string;
     count: number;
+    
     users: Array<{
       userId: string;
       userEmail: string;

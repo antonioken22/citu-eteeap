@@ -28,9 +28,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-interface MenuProps {
+type MenuProps = {
   isOpen: boolean | undefined;
-}
+};
 
 export function Menu({ isOpen }: MenuProps) {
   const { user } = useUser();

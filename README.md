@@ -2,19 +2,6 @@
 
 By KARS Stack
 
-## Services Used
-
-### Backend
-
-- User Authentication: [Clerk](https://dashboard.clerk.com/)
-- Database Management: [Firebase Firestore](https://firebase.google.com/docs/firestore/)
-
-### Frontend
-
-- User Interface Theme: [next-themes](https://www.npmjs.com/package/next-themes)
-- User Interface Components: [shadcn-ui](https://ui.shadcn.com/), [sonner](https://sonner.emilkowal.ski/), & [react-datetime-picker](https://www.npmjs.com/package/react-datetime-picker)
-- Icon Pack: [lucide-react](https://www.npmjs.com/package/lucide-react)
-
 ## .env.local
 
 ```env

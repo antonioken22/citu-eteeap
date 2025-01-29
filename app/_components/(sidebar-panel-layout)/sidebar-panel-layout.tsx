@@ -1,16 +1,16 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useStore } from "@/hooks/use-store";
+import { useStore } from "@/hooks/sidebar/useStore";
 import { Footer } from "../(footer)/footer";
 import { Sidebar } from "../(sidebar)/sidebar";
-import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
+import { useSidebarToggle } from "@/hooks/sidebar/useSidebarToggle";
 
-export default function SidebarPanelLayout({
+export const SidebarPanelLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const sidebar = useStore(useSidebarToggle, (state) => state);
 
   if (!sidebar) return null;
@@ -36,4 +36,4 @@ export default function SidebarPanelLayout({
       </footer>
     </>
   );
-}
+};

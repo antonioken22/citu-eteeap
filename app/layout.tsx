@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 
 import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { SidebarPanelLayout } from "./_components/(sidebar-panel-layout)/sidebar-panel-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,12 +16,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        media: "(prefers-color-scheme: light",
+        media: "(prefers-color-scheme: light)",
         url: "/citu-eteeap-logo.svg",
         href: "/citu-eteeap-logo.svg",
       },
       {
-        media: "(prefers-color-scheme: dark",
+        media: "(prefers-color-scheme: dark)",
         url: "/citu-eteeap-logo.svg",
         href: "/citu-eteeap-logo.svg",
       },
@@ -44,7 +45,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="citu-eteeap-theme"
           >
-            {children}
+            <SidebarPanelLayout>{children}</SidebarPanelLayout>
           </ThemeProvider>
           <Toaster position="bottom-center" />
         </body>

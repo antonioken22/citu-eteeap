@@ -2,12 +2,13 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useUser } from "@clerk/nextjs";
-import { toast } from "sonner";
-
 import { firestore } from "@/firebase/config";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
+import { toast } from "sonner";
 import { Spinner } from "@/components/spinner";
+
+import { useUser } from "@clerk/nextjs";
 
 const VerificationPage = () => {
   const router = useRouter();

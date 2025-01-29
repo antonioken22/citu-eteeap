@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { cn } from "@/lib/utils";
-import { useStore } from "@/hooks/use-store";
 import { Button } from "@/components/ui/button";
+
+import { useStore } from "@/hooks/sidebar/useStore";
+import { useSidebarToggle } from "@/hooks/sidebar/useSidebarToggle";
+
+import { cn } from "@/lib/utils";
 import { Menu } from "./menu";
-import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
 import { SidebarToggle } from "./sidebar-toggle";
 
 export function Sidebar() {

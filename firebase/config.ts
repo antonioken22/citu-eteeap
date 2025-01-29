@@ -19,12 +19,14 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 // Firebase Firestore
 const firestore = getFirestore(app);
 
+//Firebase Storage
+const storage = getStorage(app);
+
 // Firebase Messaging (Push Notification)
 const messaging = async () => {
   const supported = await isSupported();
   return supported ? getMessaging(app) : null;
 };
-
 export const fetchToken = async () => {
   try {
     const fcmMessaging = await messaging();
@@ -40,8 +42,5 @@ export const fetchToken = async () => {
     return null;
   }
 };
-
-//Firebase Storage
-const storage = getStorage(app);
 
 export { app, firestore, storage, messaging };

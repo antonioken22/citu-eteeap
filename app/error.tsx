@@ -21,6 +21,8 @@ const Error = () => {
         src={ErrorPhoto}
         height="300"
         width="300"
+        loading="eager"
+        priority
         className="dark:hidden"
       />
       <Image
@@ -28,6 +30,8 @@ const Error = () => {
         src={ErrorPhoto}
         height="300"
         width="300"
+        loading="eager"
+        priority
         className="hidden dark:block"
       />
       <h2>Something went wrong!</h2>

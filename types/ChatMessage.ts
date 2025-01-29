@@ -1,9 +1,11 @@
 export type ChatMessage = {
-    id?: string;
-    message: string;
+    chatMessageId?: string;
     dateCreated?: Date;
-    isRead: boolean;
+
     isView: boolean;
+    isRead: boolean;
+
+    message: string;
     sender: {
       userId: string;
       userEmail?: string;
