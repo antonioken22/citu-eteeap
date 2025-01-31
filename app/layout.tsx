@@ -6,13 +6,12 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { SidebarPanelLayout } from "./_components/(sidebar-panel-layout)/sidebar-panel-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CIT-U ETEEAP",
-  description: "CIT-U ETEEAP Process Management System Web Application.",
+  title: process.env.APP_NAME,
+  description: process.env.APP_DESC,
   icons: {
     icon: [
       {
@@ -45,7 +44,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="citu-eteeap-theme"
           >
-            <SidebarPanelLayout>{children}</SidebarPanelLayout>
+            {children}
           </ThemeProvider>
           <Toaster position="bottom-center" />
         </body>
