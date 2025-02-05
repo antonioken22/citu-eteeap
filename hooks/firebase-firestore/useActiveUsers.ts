@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, use } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { firestore } from "@/firebase/config";
 import {
   collection,
@@ -18,31 +18,24 @@ import { ActiveUser } from "@/types/ActiveUser";
 
 import { useUser } from "@clerk/clerk-react";
 
-const getCurrentHour = () => {
-  const date = new Date();
-  const hours = date.getHours();
-  const period = hours < 12 ? "AM" : "PM";
-  const adjustedHours = hours % 12 || 12;
-  return `${adjustedHours} ${period}`;
-};
-
+// Helper functions in setting the docId (YY-MM-DD, HH:00 - HH:59)
 const getFullDateTimeRange = () => {
   const date = new Date();
-  const year = date.getFullYear();
+  const year = String(date.getFullYear()).slice(-2);
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-  const hours = date.getHours();
-  const period = hours < 12 ? "AM" : "PM";
-  const adjustedHours = hours % 12 || 12;
-  return `${month}-${day}-${year} @ ${adjustedHours}:00 - ${adjustedHours}:59 ${period}`;
+  const hours = String(date.getHours()).padStart(2, "0");
+
+  return `${year}-${month}-${day}, ${hours}:00 - ${hours}:59`;
 };
 
+// Helper function in getting the today's date
 const getTodayDate = () => {
   const date = new Date();
-  const year = date.getFullYear();
+  const year = String(date.getFullYear()).slice(-2);
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-  return `${month}-${day}-${year}`;
+  return `${year}-${month}-${day}`;
 };
 
 export const useActiveUsers = () => {
@@ -163,6 +156,7 @@ export const useActiveUsers = () => {
           }
         } else {
           await setDoc(docRef, {
+            activeUsersLogId: fullDateTimeRange,
             count: 1,
             users: [userData],
           });

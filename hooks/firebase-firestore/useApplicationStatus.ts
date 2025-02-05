@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { firestore } from "@/firebase/config";
 import {
   doc,
@@ -10,9 +10,6 @@ import {
   query,
   where,
   getDocs,
-  orderBy,
-  limit,
-  onSnapshot,
   Unsubscribe,
 } from "firebase/firestore";
 
@@ -22,9 +19,17 @@ import { ApplicationStatusLog } from "@/types/ApplicationStatusLog";
 
 import { useUser } from "@clerk/clerk-react";
 
-// Helper function to format the ID with leading zeros
-const formatLogId = (number: number): string => {
-  return String(number).padStart(9, "0"); // Ensures the number is 9 digits with leading zeros
+// Helper function to generate the applicationStatusLogId
+const getNextApplicationStatusLogId = async (): Promise<string> => {
+  const date = new Date();
+  const year = String(date.getFullYear()).slice(-2);
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  return `${year}-${month}-${day}, ${hours}:${minutes}:${seconds}`;
 };
 
 export const useApplicationStatus = () => {
@@ -79,46 +84,6 @@ export const useApplicationStatus = () => {
     }
   };
 
-  // CREATE status log (ADMIN)
-  const getNextApplicationStatusLogId = async (): Promise<string> => {
-    const logsCollection = collection(firestore, "applicationStatusLog");
-    const latestLogQuery = query(
-      logsCollection,
-      orderBy("applicationStatusLogId", "desc"),
-      limit(1)
-    );
-
-    const querySnapshot = await getDocs(latestLogQuery);
-
-    let nextIdNumber = 1; // Start with 1 if no logs are found
-
-    if (!querySnapshot.empty) {
-      const latestLog = querySnapshot.docs[0].data() as ApplicationStatusLog;
-      const latestId = latestLog.applicationStatusLogId || "".split(" ")[0]; // Extract the number part (before the space)
-      nextIdNumber = parseInt(latestId, 10) + 1; // Increment the numerical part
-    }
-
-    // Format the number part to have leading zeros
-    const formattedNumber = formatLogId(nextIdNumber);
-
-    // Get current date and time formatted as required
-    const currentDate = new Date();
-    const formattedDate = currentDate
-      .toLocaleString("en-US", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      })
-      .replace(/\//g, "-");
-
-    // Return the formatted log ID
-    return `${formattedNumber} ${formattedDate}`;
-  };
-
   // UPDATE applicationStatus and CREATE statusLog (ADMIN)
   const updateApplicationStatus = async (
     applicationId: string,
@@ -140,7 +105,7 @@ export const useApplicationStatus = () => {
         applicationStatus: newApplicationStatus,
       });
 
-      // Generate the next applicationStatusLogId
+      // Generate the applicationStatusLogId
       const applicationStatusLogId = await getNextApplicationStatusLogId();
       const dateEdited = new Date();
 

@@ -85,25 +85,24 @@ export const ChatUsers = ({
 
   // Extract the current time range
   const currentDate = new Date();
-  const formattedCurrentDate = `${String(currentDate.getMonth() + 1).padStart(
-    2,
-    "0"
-  )}-${String(currentDate.getDate()).padStart(
-    2,
-    "0"
-  )}-${currentDate.getFullYear()}`;
-  const currentHour = currentDate.getHours();
-  const hourRangeStart = currentHour % 12 || 12;
-  const hourRangePeriod = currentHour < 12 ? "AM" : "PM";
-  const formattedHourRange = `${hourRangeStart}:00 - ${hourRangeStart}:59 ${hourRangePeriod}`;
+  const year = String(currentDate.getFullYear()).slice(-2);
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const hours = String(currentDate.getHours()).padStart(2, "0");
+
+  const formattedHourRange = `${year}-${month}-${day}, ${hours}:00 - ${hours}:59`;
 
   // Extract active user IDs in the current time range
-  const activeUserIds = activeUsers
-    .filter((entry) => entry.time === formattedHourRange)
-    .reduce<string[]>((acc, cur) => {
-      const ids = cur.users.map((user) => user.userId);
-      return [...acc, ...ids];
-    }, []);
+  const activeUserIds = useMemo(() => {
+    return activeUsers
+      .filter((entry) => {
+        return entry.activeUsersLogId === formattedHourRange;
+      })
+      .reduce<string[]>((acc, cur) => {
+        const ids = cur.users?.map((user) => user.userId);
+        return ids ? [...acc, ...ids] : acc;
+      }, []);
+  }, [activeUsers, formattedHourRange]);
 
   // Extract unread messages for the current user
   const unreadMessages = chatMessages.filter(
@@ -143,7 +142,7 @@ export const ChatUsers = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search a user..."
-          className="pl-10" // Adds padding to make space for the icon
+          className="pl-10"
         />
         <Search className="absolute w-4 h-4 left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
       </div>

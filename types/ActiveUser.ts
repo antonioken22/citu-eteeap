@@ -1,12 +1,13 @@
 export type ActiveUser = {
-    time: string;
-    count: number;
-    
-    users: Array<{
-      userId: string;
-      userEmail: string;
-      userFirstName: string;
-      userLastName: string;
-    }>;
-  }
-  
+  activeUsersLogId?: string;
+
+  time: string;
+  count: number;
+
+  users: Array<{
+    userId: string;
+    userEmail: string;
+    userFirstName: string;
+    userLastName: string;
+  }>;
+};

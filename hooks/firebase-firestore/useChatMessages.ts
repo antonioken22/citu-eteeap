@@ -7,11 +7,13 @@ import {
   getDocs,
   doc,
   updateDoc,
-  addDoc,
   query,
   onSnapshot,
   where,
   Unsubscribe,
+  orderBy,
+  limit,
+  setDoc,
 } from "firebase/firestore";
 
 import { toast } from "sonner";
@@ -19,6 +21,19 @@ import { toast } from "sonner";
 import { ChatMessage } from "@/types/ChatMessage";
 
 import { useUser } from "@clerk/nextjs";
+
+// Helper function to generate the chatMessageId
+const getNextChatMessageId = async (): Promise<string> => {
+  const date = new Date();
+  const year = String(date.getFullYear()).slice(-2);
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  return `${year}-${month}-${day}, ${hours}:${minutes}:${seconds}`;
+};
 
 export const useChatMessages = () => {
   const { user } = useUser();
@@ -93,17 +108,20 @@ export const useChatMessages = () => {
 
       setLoading(true);
 
-      const chatMessageWithDateCreated = {
-        ...newChatMessage,
-        message: newChatMessage.message,
-        dateCreated: new Date(),
-      };
-
       try {
-        await addDoc(
-          collection(firestore, "chatMessages"),
+        const chatMessageId = await getNextChatMessageId();
+        const chatMessageWithDateCreated = {
+          ...newChatMessage,
+          chatMessageId,
+          message: newChatMessage.message,
+          dateCreated: new Date(),
+        };
+
+        await setDoc(
+          doc(firestore, "chatMessages", chatMessageId),
           chatMessageWithDateCreated
         );
+
         setChatMessages((prevChatMessages) => [
           ...prevChatMessages,
           chatMessageWithDateCreated,

@@ -15,6 +15,8 @@ import {
   DocumentData,
   Unsubscribe,
   getDoc,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 
 import { toast } from "sonner";
@@ -27,12 +29,20 @@ import { useUser } from "@clerk/nextjs";
 const generateApplicationId = async (): Promise<string> => {
   try {
     const applicationsCollection = collection(firestore, "applications");
-    const snapshot = await getDocs(applicationsCollection);
-    const count = snapshot.size; // Get the current count of applications
+    const q = query(
+      applicationsCollection,
+      orderBy("applicationId", "desc"),
+      limit(1)
+    );
+    const snapshot = await getDocs(q);
 
-    // Generate the next application ID formatted as A00001, A00002, etc.
-    const nextId = `A${(count + 1).toString().padStart(5, "0")}`;
-    return nextId;
+    let nextNumber = 1;
+    if (!snapshot.empty) {
+      const latestId = snapshot.docs[0].data().applicationId;
+      nextNumber = parseInt(latestId.substring(1)) + 1;
+    }
+
+    return `A${String(nextNumber).padStart(9, "0")}`;
   } catch (e) {
     throw new Error("Error generating application ID");
   }
@@ -303,17 +313,14 @@ export const useApplications = () => {
 
         // Generate the custom ID for oldApplications
         const now = new Date();
-        const timestamp = now
-          .toLocaleString("en-US", {
-            year: "2-digit",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-            hour12: true,
-          })
-          .replace(/\//g, "-");
+        const year = String(now.getFullYear()).slice(-2); // "25"
+        const month = String(now.getMonth() + 1).padStart(2, "0"); // "02"
+        const day = String(now.getDate()).padStart(2, "0"); // "05"
+        const hours = String(now.getHours()).padStart(2, "0"); // "17"
+        const minutes = String(now.getMinutes()).padStart(2, "0"); // "25"
+        const seconds = String(now.getSeconds()).padStart(2, "0"); // "55"
+
+        const timestamp = `${year}-${month}-${day}, ${hours}:${minutes}:${seconds}`;
         const oldApplicationId = `${applicationId} ${timestamp}`;
 
         // Save the current version to "oldApplications" table with the custom ID

@@ -3,8 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { firestore } from "@/firebase/config";
 import {
-  getDoc,
-  doc,
   Unsubscribe,
   collection,
   query,
