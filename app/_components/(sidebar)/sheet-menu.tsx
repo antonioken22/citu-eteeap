@@ -32,16 +32,9 @@ export function SheetMenu() {
                 <Image
                   priority
                   alt="CIT-U ETEEAP Logo"
-                  src="/citu-eteeap-logo.svg"
+                  src="/favicon/favicon-96x96.png"
                   fill
-                  className="dark:hidden"
-                />
-                <Image
-                  priority
-                  alt="CIT-U ETEEAP Logo"
-                  src="/citu-eteeap-logo.svg"
-                  fill
-                  className="hidden dark:block"
+                  className=""
                 />
               </div>
               <SheetTitle className="font-bold text-lg">

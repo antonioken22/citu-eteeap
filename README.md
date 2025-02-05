@@ -1,4 +1,4 @@
-# [<img src="/public/citu-eteeap-logo.svg" alt="Logo Dark Mode" width="32" height="32"> CIT-U ETEEAP](https://citu-eteeap.vercel.app/)
+# [<img src="/public/logos/citu-eteeap-logo.svg" alt="Logo Dark Mode" width="32" height="32"> CIT-U ETEEAP](https://citu-eteeap.vercel.app/)
 
 By KARS Stack
 

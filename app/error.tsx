@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import ErrorPhoto from "@/public/assets/error.png";
 
-const Error = () => {
+export default function Error() {
   const router = useRouter();
 
   const handleGoBack = () => {
@@ -38,6 +38,4 @@ const Error = () => {
       <Button onClick={handleGoBack}>Go Back</Button>
     </div>
   );
-};
-
-export default Error;
+}

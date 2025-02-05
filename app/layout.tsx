@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     icon: [
       {
         media: "(prefers-color-scheme: light)",
-        url: "/citu-eteeap-logo.svg",
-        href: "/citu-eteeap-logo.svg",
+        url: "/favicon/favicon-96x96.png",
+        href: "/favicon/favicon-96x96.png",
       },
       {
         media: "(prefers-color-scheme: dark)",
-        url: "/citu-eteeap-logo.svg",
-        href: "/citu-eteeap-logo.svg",
+        url: "/favicon/favicon-96x96.png",
+        href: "/favicon/favicon-96x96.png",
       },
     ],
   },
@@ -36,6 +36,38 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          {/* NextJS */}
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+          <link
+            rel="icon"
+            href="/icon?<generated>"
+            type="image/<generated>"
+            sizes="<generated>"
+          />
+          <link
+            rel="apple-touch-icon"
+            href="/apple-icon?<generated>"
+            type="image/<generated>"
+            sizes="<generated>"
+          />
+          {/* https://realfavicongenerator.net/favicon-generator/nextjs */}
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicon/favicon-96x96.png"
+            sizes="96x96"
+          />
+          <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+          <link rel="shortcut icon" href="/favicon/favicon.ico" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/favicon/apple-touch-icon.png"
+          />
+          <meta name="apple-mobile-web-app-title" content="antonioken" />
+          <link rel="manifest" href="/favicon/site.webmanifest" />
+        </head>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"

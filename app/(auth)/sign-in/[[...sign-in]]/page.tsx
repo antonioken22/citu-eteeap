@@ -1,10 +1,11 @@
 import Image from "next/image";
+
 import { Loader2 } from "lucide-react";
+import { ThemeSwitch } from "@/components/ThemeSwitcher";
 import { ClerkLoaded, ClerkLoading, SignIn } from "@clerk/nextjs";
 
-import { ThemeSwitch } from "@/components/ThemeSwitcher";
-import ETEEAPMarketingPoster from "@/public/marketing-side-panel.jpg";
-import WildCatsWallpaper from "@/public/wildcats-wallpaper.png";
+import ETEEAPMarketingPoster from "@/public/auth/marketing-side-panel.jpg";
+import WildCatsWallpaper from "@/public/auth/wildcats-wallpaper.png";
 
 export default function SignInPage() {
   return (
