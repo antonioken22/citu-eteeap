@@ -2,9 +2,9 @@ import { ThemeSwitch } from "@/components/ThemeSwitcher";
 
 import { UserNav } from "./user-nav";
 import { SheetMenu } from "../(sidebar)/sheet-menu";
-interface NavbarProps {
+type NavbarProps = {
   title: string;
-}
+};
 
 export function Navbar({ title }: NavbarProps) {
   return (

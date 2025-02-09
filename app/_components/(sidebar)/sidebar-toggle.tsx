@@ -3,10 +3,10 @@ import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-interface SidebarToggleProps {
+type SidebarToggleProps = {
   isOpen: boolean | undefined;
   setIsOpen?: () => void;
-}
+};
 
 export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
   return (

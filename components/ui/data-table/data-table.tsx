@@ -37,7 +37,7 @@ import { ArrowUpAZ, ArrowUpZA, ChevronDown } from "lucide-react";
 
 import { DataTablePagination } from "./data-table-pagination";
 
-interface DataTableProps<TData, TValue> {
+type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onDataLoading?: boolean;
@@ -46,7 +46,7 @@ interface DataTableProps<TData, TValue> {
   defaultHiddenColumns?: VisibilityState;
   onTableReady?: (table: ReactTable<TData>) => void;
   onRowSelectionChange?: (selectedData: TData[]) => void;
-}
+};
 
 export function DataTable<TData, TValue>({
   columns,

@@ -11,8 +11,6 @@ import {
   onSnapshot,
   where,
   Unsubscribe,
-  orderBy,
-  limit,
   setDoc,
 } from "firebase/firestore";
 
