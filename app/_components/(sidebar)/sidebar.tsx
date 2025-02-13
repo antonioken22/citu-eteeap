@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 
-import { useStore } from "@/hooks/sidebar/useStore";
-import { useSidebarToggle } from "@/hooks/sidebar/useSidebarToggle";
+import { useStore } from "@/hooks/sidebar/use-store";
+import { useSidebarToggle } from "@/hooks/sidebar/use-sidebar-toggle";
 
 import { cn } from "@/lib/utils";
 import { Menu } from "./menu";

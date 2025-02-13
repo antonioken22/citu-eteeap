@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { useApplicationStatus } from "@/hooks/firebase-firestore/useApplicationStatus";
+import { useApplicationStatus } from "@/hooks/firebase-firestore/use-application-status";
 
 import { ApplicationStatusInfoDrawer } from "../InfoDrawers/ApplicationStatusInfoDrawer";
 

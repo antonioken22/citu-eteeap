@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { User } from "@clerk/backend";
 import { ApplicantData } from "@/types/ApplicantData";
 
-import { useApplications } from "@/hooks/firebase-firestore/useApplications";
+import { useApplications } from "@/hooks/firebase-firestore/use-applications";
 
 import { Tab1 } from "./components/Tab1";
 import { Tab2 } from "./components/Tab2";

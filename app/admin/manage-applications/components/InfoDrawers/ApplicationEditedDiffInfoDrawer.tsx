@@ -25,7 +25,7 @@ import {
 import { columns } from "../Columns";
 import { ApplicantData } from "@/types/ApplicantData";
 
-import { useApplications } from "@/hooks/firebase-firestore/useApplications";
+import { useApplications } from "@/hooks/firebase-firestore/use-applications";
 
 const formatCellValue = (value: any): React.ReactNode => {
   if (value === null || value === undefined) return "-"; // Handle null or undefined values

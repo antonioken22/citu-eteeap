@@ -1,10 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useStore } from "@/hooks/sidebar/useStore";
+import { useStore } from "@/hooks/sidebar/use-store";
 import { Footer } from "../(footer)/footer";
 import { Sidebar } from "../(sidebar)/sidebar";
-import { useSidebarToggle } from "@/hooks/sidebar/useSidebarToggle";
+import { useSidebarToggle } from "@/hooks/sidebar/use-sidebar-toggle";
 
 export const SidebarPanelLayout = ({
   children,

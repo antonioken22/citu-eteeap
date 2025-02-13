@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { UserData } from "@/types/UserData";
 
 import { useUser } from "@clerk/nextjs";
-import { useUsers } from "@/hooks/firebase-firestore/useUsers";
+import { useUsers } from "@/hooks/firebase-firestore/use-users";
 
 import { ChatUsers } from "./_components/ChatUsers";
 import { ChatMessageHistory } from "./_components/ChatMessageHistory";
 import { ChatComposeMessage } from "./_components/ChatComposeMessage";
-import { useActiveUsers } from "@/hooks/firebase-firestore/useActiveUsers";
+import { useActiveUsers } from "@/hooks/firebase-firestore/use-active-users";
 
 export const ChatSupportView = () => {
   const { user, isLoaded } = useUser();

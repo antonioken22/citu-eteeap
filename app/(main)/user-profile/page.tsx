@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import { useUser } from "@clerk/nextjs";
-import { useApplications } from "@/hooks/firebase-firestore/useApplications";
+import { useApplications } from "@/hooks/firebase-firestore/use-applications";
 
 import { UserProfileView } from "./UserProfileView";
 

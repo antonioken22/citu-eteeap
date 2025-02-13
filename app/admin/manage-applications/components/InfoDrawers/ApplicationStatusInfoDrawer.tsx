@@ -25,7 +25,7 @@ import {
 import { Timestamp } from "firebase/firestore";
 import { ApplicationStatusLog } from "@/types/ApplicationStatusLog";
 
-import { useApplicationStatus } from "@/hooks/firebase-firestore/useApplicationStatus";
+import { useApplicationStatus } from "@/hooks/firebase-firestore/use-application-status";
 
 type DrawerProps = {
   isDrawerOpen: boolean;

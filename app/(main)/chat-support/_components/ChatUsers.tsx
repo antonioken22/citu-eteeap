@@ -10,8 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserData } from "@/types/UserData";
 
 import { useUser } from "@clerk/nextjs";
-import { useActiveUsers } from "@/hooks/firebase-firestore/useActiveUsers";
-import { useChatMessages } from "@/hooks/firebase-firestore/useChatMessages";
+import { useActiveUsers } from "@/hooks/firebase-firestore/use-active-users";
+import { useChatMessages } from "@/hooks/firebase-firestore/use-chat-messages";
 
 type ChatUsersProps = {
   chatUsers: UserData[];

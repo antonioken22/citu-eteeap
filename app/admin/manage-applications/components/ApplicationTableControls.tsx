@@ -21,7 +21,7 @@ import {
 import { ApplicantData } from "@/types/ApplicantData";
 
 import { useUser } from "@clerk/nextjs";
-import { useApplications } from "@/hooks/firebase-firestore/useApplications";
+import { useApplications } from "@/hooks/firebase-firestore/use-applications";
 import { Timestamp } from "firebase/firestore";
 import { Download } from "lucide-react";
 import { Separator } from "@/components/ui/separator";

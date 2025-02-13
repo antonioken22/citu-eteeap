@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { ApplicantData } from "@/types/ApplicantData";
-import { useFileUpload } from "@/hooks/firebase-storage/useFileUpload";
+import { useFileUpload } from "@/hooks/firebase-storage/use-file-upload";
 import { Check, X } from "lucide-react";
 
 type Tab6Props = {

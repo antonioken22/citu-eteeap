@@ -11,7 +11,7 @@ import { UserData } from "@/types/UserData";
 import { ChatMessage } from "@/types/ChatMessage";
 
 import { useUser } from "@clerk/nextjs";
-import { useChatMessages } from "@/hooks/firebase-firestore/useChatMessages";
+import { useChatMessages } from "@/hooks/firebase-firestore/use-chat-messages";
 
 type ChatMessageHistoryProps = {
   selectedUser: Partial<UserData> | null;

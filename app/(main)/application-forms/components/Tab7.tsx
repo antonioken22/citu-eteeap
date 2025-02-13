@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { useFileUpload } from "@/hooks/firebase-storage/useFileUpload";
+import { useFileUpload } from "@/hooks/firebase-storage/use-file-upload";
 import { ApplicantData } from "@/types/ApplicantData";
 
 import { RenderMissingDocs } from "./RenderMissingDocs";

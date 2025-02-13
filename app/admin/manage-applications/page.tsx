@@ -18,7 +18,7 @@ import {
 import { ApplicantData } from "@/types/ApplicantData";
 
 import { useUser } from "@clerk/nextjs";
-import { useApplications } from "@/hooks/firebase-firestore/useApplications";
+import { useApplications } from "@/hooks/firebase-firestore/use-applications";
 
 import { ContentLayout } from "@/app/_components/(content-layout)/content-layout";
 import { columns } from "./components/Columns";
