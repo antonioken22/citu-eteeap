@@ -11,7 +11,7 @@ export function Footer() {
             Program, Cebu Institute of Technology - University
           </p>
           <p className="text-xs md:text-sm text-muted-foreground">
-            © 2024 by KARS Stack. All rights reserved
+            © {new Date().getFullYear()} by KARS Stack. All rights reserved
           </p>
         </div>
       </div>
